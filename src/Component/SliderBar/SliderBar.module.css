@@ -1,0 +1,17 @@
+.sliderImg {
+  object-fit: cover;
+  width: 100%;
+  height: 200px;
+}
+
+@media (min-width: 768px) {
+  .sliderImg {
+    height: 400px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .sliderImg {
+    height: 600px;
+  }
+}

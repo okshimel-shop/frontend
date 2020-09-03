@@ -1,0 +1,58 @@
+.footer {
+  background-color: #222;
+}
+
+.footer__wrapper {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer__working_wrapper {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.footer__working_title {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.footer__working_desc {
+  font-size: 12px;
+}
+
+.footer__help_wrapper {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.footer__help_title {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.footer__help_list {
+  width: 150px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footer__help_list_item {
+  width: 75px;
+  font-size: 12px;
+}
+
+.footer__help_list_item:not(:nth-last-child(-n + 2)) {
+  margin-bottom: 6px;
+}
+
+.footer__copyright {
+  color: #fff;
+  font-size: 10px;
+}

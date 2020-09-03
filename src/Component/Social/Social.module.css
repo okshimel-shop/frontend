@@ -1,0 +1,13 @@
+.social__list {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.social__item {
+  width: 30px;
+  height: 30px;
+}
+
+.social__item:last-child {
+  margin-right: 5px;
+}

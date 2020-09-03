@@ -1,0 +1,17 @@
+.container {
+  width: 292px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 708px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1146px;
+  }
+}

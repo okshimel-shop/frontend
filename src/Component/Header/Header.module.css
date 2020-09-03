@@ -1,0 +1,50 @@
+.header {
+  background-color: #222;
+}
+
+.header__wrapper {
+  height: 50px;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__burgerMenu::after {
+  content: "";
+  display: block;
+  width: 25px;
+  height: 18px;
+  cursor: pointer;
+  position: absolute;
+  transform: translateY(-10px);
+}
+
+.header__burgerItem {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: #fff;
+}
+
+.header__burgerItem::before {
+  content: "";
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: #fff;
+  transform: translateY(-8px);
+}
+
+.header__burgerItem::after {
+  content: "";
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: #fff;
+  transform: translateY(6px);
+}
+
+.header__basket {
+  cursor: pointer;
+}

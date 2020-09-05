@@ -38,7 +38,5 @@ h6 {
 }
 
 body {
-  background-color: #ddd;
-  background-attachment: fixed;
-  background-image: url("./images/background.png");
+  background-color: #bbb;
 }

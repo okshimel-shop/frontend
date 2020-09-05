@@ -9,20 +9,20 @@ import css from "./Social.module.css";
 const Social = () => {
   return (
     <ul className={css.social__list}>
-      <li>
-        <img className={css.social__item} src={facebook} alt="" />
+      <li className={css.social__item}>
+        <img className={css.social__item_img} src={facebook} alt="" />
       </li>
-      <li>
-        <img className={css.social__item} src={instagram} alt="" />
+      <li className={css.social__item}>
+        <img className={css.social__item_img} src={instagram} alt="" />
       </li>
-      <li>
-        <img className={css.social__item} src={telegram} alt="" />
+      <li className={css.social__item}>
+        <img className={css.social__item_img} src={telegram} alt="" />
       </li>
-      <li>
-        <img className={css.social__item} src={viber} alt="" />
+      <li className={css.social__item}>
+        <img className={css.social__item_img} src={viber} alt="" />
       </li>
-      <li>
-        <img className={css.social__item} src={youtube} alt="" />
+      <li className={css.social__item}>
+        <img className={css.social__item_img} src={youtube} alt="" />
       </li>
     </ul>
   );

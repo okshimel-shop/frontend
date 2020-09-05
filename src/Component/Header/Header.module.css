@@ -1,5 +1,5 @@
 .header {
-  background-color: #222;
+  background-color: #333;
 }
 
 .header__wrapper {
@@ -24,7 +24,7 @@
   display: block;
   width: 25px;
   height: 2px;
-  background-color: #fff;
+  background-color: #eee;
 }
 
 .header__burgerItem::before {
@@ -32,7 +32,7 @@
   display: block;
   width: 25px;
   height: 2px;
-  background-color: #fff;
+  background-color: #eee;
   transform: translateY(-8px);
 }
 
@@ -41,10 +41,33 @@
   display: block;
   width: 25px;
   height: 2px;
-  background-color: #fff;
+  background-color: #eee;
   transform: translateY(6px);
 }
 
 .header__basket {
+  width: 28px;
+  height: 28px;
   cursor: pointer;
+}
+
+@media (min-width: 1200px) {
+  .header__wrapper {
+    height: 60px;
+    padding: 0 30px;
+  }
+
+  .header__burgerMenu::after {
+    display: none;
+  }
+
+  .header__burgerItem {
+    display: none;
+  }
+
+  .header__basket {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+  }
 }

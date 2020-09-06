@@ -5,10 +5,10 @@ import component from "./transition/component.module.css";
 import overlay from "./transition/overlay.module.css";
 import css from "./ModalBurger.module.css";
 
-const ModalBurger = ({ isModalBurg, modalBurgTog }) => {
+const ModalBurger = ({ modalOpen, modalOpenHandler }) => {
   return (
     <CSSTransition
-      in={isModalBurg}
+      in={modalOpen === "left"}
       timeout={400}
       classNames={component}
       unmountOnExit
@@ -22,13 +22,13 @@ const ModalBurger = ({ isModalBurg, modalBurgTog }) => {
             unmountOnExit
           >
             <div
-              onClick={() => modalBurgTog(false)}
+              onClick={() => modalOpenHandler("nothin")}
               className={css.modal_sidebar__overlay}
             ></div>
           </CSSTransition>
           <div className={css.modal_sidebar__body}>
             <img
-              onClick={() => modalBurgTog(false)}
+              onClick={() => modalOpenHandler("nothin")}
               className={css.modal_sidebar__button_close}
               src={closeIcon}
               alt="Close icon"

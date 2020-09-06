@@ -5,12 +5,12 @@ import magnifier from "../../images/interface/magnifier.svg";
 import basket from "../../images/interface/basket.svg";
 import css from "./Header.module.css";
 
-const Header = ({ modalBurgTog, modalBaskTog }) => {
+const Header = ({ modalOpenHandler }) => {
   return (
     <header className={css.header}>
       <div className={css.header__wrapper}>
         <div
-          onClick={() => modalBurgTog(true)}
+          onClick={() => modalOpenHandler("left")}
           className={css.header__burgerMenu}
         >
           <i className={css.header__burgerItem}></i>
@@ -45,7 +45,7 @@ const Header = ({ modalBurgTog, modalBaskTog }) => {
             alt="basket icon"
           />
           <img
-            onClick={() => modalBaskTog(true)}
+            onClick={() => modalOpenHandler("right")}
             className={css.header__basket_icon}
             src={basket}
             alt="basket icon"

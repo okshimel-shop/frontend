@@ -8,25 +8,20 @@ import ModalBasket from "../Component/ModalBasket/ModalBasket";
 import css from "./App.module.css";
 
 function App() {
-  const [isModalBurg, setIsModalBurg] = useState(false);
-  const [isModalBask, setIsModalBask] = useState(false);
+  const [modalOpen, setModalOpen] = useState("nothin");
 
-  const modalBurgTog = (status) => {
-    setIsModalBurg(status);
-  };
-
-  const modalBaskTog = (status) => {
-    setIsModalBask(status);
+  const modalOpenHandler = (status) => {
+    setModalOpen(status);
   };
 
   return (
     <div className={css.container}>
-      <Header modalBurgTog={modalBurgTog} modalBaskTog={modalBaskTog} />
+      <Header modalOpenHandler={modalOpenHandler} />
       <SliderBar />
       <Main />
       <Footer />
-      <ModalBurger isModalBurg={isModalBurg} modalBurgTog={modalBurgTog} />
-      <ModalBasket isModalBask={isModalBask} modalBaskTog={modalBaskTog} />
+      <ModalBurger modalOpen={modalOpen} modalOpenHandler={modalOpenHandler} />
+      <ModalBasket modalOpen={modalOpen} modalOpenHandler={modalOpenHandler} />
     </div>
   );
 }

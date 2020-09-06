@@ -5,10 +5,10 @@ import component from "./transition/component.module.css";
 import overlay from "./transition/overlay.module.css";
 import css from "./ModalBasket.module.css";
 
-const ModalBasket = ({ isModalBask, modalBaskTog }) => {
+const ModalBasket = ({ modalOpen, modalOpenHandler }) => {
   return (
     <CSSTransition
-      in={isModalBask}
+      in={modalOpen === "right"}
       timeout={400}
       classNames={component}
       unmountOnExit
@@ -22,13 +22,13 @@ const ModalBasket = ({ isModalBask, modalBaskTog }) => {
             unmountOnExit
           >
             <div
-              onClick={() => modalBaskTog(false)}
+              onClick={() => modalOpenHandler("nothin")}
               className={css.modal_sidebar__overlay}
             ></div>
           </CSSTransition>
           <div className={css.modal_sidebar__body}>
             <img
-              onClick={() => modalBaskTog(false)}
+              onClick={() => modalOpenHandler("nothin")}
               className={css.modal_sidebar__button_close}
               src={closeIcon}
               alt="Close icon"

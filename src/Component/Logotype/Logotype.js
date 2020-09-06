@@ -3,8 +3,10 @@ import css from "./Logotype.module.css";
 
 const Logotype = () => {
   return (
-    <h1 className={css.logo} href="/">
-      Okshimel
+    <h1 className={css.logo}>
+      <a className={css.logo__link} href="/">
+        Okshimel
+      </a>
     </h1>
   );
 };

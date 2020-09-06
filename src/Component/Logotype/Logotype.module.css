@@ -1,11 +1,14 @@
 .logo {
-  color: #eee;
   font-size: 24px;
   text-transform: uppercase;
 }
 
+.logo__link {
+  color: #eee;
+}
+
 @media (min-width: 1200px) {
   .logo {
-    font-size: 34px;
+    font-size: 30px;
   }
 }

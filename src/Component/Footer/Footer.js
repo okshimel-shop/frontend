@@ -24,7 +24,7 @@ const Footer = () => {
       </div>
       <div className={css.footer__copyright}>
         <p className={`${css.footer__copyright_text}`}>
-          @ 2020. Интеренет-магазин Okshimel
+          Copyright © 2020 - Магазин Okshimel
         </p>
       </div>
     </footer>

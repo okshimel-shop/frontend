@@ -26,6 +26,15 @@
   background-color: #eee;
 }
 
+.modal_sidebar__button_close {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+}
+
 @media (min-width: 768px) {
   .modal_sidebar__body {
     width: 400px;
@@ -33,7 +42,7 @@
 }
 
 @media (min-width: 1200px) {
-  .modal_sidebar__overlay {
+  .modal_sidebar__container {
     display: none;
   }
 }

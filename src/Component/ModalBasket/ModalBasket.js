@@ -1,13 +1,14 @@
 import React from "react";
 import { CSSTransition } from "react-transition-group";
+import closeIcon from "../../images/interface/close-btn.svg";
 import component from "./transition/component.module.css";
 import overlay from "./transition/overlay.module.css";
-import css from "./ModalSidebar.module.css";
+import css from "./ModalBasket.module.css";
 
-const ModalSidebar = ({ modalSbStatus, modalSbToggle }) => {
+const ModalBasket = ({ isModalBask, modalBaskTog }) => {
   return (
     <CSSTransition
-      in={modalSbStatus}
+      in={isModalBask}
       timeout={400}
       classNames={component}
       unmountOnExit
@@ -21,15 +22,22 @@ const ModalSidebar = ({ modalSbStatus, modalSbToggle }) => {
             unmountOnExit
           >
             <div
-              onClick={modalSbToggle}
+              onClick={() => modalBaskTog(false)}
               className={css.modal_sidebar__overlay}
             ></div>
           </CSSTransition>
-          <div className={css.modal_sidebar__body}></div>
+          <div className={css.modal_sidebar__body}>
+            <img
+              onClick={() => modalBaskTog(false)}
+              className={css.modal_sidebar__button_close}
+              src={closeIcon}
+              alt="Close icon"
+            />
+          </div>
         </div>
       )}
     </CSSTransition>
   );
 };
 
-export default ModalSidebar;
+export default ModalBasket;

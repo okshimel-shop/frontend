@@ -5,10 +5,26 @@ import component from "./transition/component.module.css";
 import overlay from "./transition/overlay.module.css";
 import css from "./ModalBurger.module.css";
 
-const ModalBurger = ({ modalOpen, modalOpenHandler }) => {
+const ModalBurger = ({ modalStatus, setModalStatus }) => {
+  const modalWindowToggler = () => {
+    const template = {
+      status: false,
+      position: modalStatus.position,
+    };
+    setModalStatus(template);
+  };
+
+  const foundPosition = () => {
+    if (modalStatus.position === "left") {
+      return css.modal_sidebar__button_close_left;
+    } else if (modalStatus.position === "right") {
+      return css.modal_sidebar__button_close_right;
+    }
+  };
+
   return (
     <CSSTransition
-      in={modalOpen === "left"}
+      in={modalStatus.status}
       timeout={400}
       classNames={component}
       unmountOnExit
@@ -22,14 +38,14 @@ const ModalBurger = ({ modalOpen, modalOpenHandler }) => {
             unmountOnExit
           >
             <div
-              onClick={() => modalOpenHandler("nothin")}
+              onClick={modalWindowToggler}
               className={css.modal_sidebar__overlay}
             ></div>
           </CSSTransition>
           <div className={css.modal_sidebar__body}>
             <img
-              onClick={() => modalOpenHandler("nothin")}
-              className={css.modal_sidebar__button_close}
+              onClick={modalWindowToggler}
+              className={foundPosition()}
               src={closeIcon}
               alt="Close icon"
             />

@@ -4,24 +4,23 @@ import SliderBar from "../Component/SliderBar/SliderBar";
 import Main from "../Component/Main/Main";
 import Footer from "../Component/Footer/Footer";
 import ModalBurger from "../Component/ModalBurger/ModalBurger";
-import ModalBasket from "../Component/ModalBasket/ModalBasket";
 import css from "./App.module.css";
 
-function App() {
-  const [modalOpen, setModalOpen] = useState("nothin");
+const template = {
+  status: false,
+  position: "undefined",
+};
 
-  const modalOpenHandler = (status) => {
-    setModalOpen(status);
-  };
+function App() {
+  const [modalStatus, setModalStatus] = useState(template);
 
   return (
     <div className={css.container}>
-      <Header modalOpenHandler={modalOpenHandler} />
+      <Header setModalStatus={setModalStatus} />
       <SliderBar />
       <Main />
       <Footer />
-      <ModalBurger modalOpen={modalOpen} modalOpenHandler={modalOpenHandler} />
-      <ModalBasket modalOpen={modalOpen} modalOpenHandler={modalOpenHandler} />
+      <ModalBurger modalStatus={modalStatus} setModalStatus={setModalStatus} />
     </div>
   );
 }

@@ -26,12 +26,21 @@
   background-color: #eee;
 }
 
-.modal_sidebar__button_close {
+.modal_sidebar__button_close_left {
   width: 20px;
   height: 20px;
   position: absolute;
   top: 15px;
   right: 15px;
+  cursor: pointer;
+}
+
+.modal_sidebar__button_close_right {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 15px;
+  left: 15px;
   cursor: pointer;
 }
 
@@ -41,7 +50,7 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
   .modal_sidebar__container {
     display: none;
   }

@@ -10,7 +10,7 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
   .sliderImg {
     height: 600px;
   }

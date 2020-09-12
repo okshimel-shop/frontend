@@ -3,8 +3,9 @@
 }
 
 .header__wrapper {
+  margin: 0 auto;
   height: 50px;
-  padding: 0 10px;
+  padding: 0 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -63,10 +64,11 @@
   cursor: pointer;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
   .header__wrapper {
+    padding: 0 5px;
+    width: 1004px;
     height: 60px;
-    padding: 0 30px;
   }
 
   .header__burgerMenu {

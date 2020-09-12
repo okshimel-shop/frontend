@@ -5,14 +5,21 @@ import magnifier from "../../images/interface/magnifier.svg";
 import basket from "../../images/interface/basket.svg";
 import css from "./Header.module.css";
 
-const Header = ({ modalOpenHandler }) => {
+const Header = ({ setModalStatus }) => {
+  const modalWindowToggler = (e) => {
+    const tagName = e.target.tagName;
+
+    const template = {
+      status: true,
+      position: tagName !== "IMG" ? "left" : "right",
+    };
+    setModalStatus(template);
+  };
+
   return (
     <header className={css.header}>
       <div className={css.header__wrapper}>
-        <div
-          onClick={() => modalOpenHandler("left")}
-          className={css.header__burgerMenu}
-        >
+        <div onClick={modalWindowToggler} className={css.header__burgerMenu}>
           <i className={css.header__burgerItem}></i>
         </div>
 
@@ -45,7 +52,7 @@ const Header = ({ modalOpenHandler }) => {
             alt="basket icon"
           />
           <img
-            onClick={() => modalOpenHandler("right")}
+            onClick={modalWindowToggler}
             className={css.header__basket_icon}
             src={basket}
             alt="basket icon"

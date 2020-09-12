@@ -1,92 +1,87 @@
 .footer {
-  padding-top: 20px;
+  padding: 15px 0;
   background-color: #333;
 }
 
 .footer__wrapper {
+  position: relative;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.footer__help_wrapper {
-  color: #eee;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
 .footer__help_list {
-  width: 170px;
+  transform: translateX(-70px);
+  width: 130px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-bottom: 15px;
 }
 
 .footer__help_list_item {
-  width: 85px;
+  width: 65px;
+  color: #eee;
   font-size: 12px;
+  text-align: center;
 }
 
 .footer__help_list_item:not(:nth-last-child(-n + 2)) {
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 
 .footer__working_wrapper {
-  width: 170px;
+  position: absolute;
+  top: 0;
+  transform: translateX(80px);
   color: #eee;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .footer__working_title {
-  font-size: 16px;
+  font-size: 12px;
   margin-bottom: 5px;
 }
 
 .footer__working_desc {
   font-size: 12px;
-  margin-bottom: 6px;
 }
 
 .footer__copyright {
   text-align: center;
-}
-
-.footer__copyright_text {
   color: #eee;
   font-size: 10px;
-  line-height: 40px;
 }
 
 @media (min-width: 768px) {
   .footer__wrapper {
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
   }
 
-  .footer__help_wrapper {
+  .footer__help_list {
+    transform: none;
+    width: 160px;
     margin-bottom: 0;
   }
 
-  .footer__help_list {
-    width: 195px;
-  }
-
   .footer__help_list_item {
-    width: 97px;
+    width: 80px;
     font-size: 14px;
   }
 
   .footer__working_wrapper {
-    width: 195px;
-    order: 3;
+    position: static;
+    transform: none;
     margin-bottom: 0;
   }
 
   .footer__working_title {
-    font-size: 18px;
+    font-size: 14px;
   }
 
   .footer__working_desc {
@@ -94,36 +89,34 @@
     margin-bottom: 0;
   }
 
-  .footer__copyright_text {
+  .footer__copyright {
     font-size: 12px;
-    line-height: 50px;
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
+  .footer__wrapper {
+    width: 1004px;
+  }
+
   .footer__help_list {
-    width: 220px;
+    width: 200px;
   }
 
   .footer__help_list_item {
-    width: 110px;
+    width: 100px;
     font-size: 16px;
   }
 
-  .footer__working_wrapper {
-    width: 220px;
-  }
-
   .footer__working_title {
-    font-size: 20px;
+    font-size: 16px;
   }
 
   .footer__working_desc {
     font-size: 16px;
   }
 
-  .footer__copyright_text {
+  .footer__copyright {
     font-size: 14px;
-    line-height: 60px;
   }
 }

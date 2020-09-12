@@ -1,1 +1,0 @@
-# okshimel-shop-project

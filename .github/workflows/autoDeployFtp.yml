@@ -1,0 +1,39 @@
+- workflow "Auto Deploy Ftp" { 
+
+ on = "push" 
+
+  resolves = ["Deploy"] 
+  }
+
+  action "Install" { 
+  uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
+ args = "install" 
+  env = {
+    NODE_ENV = "production"
+  }
+}
+
+action "Build" {
+  needs = ["Install"]
+  uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
+  args = "run build"
+  env = {
+    NODE_ENV = "production"
+  }
+}
+
+action "Deploy" {
+  needs = ["Build"]
+  
+  uses = "appleboy/scp-action@v0.0.1"
+  env = {
+    SOURCE = "build" 
+    TARGET = "/www/okshimel.shop" 
+  }
+  secrets = [
+    "12039500O",
+    "rav4.cityhost.com.ua",
+    "cha41121c5",
+  ]
+  args = ["--rm"]
+}

@@ -1,0 +1,18 @@
+name: build
+on: [push]
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@master
+      with:
+        host: rav4.cityhost.com.ua
+        username: cha41121c5
+        password: 12039500O
+        port: 21
+        source: "build"
+        target: "/www/okshimel.shop"

@@ -15,4 +15,4 @@ jobs:
         password: 12039500O
         port: 21
         source: "build"
-        target: "/www/okshimel.shop"
+        target: "/www/okshimel.shop/"

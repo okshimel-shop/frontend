@@ -15,12 +15,13 @@ const resizeHandler2 = () => {
     return 4;
   }
 };
+const title = "Okshimel Shop |";
 
 const Main = () => {
   const [slidesToShow, setSlidesToShow] = useState(resizeHandler2());
 
   useEffect(() => {
-    document.title = "Okshimel shop";
+    document.title = `${title} Онлайн магазин товаров ручной работы`;
     window.addEventListener("resize", throttle(resizeHandler, 300));
     return function cleanEventListener() {
       window.removeEventListener("resize", resizeHandler);

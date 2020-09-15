@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Social from "../Social/Social";
 import css from "./Footer.module.css";
 
@@ -7,10 +8,26 @@ const Footer = () => {
     <footer className={css.footer}>
       <div className={css.footer__wrapper}>
         <ul className={css.footer__help_list}>
-          <li className={css.footer__help_list_item}>О компании</li>
-          <li className={css.footer__help_list_item}>Контакты</li>
-          <li className={css.footer__help_list_item}>Доставка</li>
-          <li className={css.footer__help_list_item}>Оплата</li>
+          <li className={css.footer__help_list_item}>
+            <Link to="/about" className={css.footer__help_list_item_link}>
+              О компании
+            </Link>
+          </li>
+          <li className={css.footer__help_list_item}>
+            <Link to="/contacts" className={css.footer__help_list_item_link}>
+              Контакты
+            </Link>
+          </li>
+          <li className={css.footer__help_list_item}>
+            <Link to="/deliveries" className={css.footer__help_list_item_link}>
+              Доставка
+            </Link>
+          </li>
+          <li className={css.footer__help_list_item}>
+            <Link to="/payments" className={css.footer__help_list_item_link}>
+              Оплата
+            </Link>
+          </li>
         </ul>
         <Social />
 

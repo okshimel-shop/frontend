@@ -23,9 +23,13 @@
 
 .footer__help_list_item {
   width: 65px;
+  text-align: center;
+}
+
+.footer__help_list_item_link {
+  display: block;
   color: #eee;
   font-size: 12px;
-  text-align: center;
 }
 
 .footer__help_list_item:not(:nth-last-child(-n + 2)) {
@@ -71,6 +75,9 @@
 
   .footer__help_list_item {
     width: 80px;
+  }
+
+  .footer__help_list_item_link {
     font-size: 14px;
   }
 
@@ -105,6 +112,9 @@
 
   .footer__help_list_item {
     width: 100px;
+  }
+
+  .footer__help_list_item_link {
     font-size: 16px;
   }
 

@@ -1,15 +1,15 @@
 import React from "react";
 import Slider from "infinite-react-carousel";
-import css from "./SliderBar.module.css";
+import css from "./MainSlider.module.css";
 
-const SliderBar = () => {
+const MainSlider = () => {
   const settings = {
-    adaptiveHeight: true,
     arrows: false,
     autoplay: true,
     autoplaySpeed: 5000,
-    duration: 500,
+    duration: 200,
     pauseOnHover: true,
+    swipe: false,
   };
 
   return (
@@ -18,21 +18,21 @@ const SliderBar = () => {
         <div>
           <img
             className={css.sliderImg}
-            src="https://static9.depositphotos.com/1006075/1197/i/450/depositphotos_11973672-stock-photo-cupcakes.jpg"
+            src="https://images.wallpaperscraft.ru/image/neboskreb_most_gorod_184999_3840x2160.jpg"
             alt=""
           />
         </div>
         <div>
           <img
             className={css.sliderImg}
-            src="https://www.ejin.ru/wp-content/uploads/2018/11/fshshshshshshshsh-e1542184507336.jpg"
+            src="https://images.wallpaperscraft.ru/image/kofejnye_zerna_kofe_zerna_179491_3840x2160.jpg"
             alt=""
           />
         </div>
         <div>
           <img
             className={css.sliderImg}
-            src="https://avatarko.ru/img/kartinka/33/multfilm_lyagushka_32117.jpg"
+            src="https://images.wallpaperscraft.ru/image/apelsin_tsitrus_frukt_184594_3840x2160.jpg"
             alt=""
           />
         </div>
@@ -41,4 +41,4 @@ const SliderBar = () => {
   );
 };
 
-export default SliderBar;
+export default MainSlider;

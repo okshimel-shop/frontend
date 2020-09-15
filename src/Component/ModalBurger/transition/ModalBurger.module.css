@@ -4,7 +4,7 @@
 
 .enterActive {
   transform: translateX(0);
-  transition: transform 400ms linear;
+  transition: transform 250ms linear;
 }
 
 .exit {
@@ -13,5 +13,5 @@
 
 .exitActive {
   transform: translateX(-100%);
-  transition: transform 400ms linear;
+  transition: transform 250ms linear;
 }

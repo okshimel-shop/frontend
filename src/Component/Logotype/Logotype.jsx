@@ -1,12 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import css from "./Logotype.module.css";
 
 const Logotype = () => {
   return (
     <h1 className={css.logo}>
-      <a className={css.logo__link} href="/">
+      <Link to="/" className={css.logo__link}>
         Okshimel
-      </a>
+      </Link>
     </h1>
   );
 };

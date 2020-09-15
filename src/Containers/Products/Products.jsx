@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import css from "./Products.module.css";
 
 const Products = () => {
+  useEffect(() => {
+    document.title = "Все товары";
+  });
+
   return (
     <section className={css.products}>
       <div className={css.products__wrapper}>
-        <h2 className={css.products__title}>Каталог масок</h2>
+        <h2 className={css.products__title}>Все товары</h2>
         <ul className={css.products__list}>
           <li className={css.products__list_item}>
             <img

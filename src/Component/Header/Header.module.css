@@ -83,13 +83,13 @@
     display: flex;
   }
 
-  .header__main_menu_item {
-    color: #eee;
-    font-size: 20px;
-  }
-
   .header__main_menu_item:not(:last-child) {
     margin-right: 25px;
+  }
+
+  .header__main_menu_item_link {
+    color: #eee;
+    font-size: 20px;
   }
 
   .header__phone_wrapper {

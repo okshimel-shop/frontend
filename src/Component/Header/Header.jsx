@@ -1,37 +1,58 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { modalOpen } from "../../redux/actions/modalAction";
 import Logotype from "../Logotype/Logotype";
 import phone from "../../images/interface/phone.svg";
 import magnifier from "../../images/interface/magnifier.svg";
 import basket from "../../images/interface/basket.svg";
 import css from "./Header.module.css";
 
-const Header = ({ setModalStatus }) => {
-  const modalWindowToggler = (e) => {
-    const tagName = e.target.tagName;
+const Header = () => {
+  const dispatch = useDispatch();
 
-    const template = {
-      status: true,
-      position: tagName !== "IMG" ? "left" : "right",
-    };
-    setModalStatus(template);
+  const openModalHandler = (btnType) => {
+    dispatch(modalOpen(btnType));
   };
 
   return (
     <header className={css.header}>
       <div className={css.header__wrapper}>
-        <div onClick={modalWindowToggler} className={css.header__burgerMenu}>
+        <div
+          onClick={() => openModalHandler("left")}
+          className={css.header__burgerMenu}
+        >
           <i className={css.header__burgerItem}></i>
         </div>
 
         <Logotype />
 
         <ul className={css.header__main_menu}>
-          <li className={css.header__main_menu_item}>Menu 1</li>
-          <li className={css.header__main_menu_item}>Menu 2</li>
-          <li className={css.header__main_menu_item}>Menu 3</li>
-          <li className={css.header__main_menu_item}>Menu 4</li>
-          <li className={css.header__main_menu_item}>Menu 5</li>
-          <li className={css.header__main_menu_item}>Menu 6</li>
+          <li className={css.header__main_menu_item}>
+            <Link to="/products" className={css.header__main_menu_item_link}>
+              Товары
+            </Link>
+          </li>
+          <li className={css.header__main_menu_item}>
+            <Link to="/about" className={css.header__main_menu_item_link}>
+              О компании
+            </Link>
+          </li>
+          <li className={css.header__main_menu_item}>
+            <Link to="/contacts" className={css.header__main_menu_item_link}>
+              Контакты
+            </Link>
+          </li>
+          <li className={css.header__main_menu_item}>
+            <Link to="/deliveries" className={css.header__main_menu_item_link}>
+              Доставка
+            </Link>
+          </li>
+          <li className={css.header__main_menu_item}>
+            <Link to="/payments" className={css.header__main_menu_item_link}>
+              Оплата
+            </Link>
+          </li>
         </ul>
 
         <div className={css.header__phone_wrapper}>
@@ -52,7 +73,7 @@ const Header = ({ setModalStatus }) => {
             alt="basket icon"
           />
           <img
-            onClick={modalWindowToggler}
+            onClick={() => openModalHandler("right")}
             className={css.header__basket_icon}
             src={basket}
             alt="basket icon"

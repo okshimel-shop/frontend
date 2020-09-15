@@ -14,5 +14,5 @@ jobs:
         username: cha41121c5
         password: 12039500O
         port: 21
-        source: "build"
-        target: "/www/okshimel.shop/"
+        source: "build/"
+        target: "/www/okshimel.shop"

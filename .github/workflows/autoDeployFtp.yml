@@ -1,10 +1,7 @@
- workflow "Auto Deploy Ftp" { 
-
- on = "push" 
-
-  resolves = ["Deploy"] 
-  }
-
+- workflow "Auto Deploy Ftp" { 
+   on = "push" 
+   resolves = ["Deploy"]  
+   }
 
  action "Deploy" {
   needs = ["Build"]
@@ -12,12 +9,13 @@
   uses = "appleboy/scp-action@v0.0.1"
   env = {
     SOURCE = "build" 
-    TARGET = "/www/okshimel.shop" 
+
+    TARGET = "/" 
   }
   secrets = [
-    "12039500O",
-    "rav4.cityhost.com.ua",
-    "cha41121c5",
+    "PASSWORD",
+    "HOST",
+    "USERNAME",
   ]
   args = ["--rm"]
 }

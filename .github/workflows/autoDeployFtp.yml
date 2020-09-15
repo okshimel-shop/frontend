@@ -1,4 +1,4 @@
-- workflow "Auto Deploy Ftp" { 
+ workflow "Auto Deploy Ftp" { 
 
  on = "push" 
 

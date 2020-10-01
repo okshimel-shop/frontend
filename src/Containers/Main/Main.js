@@ -15,6 +15,7 @@ const resizeHandler2 = () => {
     return 4;
   }
 };
+
 const title = "Okshimel Shop |";
 
 const Main = () => {

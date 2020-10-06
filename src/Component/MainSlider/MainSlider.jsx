@@ -18,14 +18,14 @@ const MainSlider = () => {
         <div>
           <img
             className={css.sliderImg}
-            src="https://images.wallpaperscraft.ru/image/neboskreb_most_gorod_184999_3840x2160.jpg"
+            src="https://images.wallpaperscraft.ru/image/ulitsa_nochnoj_gorod_neon_187651_3840x2160.jpg"
             alt=""
           />
         </div>
         <div>
           <img
             className={css.sliderImg}
-            src="https://images.wallpaperscraft.ru/image/kofejnye_zerna_kofe_zerna_179491_3840x2160.jpg"
+            src="https://images.wallpaperscraft.ru/image/skaly_vid_sverhu_more_187641_3840x2160.jpg"
             alt=""
           />
         </div>

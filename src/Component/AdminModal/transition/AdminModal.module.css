@@ -1,0 +1,19 @@
+@media (min-width: 1024px) {
+  .enter {
+    transform: scale(0);
+  }
+
+  .enterActive {
+    transform: scale(1);
+    transition: transform 250ms linear;
+  }
+
+  .exit {
+    transform: scale(1);
+  }
+
+  .exitActive {
+    transform: scale(0);
+    transition: transform 250ms linear;
+  }
+}

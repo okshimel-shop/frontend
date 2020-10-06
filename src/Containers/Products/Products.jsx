@@ -1,160 +1,40 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProducts } from "../../redux/operations/productOperation";
 import css from "./Products.module.css";
 
 const Products = () => {
+  const dispatch = useDispatch();
+
+  const products = useSelector((state) => state.product);
+
   useEffect(() => {
     document.title = "Все товары";
-  });
+    dispatch(getAllProducts());
+    console.log("update");
+  }, [dispatch]);
+
+  console.log(products);
 
   return (
     <section className={css.products}>
       <div className={css.products__wrapper}>
         <h2 className={css.products__title}>Все товары</h2>
         <ul className={css.products__list}>
-          <li className={css.products__list_item}>
-            <img
-              className={css.products__list_item_img}
-              src="https://www.tellerreport.com/images/no-image.png"
-              alt="no-img"
-              width="130"
-              height="130"
-            />
-            <h3 className={css.products__list_item_title}>Маска №1</h3>
-            <p className={css.products__list_item_price}>120 грн</p>
-            <button className={css.products__list_item_btn}>Купить</button>
-          </li>
-          <li className={css.products__list_item}>
-            <img
-              className={css.products__list_item_img}
-              src="https://www.tellerreport.com/images/no-image.png"
-              alt="no-img"
-              width="130"
-              height="130"
-            />
-            <h3 className={css.products__list_item_title}>Маска №2</h3>
-            <p className={css.products__list_item_price}>120 грн</p>
-            <button className={css.products__list_item_btn}>Купить</button>
-          </li>
-          <li className={css.products__list_item}>
-            <img
-              className={css.products__list_item_img}
-              src="https://www.tellerreport.com/images/no-image.png"
-              alt="no-img"
-              width="130"
-              height="130"
-            />
-            <h3 className={css.products__list_item_title}>Маска №3</h3>
-            <p className={css.products__list_item_price}>120 грн</p>
-            <button className={css.products__list_item_btn}>Купить</button>
-          </li>
-          <li className={css.products__list_item}>
-            <img
-              className={css.products__list_item_img}
-              src="https://www.tellerreport.com/images/no-image.png"
-              alt="no-img"
-              width="130"
-              height="130"
-            />
-            <h3 className={css.products__list_item_title}>Маска №4</h3>
-            <p className={css.products__list_item_price}>120 грн</p>
-            <button className={css.products__list_item_btn}>Купить</button>
-          </li>
-          <li className={css.products__list_item}>
-            <img
-              className={css.products__list_item_img}
-              src="https://www.tellerreport.com/images/no-image.png"
-              alt="no-img"
-              width="130"
-              height="130"
-            />
-            <h3 className={css.products__list_item_title}>Маска №5</h3>
-            <p className={css.products__list_item_price}>120 грн</p>
-            <button className={css.products__list_item_btn}>Купить</button>
-          </li>
-          <li className={css.products__list_item}>
-            <img
-              className={css.products__list_item_img}
-              src="https://www.tellerreport.com/images/no-image.png"
-              alt="no-img"
-              width="130"
-              height="130"
-            />
-            <h3 className={css.products__list_item_title}>Маска №6</h3>
-            <p className={css.products__list_item_price}>120 грн</p>
-            <button className={css.products__list_item_btn}>Купить</button>
-          </li>
-          <li className={css.products__list_item}>
-            <img
-              className={css.products__list_item_img}
-              src="https://www.tellerreport.com/images/no-image.png"
-              alt="no-img"
-              width="130"
-              height="130"
-            />
-            <h3 className={css.products__list_item_title}>Маска №7</h3>
-            <p className={css.products__list_item_price}>120 грн</p>
-            <button className={css.products__list_item_btn}>Купить</button>
-          </li>
-          <li className={css.products__list_item}>
-            <img
-              className={css.products__list_item_img}
-              src="https://www.tellerreport.com/images/no-image.png"
-              alt="no-img"
-              width="130"
-              height="130"
-            />
-            <h3 className={css.products__list_item_title}>Маска №8</h3>
-            <p className={css.products__list_item_price}>120 грн</p>
-            <button className={css.products__list_item_btn}>Купить</button>
-          </li>
-          <li className={css.products__list_item}>
-            <img
-              className={css.products__list_item_img}
-              src="https://www.tellerreport.com/images/no-image.png"
-              alt="no-img"
-              width="130"
-              height="130"
-            />
-            <h3 className={css.products__list_item_title}>Маска №9</h3>
-            <p className={css.products__list_item_price}>120 грн</p>
-            <button className={css.products__list_item_btn}>Купить</button>
-          </li>
-          <li className={css.products__list_item}>
-            <img
-              className={css.products__list_item_img}
-              src="https://www.tellerreport.com/images/no-image.png"
-              alt="no-img"
-              width="130"
-              height="130"
-            />
-            <h3 className={css.products__list_item_title}>Маска №10</h3>
-            <p className={css.products__list_item_price}>120 грн</p>
-            <button className={css.products__list_item_btn}>Купить</button>
-          </li>
-          <li className={css.products__list_item}>
-            <img
-              className={css.products__list_item_img}
-              src="https://www.tellerreport.com/images/no-image.png"
-              alt="no-img"
-              width="130"
-              height="130"
-            />
-            <h3 className={css.products__list_item_title}>Маска №11</h3>
-            <p className={css.products__list_item_price}>120 грн</p>
-            <button className={css.products__list_item_btn}>Купить</button>
-          </li>
-          <li className={css.products__list_item}>
-            <img
-              className={css.products__list_item_img}
-              src="https://www.tellerreport.com/images/no-image.png"
-              alt="no-img"
-              width="130"
-              height="130"
-            />
-            <h3 className={css.products__list_item_title}>Маска №12</h3>
-            <p className={css.products__list_item_price}>120 грн</p>
-            <button className={css.products__list_item_btn}>Купить</button>
-          </li>
+          {products.map((prod) => (
+            <li key={prod.id} className={css.products__list_item}>
+              <img
+                className={css.products__list_item_img}
+                src={prod.images[0]}
+                alt={prod.title}
+                width="130"
+                height="130"
+              />
+              <h3 className={css.products__list_item_title}>{prod.title}</h3>
+              <p className={css.products__list_item_price}>{prod.price} грн</p>
+              <button className={css.products__list_item_btn}>Купить</button>
+            </li>
+          ))}
         </ul>
       </div>
     </section>

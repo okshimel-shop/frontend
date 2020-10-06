@@ -6,7 +6,7 @@ import { modalClose } from "../../redux/actions/modalAction";
 import animation from "./transition/BackgoundOvarlay.module.css";
 import css from "./BackgoundOvarlay.module.css";
 
-const BackgroundOvarlay = ({ modalStatus }) => {
+const BackgroundOvarlay = ({ modalStatus = "closed" }) => {
   const dispatch = useDispatch();
 
   const modalCloseHandler = () => {
@@ -15,7 +15,7 @@ const BackgroundOvarlay = ({ modalStatus }) => {
 
   return (
     <CSSTransition
-      in={modalStatus === "left" || modalStatus === "right"}
+      in={modalStatus !== "closed"}
       timeout={250}
       classNames={animation}
       unmountOnExit

@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  gatCurrentUser,
-  userLogin,
-  signOutUser,
-} from "../../redux/operations/userOperation";
+import { userLoginOperation } from "../../redux/operations/userOperation";
 
 const initialState = { email: "", password: "" };
 
@@ -12,10 +8,6 @@ const Login = () => {
   const [form, setForm] = useState(initialState);
 
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(gatCurrentUser());
-  // }, []);
 
   const inputHandler = ({ target }) => {
     const { name, value } = target;
@@ -25,15 +17,7 @@ const Login = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     setForm(initialState);
-    dispatch(userLogin(form));
-  };
-
-  const currentUser = () => {
-    dispatch(gatCurrentUser());
-  };
-
-  const signOut = () => {
-    dispatch(signOutUser());
+    dispatch(userLoginOperation(form));
   };
 
   return (
@@ -58,8 +42,6 @@ const Login = () => {
         />
         <button type="submit">Отправить</button>
       </form>
-      <button onClick={currentUser}>Current</button>
-      <button onClick={signOut}>SignOut</button>
     </div>
   );
 };

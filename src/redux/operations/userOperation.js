@@ -1,21 +1,13 @@
 import { auth } from "../../firebase";
+import { userStatus } from "../actions/userAction";
 
-export const userLogin = ({ email, password }) => async (dispatch) => {
+export const isUserLoginOperation = () => async (dispatch) => {
   try {
-    const result = await auth.signInWithEmailAndPassword(email, password);
-    console.log(result);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const gatCurrentUser = () => async (dispatch) => {
-  try {
-    auth.onAuthStateChanged(function (user) {
+    await auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log("User login");
+        dispatch(userStatus(user.email));
       } else {
-        console.log("User not login");
+        dispatch(userStatus(null));
       }
     });
   } catch (error) {
@@ -23,10 +15,17 @@ export const gatCurrentUser = () => async (dispatch) => {
   }
 };
 
-export const signOutUser = () => async (dispatch) => {
+export const userLoginOperation = ({ email, password }) => async (dispatch) => {
   try {
-    const user = auth.signOut();
-    console.log(user);
+    await auth.signInWithEmailAndPassword(email, password);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const userLogoutOperation = () => async (dispatch) => {
+  try {
+    auth.signOut();
   } catch (error) {
     console.log(error);
   }

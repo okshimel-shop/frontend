@@ -11,8 +11,8 @@ const ModalBurger = () => {
   const dispatch = useDispatch();
   const modalStatus = useSelector(({ modal }) => modal);
 
-  const modalCloseHandler = () => {
-    dispatch(modalClose());
+  const modalCloseHandler = (e) => {
+    if (e.target.id !== "modal-body") dispatch(modalClose());
   };
 
   const scrollSwitcher = (type) => {
@@ -31,7 +31,7 @@ const ModalBurger = () => {
           onClick={modalCloseHandler}
           className={css.modal_sidebar__container}
         >
-          <div className={css.modal_sidebar__body}>
+          <div className={css.modal_sidebar__body} id="modal-body">
             <img
               onClick={modalCloseHandler}
               className={css.modal_sidebar__button_close}

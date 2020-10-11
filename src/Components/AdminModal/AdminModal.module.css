@@ -1,0 +1,36 @@
+.modal_admin__container {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .modal_admin__container {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+  }
+
+  .modal_admin__body {
+    padding: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    width: 924px;
+    height: 524px;
+    background-color: #eee;
+  }
+
+  .modal_admin__button_close {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,51 @@
+.social__list {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.social__item:nth-child(1) {
+  background-image: url(../../images/social/facebook.png);
+  background-size: cover;
+}
+
+.social__item:nth-child(2) {
+  background-image: url(../../images/social/instagram.png);
+  background-size: cover;
+}
+
+.social__item:nth-child(3) {
+  background-image: url(../../images/social/telegram.png);
+  background-size: cover;
+}
+
+.social__item:nth-child(4) {
+  background-image: url(../../images/social/viber.png);
+  background-size: cover;
+}
+
+.social__item:nth-child(5) {
+  background-image: url(../../images/social/youtube.png);
+  background-size: cover;
+}
+
+.social__item:not(:nth-last-child(-n + 1)) {
+  margin-right: 5px;
+}
+
+.social__item_link {
+  display: block;
+  width: 30px;
+  height: 30px;
+}
+
+@media (min-width: 768px) {
+  .social__list {
+    margin-bottom: 0;
+  }
+
+  .social__item_link {
+    width: 35px;
+    height: 35px;
+  }
+}

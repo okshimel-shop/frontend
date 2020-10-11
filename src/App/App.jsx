@@ -4,20 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { isUserLoginOperation } from "../redux/operations/userOperation";
 
-import AdminBar from "../Component/AdminBar/AdminBar";
-import Header from "../Component/Header/Header";
+import Header from "../Components/Header/Header";
 import Main from "../Containers/Main/Main";
 import Login from "../Containers/Login/Login";
 import Products from "../Containers/Products/Products";
 import Company from "../Containers/Company/Company";
-import Footer from "../Component/Footer/Footer";
-import AdminModal from "../Component/AdminModal/AdminModal";
-import ModalBurger from "../Component/ModalBurger/ModalBurger";
-import ModalBasket from "../Component/ModalBasket/ModalBasket";
+import Footer from "../Components/Footer/Footer";
+import AdminModal from "../Components/AdminModal/AdminModal";
+import ModalBurger from "../Components/ModalBurger/ModalBurger";
+import ModalBasket from "../Components/ModalBasket/ModalBasket";
 
 import css from "./App.module.css";
-
-// const Products = React.lazy(() => import("../Containers/Products/Products"));
 
 function App() {
   const dispatch = useDispatch();
@@ -25,14 +22,11 @@ function App() {
 
   useEffect(() => {
     dispatch(isUserLoginOperation());
-  });
+  }, [dispatch]);
 
   return (
     <div className={css.container}>
-      {islogged && <AdminBar />}
-      <Header />
-
-      {/* <Suspense fallback={<div>Загрузка...</div>}> */}
+      <Header islogged={islogged} />
       <Switch>
         <Route exact path="/" component={Main} />
         {!islogged && <Route exact path="/admin" component={Login} />}
@@ -47,8 +41,6 @@ function App() {
 
         <Redirect to="/" />
       </Switch>
-      {/* </Suspense> */}
-
       <Footer />
 
       <AdminModal />

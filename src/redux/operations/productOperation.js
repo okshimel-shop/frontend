@@ -1,13 +1,18 @@
+import axios from "axios";
 import { modalClose } from "../actions/modalAction.js";
-import { productsLoad } from "../actions/productAction.js";
+import { spinnerDisable, spinnerEnable } from "../actions/spinnerAction.js";
+
 const { db, storage } = require("../../firebase");
 const storageRef = storage.ref();
+
+axios.defaults.baseURL = "https://okshimel-shop-7afff.firebaseio.com";
 
 export const addNewProduct = (infoArr, imgArr) => async (dispatch) => {
   try {
     const newProdRef = await db.collection("products").doc();
-
     const documentId = newProdRef.id;
+
+    const nextId = await axios.get("/counters/nextProductId.json");
 
     const pathImgArr = [];
     for (let i = 1; i <= imgArr.length; i++) {
@@ -15,7 +20,7 @@ export const addNewProduct = (infoArr, imgArr) => async (dispatch) => {
       const resultImgLoad = await imagesRef.put(imgArr[i - 1]);
       const pathRef = storage.ref(resultImgLoad.metadata.fullPath);
       pathImgArr.push(pathRef);
-      console.log(`Load ${i}`);
+      console.log(`Load img # ${i}`);
     }
 
     const linkImgArr = [];
@@ -29,13 +34,31 @@ export const addNewProduct = (infoArr, imgArr) => async (dispatch) => {
 
     const combinedObject = {
       ...infoArr,
+      price: Number(infoArr.price),
+      quantity: Number(infoArr.quantity),
       images: linkImgArr,
-      addTime: Date.now(),
-      id: documentId,
+      date: Date.now(),
+      docId: documentId,
+      views: 0,
+      id: nextId.data,
     };
 
     await newProdRef.set(combinedObject);
-    console.log("Add info to PRODUCTS");
+    console.log("Add products to BD");
+
+    const oldValue = await axios.get("/counters/quantityProducts.json");
+
+    await axios.patch("/counters.json", {
+      quantityProducts: oldValue.data + 1,
+    });
+
+    console.log(`Update prod quantity to ${oldValue.data + 1}`);
+
+    await axios.patch("/counters.json", {
+      nextProductId: nextId.data + 1,
+    });
+
+    console.log(`Update next id to ${nextId.data + 1}`);
 
     dispatch(modalClose());
   } catch (error) {
@@ -43,20 +66,40 @@ export const addNewProduct = (infoArr, imgArr) => async (dispatch) => {
   }
 };
 
-export const getAllProducts = () => async (dispatch) => {
+export const getQuantityProducts = () => async (dispatch) => {
   try {
+    const quantityProducts = await axios.get("/counters/quantityProducts.json");
+
+    return quantityProducts.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllProducts = (page, limitOnPage, quantityProducts) => async (
+  dispatch
+) => {
+  try {
+    dispatch(spinnerEnable());
     const allProdArr = [];
     await db
       .collection("products")
+      .orderBy("id", "desc")
+      .startAt(quantityProducts - (page - 1) * limitOnPage)
+      .limit(limitOnPage)
       .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach((doc) => {
-          allProdArr.push(doc.data());
+      .then((querySnapshot) => {
+        querySnapshot.forEach((res) => {
+          allProdArr.push(res.data());
         });
       });
-    console.log("load");
-    dispatch(productsLoad(allProdArr));
+
+    return allProdArr;
   } catch (error) {
     console.log(error);
+  } finally {
+    setTimeout(() => {
+      dispatch(spinnerDisable());
+    }, 500);
   }
 };

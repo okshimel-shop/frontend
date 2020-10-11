@@ -1,4 +1,19 @@
 .container {
   margin: 0 auto;
+  padding-bottom: 132px;
+  min-height: 100vh;
+  position: relative;
   background-color: #eee;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-bottom: 67px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-bottom: 71px;
+  }
 }

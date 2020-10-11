@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import throttle from "lodash.throttle";
-import MainSlider from "../../Component/MainSlider/MainSlider";
-import NewProducts from "../../Component/NewProducts/NewProducts";
-import Discounts from "../../Component/Discounts/Discounts";
-import Bestsellers from "../../Component/Bestsellers/Bestsellers";
+import MainSlider from "../../Components/MainSlider/MainSlider";
+import NewProducts from "../../Components/NewProducts/NewProducts";
+import Discounts from "../../Components/Discounts/Discounts";
+import Bestsellers from "../../Components/Bestsellers/Bestsellers";
 
-const resizeHandler2 = () => {
-  const width = document.documentElement.clientWidth;
+const howStartWidth = () => {
+  const width = window.innerWidth;
+
   if (width <= 767) {
     return 2;
   } else if (width >= 768 && width <= 1023) {
@@ -19,18 +20,18 @@ const resizeHandler2 = () => {
 const title = "Okshimel Shop |";
 
 const Main = () => {
-  const [slidesToShow, setSlidesToShow] = useState(resizeHandler2());
+  const [slidesToShow, setSlidesToShow] = useState(howStartWidth());
 
   useEffect(() => {
     document.title = `${title} Онлайн магазин товаров ручной работы`;
-    window.addEventListener("resize", throttle(resizeHandler, 300));
+    window.addEventListener("resize", throttle(resizeWidthHandler, 300));
     return function cleanEventListener() {
-      window.removeEventListener("resize", resizeHandler);
+      window.removeEventListener("resize", resizeWidthHandler);
     };
   }, []);
 
-  const resizeHandler = () => {
-    const width = document.documentElement.clientWidth;
+  const resizeWidthHandler = () => {
+    const width = window.innerWidth;
 
     if (width <= 767) {
       setSlidesToShow(2);

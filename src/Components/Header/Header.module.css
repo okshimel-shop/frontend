@@ -1,0 +1,142 @@
+.header {
+  width: 100%;
+  position: relative;
+  background-color: #333;
+  z-index: 2;
+}
+
+:global(.header__wrapper) {
+  margin: 0 auto;
+  height: 50px;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+}
+
+:global(.header__wrapper:hover ~ .admin_bar) {
+  transform: translateY(30px);
+}
+
+.header__burgerMenu::after {
+  content: "";
+  display: block;
+  width: 25px;
+  height: 18px;
+  cursor: pointer;
+  position: absolute;
+  transform: translateY(-10px);
+}
+
+.header__burgerItem {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: #eee;
+}
+
+.header__burgerItem::before {
+  content: "";
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: #eee;
+  transform: translateY(-8px);
+}
+
+.header__burgerItem::after {
+  content: "";
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: #eee;
+  transform: translateY(6px);
+}
+
+.header__main_menu {
+  display: none;
+}
+
+.header__phone_wrapper {
+  display: none;
+}
+
+.header__magnifier_icon {
+  display: none;
+}
+
+.header__basket_icon {
+  width: 28px;
+  height: 28px;
+  background-image: url(../../images/interface/basket.svg);
+  background-size: cover;
+  cursor: pointer;
+}
+
+@media (min-width: 1024px) {
+  :global(.header__wrapper) {
+    padding: 0;
+    width: 990px;
+    height: 60px;
+  }
+
+  .header__burgerMenu {
+    display: none;
+  }
+
+  .header__burgerItem {
+    display: none;
+  }
+
+  .header__main_menu {
+    display: flex;
+  }
+
+  .header__main_menu_item:not(:last-child) {
+    margin-right: 25px;
+  }
+
+  .header__main_menu_item_link {
+    color: #eee;
+    font-size: 20px;
+  }
+
+  .header__phone_wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .header__phone_icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+    background-image: url(../../images/interface/phone.svg);
+    background-size: cover;
+  }
+
+  .header__phone_link {
+    color: #eee;
+  }
+
+  .header__icon_wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .header__magnifier_icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin-right: 20px;
+    background-image: url(../../images/interface/magnifier.svg);
+    background-size: cover;
+    cursor: pointer;
+  }
+
+  .header__basket_icon {
+    width: 32px;
+    height: 32px;
+  }
+}

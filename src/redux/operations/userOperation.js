@@ -1,4 +1,5 @@
 import { auth } from "../../firebase";
+import { spinnerDisable, spinnerEnable } from "../actions/spinnerAction";
 import { userStatus } from "../actions/userAction";
 
 export const isUserLoginOperation = () => async (dispatch) => {
@@ -17,9 +18,12 @@ export const isUserLoginOperation = () => async (dispatch) => {
 
 export const userLoginOperation = ({ email, password }) => async (dispatch) => {
   try {
+    dispatch(spinnerEnable());
     await auth.signInWithEmailAndPassword(email, password);
   } catch (error) {
     console.log(error);
+  } finally {
+    dispatch(spinnerDisable());
   }
 };
 

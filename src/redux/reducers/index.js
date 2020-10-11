@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import modal from "./modalReducer";
-import product from "./productReducer";
 import user from "./userReducer";
+import spinner from "./spinnerResucer";
 
 const rootReducer = combineReducers({
   modal,
-  product,
   user,
+  spinner,
 });
 
 export default rootReducer;

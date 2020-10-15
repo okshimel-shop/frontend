@@ -4,7 +4,7 @@ import { PropTypes } from "prop-types";
 import { CSSTransition } from "react-transition-group";
 import { modalClose } from "../../redux/actions/modalAction";
 import animation from "./transition/BackgoundOvarlay.module.css";
-import css from "./BackgoundOvarlay.module.css";
+import css from "./BackgroundOvarlay.module.css";
 
 const BackgroundOvarlay = ({ modalStatus = "closed" }) => {
   const dispatch = useDispatch();

@@ -1,12 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { modalOpen } from "../../redux/actions/modalAction";
 import Logotype from "../Logotype/Logotype";
 import AdminBar from "../AdminBar/AdminBar";
+import { isloggedSelector } from "../../redux/selectors/selectors";
 import css from "./Header.module.css";
 
-const Header = ({ islogged }) => {
+const Header = () => {
+  const islogged = useSelector((state) => isloggedSelector(state));
+
   const dispatch = useDispatch();
 
   const openModalHandler = (btnType) => {
@@ -27,7 +30,10 @@ const Header = ({ islogged }) => {
 
         <ul className={css.header__main_menu}>
           <li className={css.header__main_menu_item}>
-            <Link to="/products" className={css.header__main_menu_item_link}>
+            <Link
+              to="/products?page=1"
+              className={css.header__main_menu_item_link}
+            >
               Товары
             </Link>
           </li>

@@ -1,29 +1,35 @@
 import { auth } from "../../firebase";
-import { spinnerDisable, spinnerEnable } from "../actions/spinnerAction";
+import { loaderOn, loaderOff } from "../actions/loaderAction";
 import { userStatus } from "../actions/userAction";
 
 export const isUserLoginOperation = () => async (dispatch) => {
   try {
+    dispatch(loaderOn());
+
     await auth.onAuthStateChanged((user) => {
       if (user) {
         dispatch(userStatus(user.email));
       } else {
-        dispatch(userStatus(null));
+        dispatch(userStatus(""));
       }
     });
   } catch (error) {
     console.log(error);
+  } finally {
+    setTimeout(() => {
+      dispatch(loaderOff());
+    }, 500);
   }
 };
 
 export const userLoginOperation = ({ email, password }) => async (dispatch) => {
   try {
-    dispatch(spinnerEnable());
+    dispatch(loaderOn());
     await auth.signInWithEmailAndPassword(email, password);
   } catch (error) {
     console.log(error);
   } finally {
-    dispatch(spinnerDisable());
+    dispatch(loaderOff());
   }
 };
 

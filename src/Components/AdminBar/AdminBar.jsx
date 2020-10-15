@@ -2,11 +2,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogoutOperation } from "../../redux/operations/userOperation";
 import { modalOpen } from "../../redux/actions/modalAction";
+import { isloggedSelector } from "../../redux/selectors/selectors";
 import css from "./AdminBar.module.css";
 
 const AdminBar = () => {
   const dispatch = useDispatch();
-  const userInfo = useSelector((state) => state.user);
+  const userInfo = useSelector((state) => isloggedSelector(state));
 
   const userLogoutHandler = () => {
     dispatch(userLogoutOperation());

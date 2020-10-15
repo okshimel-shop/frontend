@@ -31,6 +31,10 @@
   margin-bottom: 20px;
 }
 
+.login__input_email:hover {
+  border: 1px solid #333;
+}
+
 .login__input_pass {
   padding: 0 10px;
   width: 100%;
@@ -41,6 +45,9 @@
   font-size: 16px;
   margin-bottom: 20px;
 }
+.login__input_pass:hover {
+  border: 1px solid #333;
+}
 
 .login__form_submit_btn {
   display: block;
@@ -50,6 +57,14 @@
   border: 1px solid #aaa;
   border-radius: 5px;
   background-color: #fff;
+  cursor: pointer;
+}
+
+.login__form_submit_btn:hover,
+.login__form_submit_btn:focus {
+  color: #eee;
+  outline-color: #333;
+  background-color: #333;
 }
 
 @media (min-width: 768px) {

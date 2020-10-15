@@ -1,6 +1,8 @@
 import axios from "axios";
 import { modalClose } from "../actions/modalAction.js";
-import { spinnerDisable, spinnerEnable } from "../actions/spinnerAction.js";
+import { productsLoad } from "../actions/productAction.js";
+import { loaderOn, loaderOff } from "../actions/loaderAction.js";
+import { quantityGet } from "../actions/quantityAction.js";
 
 const { db, storage } = require("../../firebase");
 const storageRef = storage.ref();
@@ -70,7 +72,7 @@ export const getQuantityProducts = () => async (dispatch) => {
   try {
     const quantityProducts = await axios.get("/counters/quantityProducts.json");
 
-    return quantityProducts.data;
+    dispatch(quantityGet(quantityProducts.data));
   } catch (error) {
     console.log(error);
   }
@@ -80,7 +82,7 @@ export const getAllProducts = (page, limitOnPage, quantityProducts) => async (
   dispatch
 ) => {
   try {
-    dispatch(spinnerEnable());
+    dispatch(loaderOn());
     const allProdArr = [];
     await db
       .collection("products")
@@ -93,13 +95,14 @@ export const getAllProducts = (page, limitOnPage, quantityProducts) => async (
           allProdArr.push(res.data());
         });
       });
+    console.log("BD request");
 
-    return allProdArr;
+    dispatch(productsLoad(allProdArr));
   } catch (error) {
     console.log(error);
   } finally {
     setTimeout(() => {
-      dispatch(spinnerDisable());
+      dispatch(loaderOff());
     }, 500);
   }
 };

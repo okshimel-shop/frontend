@@ -9,11 +9,12 @@ import AdminAddProduct from "../AdminAddProduct/AdminAddProduct";
 import AdminProductList from "../AdminProductList/AdminProductList";
 
 import BackgroundOvarlay from "../BackgoundOvarlay/BackgroundOvarlay";
+import { modalStatusSelector } from "../../redux/selectors/selectors";
 import css from "./AdminModal.module.css";
 
 const AdminModal = () => {
   const dispatch = useDispatch();
-  const modalStatus = useSelector(({ modal }) => modal);
+  const modalStatus = useSelector((state) => modalStatusSelector(state));
 
   const modalCloseHandler = (e) => {
     if (e.target.id === "modal-close") {

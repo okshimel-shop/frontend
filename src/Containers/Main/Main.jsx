@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import throttle from "lodash.throttle";
 import MainSlider from "../../Components/MainSlider/MainSlider";
 import NewProducts from "../../Components/NewProducts/NewProducts";
@@ -17,13 +18,10 @@ const howStartWidth = () => {
   }
 };
 
-const title = "Okshimel Shop |";
-
 const Main = () => {
   const [slidesToShow, setSlidesToShow] = useState(howStartWidth());
 
   useEffect(() => {
-    document.title = `${title} Онлайн магазин товаров ручной работы`;
     window.addEventListener("resize", throttle(resizeWidthHandler, 300));
     return function cleanEventListener() {
       window.removeEventListener("resize", resizeWidthHandler);
@@ -44,6 +42,10 @@ const Main = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Okshimel Shop | Онлайн магазин товаров ручной работы</title>
+      </Helmet>
+
       <MainSlider />
       <Discounts slides={slidesToShow} />
       <Bestsellers slides={slidesToShow} />

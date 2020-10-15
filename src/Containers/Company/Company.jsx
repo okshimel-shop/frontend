@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { Helmet } from "react-helmet";
 
 const Company = () => {
-  useEffect(() => {
-    document.title = "О компании";
-  });
-
   return (
     <div>
+      <Helmet>
+        <title>О компании | Okshimel Shop</title>
+      </Helmet>
+
       <h2>test</h2>
     </div>
   );

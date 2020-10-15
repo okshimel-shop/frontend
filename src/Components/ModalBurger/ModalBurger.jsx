@@ -5,11 +5,13 @@ import { modalClose } from "../../redux/actions/modalAction";
 import closeIcon from "../../images/interface/close-btn.svg";
 import animation from "./transition/ModalBurger.module.css";
 import BackgroundOvarlay from "../BackgoundOvarlay/BackgroundOvarlay";
+import { modalStatusSelector } from "../../redux/selectors/selectors";
 import css from "./ModalBurger.module.css";
 
 const ModalBurger = () => {
+  const modalStatus = useSelector((state) => modalStatusSelector(state));
+
   const dispatch = useDispatch();
-  const modalStatus = useSelector(({ modal }) => modal);
 
   const modalCloseHandler = (e) => {
     if (e.target.id !== "modal-body") dispatch(modalClose());

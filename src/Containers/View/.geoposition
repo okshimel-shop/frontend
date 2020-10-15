@@ -1,0 +1,9 @@
+  navigator.geolocation.getCurrentPosition(
+    (location) => {
+      console.log(location.coords);
+    },
+    (error) => {
+      console.log("request location error", error);
+    }
+  );
+  https://stackoverflow.com/questions/52583277/get-user-city-and-country-in-react-native

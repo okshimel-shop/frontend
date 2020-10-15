@@ -2,40 +2,51 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import queryString from "query-string";
-import { getOneProduct } from "../../redux/operations/viewOperation";
+import Availability from "../../Components/Availability/Availability";
+import Viewed from "../../Components/Viewed/Viewed";
+import {
+  addOneView,
+  getOneProduct,
+} from "../../redux/operations/viewOperation";
 import { viewLoad } from "../../redux/actions/viewAction";
 import { viewSelector } from "../../redux/selectors/selectors";
 import css from "./View.module.css";
 
 const ProductsList = ({ location, history }) => {
-  const [imgSelected, setImgSelected] = useState(1);
+  const [imgSelected, setImgSelected] = useState(0);
 
   const view = useSelector((state) => viewSelector(state));
 
   const dispatch = useDispatch();
 
   const queryItem = queryString.parse(location.search).p;
+  const hashId = queryString.parse(location.hash).img;
 
-  const getOneProductHanvler = useCallback(() => {
+  useEffect(() => {
+    if (hashId) {
+      setImgSelected(hashId - 1);
+    }
+  }, [hashId]);
+
+  useEffect(() => {
+    view && dispatch(addOneView(view.docId, view.views));
+  }, [dispatch, view]);
+
+  const getOneProductHandler = useCallback(() => {
     dispatch(getOneProduct(Number(queryItem)));
   }, [dispatch, queryItem]);
 
   useEffect(() => {
-    getOneProductHanvler();
+    getOneProductHandler();
+
     return () => {
       dispatch(viewLoad(null));
     };
-  }, [dispatch, getOneProductHanvler]);
-
-  const availability =
-    !view ||
-    (view.quantity === 0 && "Закончился") ||
-    (view.quantity === 1 && "Заканчивается") ||
-    (view.quantity >= 2 && "В наличии");
+  }, [dispatch, getOneProductHandler]);
 
   const selectImgHandler = ({ target }) => {
     setImgSelected(Number(target.id));
-    history.push(`${location.search}#img=${Number(target.id)}`);
+    history.replace(`${location.search}#img=${Number(target.id) + 1}`);
   };
 
   return (
@@ -48,9 +59,11 @@ const ProductsList = ({ location, history }) => {
 
       {view && (
         <div className={css.view__wrapper}>
-          <h2 className={css.view__title}>{view.title}</h2>
+          <p className={css.view__category}>
+            <b>&#8249;</b> {view.category}
+          </p>
 
-          <p>{view.category}</p>
+          <h2 className={css.view__title}>{view.title}</h2>
 
           <img
             className={css.view_preview_img}
@@ -66,18 +79,36 @@ const ProductsList = ({ location, history }) => {
                 className={css.view__image_picker_item}
                 src={img}
                 alt={view.title}
-                id={idx + 1}
+                id={idx}
               />
             ))}
           </div>
 
-          <p>{availability}</p>
+          <div className={css.view__action_wrapper}>
+            <p className={css.view__action_price}>{view.price} ₴</p>
 
-          <p>{view.price}</p>
+            <Availability quantity={view.quantity} />
 
-          <p>{view.desc}</p>
+            {view.quantity > 0 && (
+              <button className={css.view__action_buy}>Купить</button>
+            )}
+            {view.quantity < 1 && (
+              <button className={css.view__action_buy}>Под заказ</button>
+            )}
+          </div>
+
+          <div className={css.view__description}>
+            <h3 className={css.view__description_title}>
+              Описание
+              <p className={css.view__description_title_prod}> {view.title}</p>
+            </h3>
+
+            <p className={css.view__description_text}>{view.desc}</p>
+          </div>
         </div>
       )}
+
+      {view && <Viewed slides={2} />}
     </section>
   );
 };

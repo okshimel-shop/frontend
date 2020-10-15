@@ -25,3 +25,15 @@ export const getOneProduct = (queryItem) => async (dispatch) => {
     }, 500);
   }
 };
+
+export const addOneView = (docId, oldValue) => async (dispatch) => {
+  try {
+    await db
+      .collection("products")
+      .doc(docId)
+      .set({ views: oldValue + 1 }, { merge: true });
+  } catch (error) {
+    console.log(error);
+  } finally {
+  }
+};

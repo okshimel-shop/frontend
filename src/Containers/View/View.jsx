@@ -23,14 +23,31 @@ const ProductsList = ({ location, history }) => {
   const hashId = queryString.parse(location.hash).img;
 
   useEffect(() => {
-    if (hashId) {
-      setImgSelected(hashId - 1);
-    }
+    hashId && setImgSelected(hashId - 1);
   }, [hashId]);
 
   useEffect(() => {
-    view && dispatch(addOneView(view.docId, view.views));
-  }, [dispatch, view]);
+    if (view) {
+      const lastViewed = JSON.parse(localStorage.getItem("viewed"));
+      const checkViewToday = lastViewed.find((item) => item.id === queryItem);
+      !checkViewToday && dispatch(addOneView(view.docId, view.views));
+    }
+  }, [dispatch, view, queryItem]);
+
+  useEffect(() => {
+    if (view) {
+      const lastViewed = JSON.parse(localStorage.getItem("viewed"));
+      const filterArrViewed = lastViewed.find((item) => item.id === queryItem);
+
+      if (!filterArrViewed) {
+        const newArrViewed = [
+          { id: queryItem, date: Date.now() },
+          ...lastViewed,
+        ];
+        localStorage.setItem("viewed", JSON.stringify(newArrViewed));
+      }
+    }
+  }, [view, queryItem]);
 
   const getOneProductHandler = useCallback(() => {
     dispatch(getOneProduct(Number(queryItem)));

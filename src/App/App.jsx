@@ -24,6 +24,20 @@ function App() {
     dispatch(isUserLoginOperation());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (!localStorage.getItem("viewed")) {
+      localStorage.setItem("viewed", JSON.stringify([]));
+    } else {
+      const lastViewed = JSON.parse(localStorage.getItem("viewed"));
+      const filtredViewed = lastViewed.filter(
+        (item) =>
+          Math.floor(Date.now() / 60000 / 60 / 24) ===
+          Math.floor(item.date / 60000 / 60 / 24)
+      );
+      localStorage.setItem("viewed", JSON.stringify(filtredViewed));
+    }
+  }, []);
+
   return (
     <div className={css.container}>
       <Header />

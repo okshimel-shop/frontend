@@ -1,0 +1,77 @@
+.InfiniteCarouselDots {
+  height: 17px !important;
+  background-color: rgba(170, 170, 170, 0.5) !important;
+  border-radius: 5px !important;
+  transform: translate(-50%, -6px) !important;
+}
+
+.InfiniteCarouselDot {
+  outline: none !important;
+}
+
+.InfiniteCarouselDotIcon {
+  width: 11px !important;
+  height: 11px !important;
+}
+
+.InfiniteCarouselDotActiveIcon {
+  background-color: #333 !important;
+}
+
+.InfiniteCarouselArrow {
+  top: 35% !important;
+}
+
+.InfiniteCarouselArrowIcon {
+  padding: 6px !important;
+  border: solid #666 !important;
+  border-width: 0 3px 3px 0 !important;
+  transition: border 200ms linear !important;
+}
+
+.InfiniteCarouselArrowIcon:hover {
+  border: solid #eee !important;
+  border-width: 0 3px 3px 0 !important;
+}
+
+.InfiniteCarouselArrowPrev {
+  left: 12px !important;
+}
+
+.InfiniteCarouselArrowNext {
+  right: 12px !important;
+}
+
+@media (min-width: 768px) {
+  .InfiniteCarouselArrow {
+    top: 40% !important;
+  }
+
+  .InfiniteCarouselArrowIcon {
+    padding: 8px !important;
+    border-width: 0 4px 4px 0 !important;
+  }
+
+  .InfiniteCarouselArrowIcon:hover {
+    border: solid #eee !important;
+    border-width: 0 4px 4px 0 !important;
+  }
+
+  .InfiniteCarouselArrowPrev {
+    left: 25px !important;
+  }
+
+  .InfiniteCarouselArrowNext {
+    right: 25px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .InfiniteCarouselArrowPrev {
+    left: 15px !important;
+  }
+
+  .InfiniteCarouselArrowNext {
+    right: 15px !important;
+  }
+}

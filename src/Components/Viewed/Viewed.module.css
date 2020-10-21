@@ -1,10 +1,10 @@
 .new_products {
   width: 300px;
   margin: 0 auto;
+  padding-bottom: 20px;
 }
 
 .new_products__wrapper {
-  padding: 16px 0 20px;
   position: relative;
 }
 
@@ -14,10 +14,11 @@
   width: 100%;
   color: #333;
   font-size: 18px;
-  margin: 0 auto 20px;
+  margin: 0 auto 10px;
 }
 
 .new_products__list_item {
+  margin: 0 auto;
   width: 140px;
   text-align: center;
 }
@@ -25,8 +26,8 @@
 .new_products__list_item_img {
   margin: 0 auto;
   object-fit: cover;
-  width: 140px;
-  height: 140px;
+  width: 145px;
+  height: 110px;
   border-radius: 5px;
   margin-bottom: 10px;
 }
@@ -43,26 +44,6 @@
   margin-bottom: 5px;
 }
 
-.new_products__list_item_btn {
-  width: 100px;
-  height: 30px;
-  border: none;
-  outline: none;
-  color: #eee;
-  font-size: 11px;
-  text-transform: uppercase;
-  background-color: #333;
-  border-radius: 15px;
-  cursor: pointer;
-}
-
-.new_products__list_item_btn:hover,
-.new_products__list_item_btn:focus {
-  border: 2px solid #333;
-  color: #333;
-  background-color: #eee;
-}
-
 @media (max-width: 767px) {
   .new_products__list_item:not(:nth-last-child(-n + 2)) {
     margin-bottom: 20px;
@@ -71,16 +52,12 @@
 
 @media (min-width: 768px) {
   .new_products {
-    width: 748px;
-  }
-
-  .new_products__wrapper {
-    padding: 26px 0 30px;
+    width: 738px;
+    padding-bottom: 30px;
   }
 
   .new_products__title {
-    font-size: 30px;
-    margin-bottom: 30px;
+    font-size: 20px;
   }
 
   .new_products__title::before {
@@ -100,8 +77,8 @@
   }
 
   .new_products__list_item_img {
-    width: 220px;
-    height: 220px;
+    width: 236px;
+    height: 177px;
   }
 
   .new_products__list_item_title {
@@ -110,11 +87,6 @@
 
   .new_products__list_item_price {
     font-size: 16px;
-  }
-
-  .new_products__list_item_btn {
-    width: 110px;
-    font-size: 13px;
   }
 }
 
@@ -127,15 +99,11 @@
 @media (min-width: 1024px) {
   .new_products {
     width: 990px;
-  }
-
-  .new_products__wrapper {
-    padding: 36px 0 40px;
+    padding-bottom: 30px;
   }
 
   .new_products__title {
-    font-size: 34px;
-    margin-bottom: 40px;
+    font-size: 24px;
   }
 
   .new_products__title::before {
@@ -160,7 +128,7 @@
 
   .new_products__list_item_img {
     width: 240px;
-    height: 240px;
+    height: 180px;
   }
 
   .new_products__list_item_title {
@@ -169,10 +137,5 @@
 
   .new_products__list_item_price {
     font-size: 18px;
-  }
-
-  .new_products__list_item_btn {
-    width: 120px;
-    font-size: 15px;
   }
 }

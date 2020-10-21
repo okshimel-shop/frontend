@@ -4,8 +4,6 @@ import { userStatus } from "../actions/userAction";
 
 export const isUserLoginOperation = () => async (dispatch) => {
   try {
-    dispatch(loaderOn());
-
     await auth.onAuthStateChanged((user) => {
       if (user) {
         dispatch(userStatus(user.email));
@@ -15,10 +13,6 @@ export const isUserLoginOperation = () => async (dispatch) => {
     });
   } catch (error) {
     console.log(error);
-  } finally {
-    setTimeout(() => {
-      dispatch(loaderOff());
-    }, 500);
   }
 };
 

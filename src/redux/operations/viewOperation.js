@@ -1,4 +1,4 @@
-import { loaderOff, loaderOn } from "../actions/loaderAction";
+import { loaderOn } from "../actions/loaderAction";
 import { viewLoad } from "../actions/viewAction";
 
 const { db } = require("../../firebase");
@@ -19,10 +19,6 @@ export const getOneProduct = (queryItem) => async (dispatch) => {
     console.log("BD request");
   } catch (error) {
     console.log(error);
-  } finally {
-    setTimeout(() => {
-      dispatch(loaderOff());
-    }, 500);
   }
 };
 
@@ -34,6 +30,5 @@ export const addOneView = (docId, oldValue) => async (dispatch) => {
       .set({ views: oldValue + 1 }, { merge: true });
   } catch (error) {
     console.log(error);
-  } finally {
   }
 };

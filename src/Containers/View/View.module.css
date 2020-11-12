@@ -141,7 +141,8 @@
 
 .view__description_text {
   padding: 0 5px;
-  font-size: 16px;
+  font-size: 14px;
+  line-height: 24px;
 }
 
 @media (min-width: 768px) {
@@ -215,6 +216,7 @@
   }
 
   .view__description {
+    width: 400px;
     margin-bottom: 30px;
   }
 
@@ -227,7 +229,8 @@
   }
 
   .view__description_text {
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 26px;
   }
 }
 
@@ -310,6 +313,7 @@
   }
 
   .view__description {
+    width: 640px;
     margin-bottom: 40px;
   }
 
@@ -322,6 +326,7 @@
   }
 
   .view__description_text {
-    font-size: 20px;
+    font-size: 18px;
+    line-height: 28px;
   }
 }

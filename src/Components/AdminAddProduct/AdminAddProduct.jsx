@@ -101,7 +101,7 @@ const AdminAddProduct = () => {
             type="text"
             name="title"
             minLength="6"
-            maxLength="30"
+            maxLength="40"
             required
             autoFocus
             placeholder="Название товара"

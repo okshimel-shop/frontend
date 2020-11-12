@@ -52,24 +52,30 @@ const Viewed = ({ prodId, loaderStatus }) => {
   return (
     <>
       {!loaderStatus && viewed.length !== 0 && (
-        <section className={css.new_products}>
-          <div className={css.new_products__wrapper}>
-            <h2 className={css.new_products__title}>Недавно смотрели</h2>
-            <ul className={css.new_products__list}>
+        <section className={css.viewed}>
+          <div className={css.viewed__wrapper}>
+            <h2 className={css.viewed__title}>Недавно смотрели</h2>
+            <ul className={css.viewed__list}>
               <InfiniteCarousel {...settings}>
                 {viewed.map((item) => (
-                  <div key={item.id} className={css.new_products__list_item}>
+                  <div key={item.id} className={css.viewed__list_item}>
                     <img
-                      className={css.new_products__list_item_img}
+                      className={css.viewed__list_item_img}
                       src={item.images[0]}
                       alt={item.title}
                     />
-                    <h3 className={css.new_products__list_item_title}>
+                    <h3 className={css.viewed__list_item_title}>
                       {item.title}
                     </h3>
-                    <p className={css.new_products__list_item_price}>
-                      {item.price} грн
-                    </p>
+                    <div className={css.viewed__list_item_wrapper}>
+                      <p className={css.viewed__list_item_price}>120</p>
+                      <div className={css.viewed__list_item_favourite_wraper}>
+                        <button
+                          className={css.viewed__list_item_favourite}
+                        ></button>
+                        <button className={css.viewed__list_item_btn}></button>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </InfiniteCarousel>

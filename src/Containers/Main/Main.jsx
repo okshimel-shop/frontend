@@ -14,8 +14,8 @@ const Main = () => {
 
       <MainSlider />
 
-      <Discounts />
       <Bestsellers />
+      <Discounts />
       <NewProducts />
     </>
   );

@@ -90,10 +90,16 @@ const Products = ({ location, history }) => {
                     {prod.title}
                   </h3>
                 </Link>
-                <p className={css.products__list_item_price}>{prod.price} ₴</p>
-                <button className={css.products__list_item_btn}>
-                  В корзину
-                </button>
+
+                <div className={css.products__list_item_wrapper}>
+                  <p className={css.products__list_item_price}>{prod.price}</p>
+                  <div className={css.products__list_item_favourite_wraper}>
+                    <button
+                      className={css.products__list_item_favourite}
+                    ></button>
+                    <button className={css.products__list_item_btn}></button>
+                  </div>
+                </div>
               </li>
             ))}
           </ul>

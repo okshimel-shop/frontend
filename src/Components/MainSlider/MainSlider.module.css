@@ -30,12 +30,11 @@
 @media (min-width: 1024px) {
   .main_slider {
     margin: 0 auto 36px;
-    padding-top: 17px;
     width: 990px;
   }
 
   .main_slider__img {
     height: 600px;
-    border-radius: 10px;
+    border-radius: 0 0 10px 10px;
   }
 }

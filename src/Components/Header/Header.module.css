@@ -67,8 +67,8 @@
 }
 
 .header__basket_icon {
-  width: 28px;
-  height: 28px;
+  width: 25px;
+  height: 25px;
   background-image: url(../../images/interface/basket.svg);
   background-size: cover;
   cursor: pointer;

@@ -32,7 +32,7 @@ const Bestsellers = () => {
   return (
     <section className={css.sliders}>
       <div className={css.sliders__wrapper}>
-        <h2 className={css.sliders__title}>Топ сегодня</h2>
+        <h2 className={css.sliders__title}>Популярные</h2>
         <ul className={css.sliders__list}>
           <InfiniteCarousel {...settings}>
             <div className={css.sliders__list_item}>
@@ -42,7 +42,7 @@ const Bestsellers = () => {
                 alt="no-img"
               />
               <h3 className={css.sliders__list_item_title}>
-                Маска волк для детских утреннико и праздников для вас бла бла
+                Маска волк для детских утренников и праздников для вас бла бла
                 бла
               </h3>
               <div className={css.sliders__list_item_wrapper}>
@@ -59,9 +59,7 @@ const Bestsellers = () => {
                 src="https://loremflickr.com/320/240?random=18"
                 alt="no-img"
               />
-              <h3 className={css.sliders__list_item_title}>
-                Карнавальная маска мишки для детей
-              </h3>
+              <h3 className={css.sliders__list_item_title}>Карнавальная</h3>
               <div className={css.sliders__list_item_wrapper}>
                 <p className={css.sliders__list_item_price}>150</p>
                 <div className={css.sliders__list_item_favourite_wraper}>
@@ -76,9 +74,7 @@ const Bestsellers = () => {
                 src="https://loremflickr.com/320/240?random=19"
                 alt="no-img"
               />
-              <h3 className={css.sliders__list_item_title}>
-                Карнавальная маска мишки для детей
-              </h3>
+              <h3 className={css.sliders__list_item_title}>Кар</h3>
               <div className={css.sliders__list_item_wrapper}>
                 <p className={css.sliders__list_item_price}>100</p>
                 <div className={css.sliders__list_item_favourite_wraper}>

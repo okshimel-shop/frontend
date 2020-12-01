@@ -1,6 +1,6 @@
 .view__wrapper {
   padding: 16px 0 0;
-  width: 300px;
+  width: 310px;
   margin: 0 auto;
 }
 
@@ -16,6 +16,7 @@
   color: #333;
   font-size: 24px;
   margin-bottom: 16px;
+  word-wrap: break-word;
 }
 
 .view_main_wrapper {
@@ -26,7 +27,7 @@
 
 .view_preview_img {
   width: 100%;
-  height: 225px;
+  height: 232px;
   border-radius: 10px;
   object-fit: cover;
   margin-bottom: 6px;
@@ -60,12 +61,24 @@
 }
 
 .view__order_price {
-  padding: 2px 5px;
+  position: relative;
+  padding: 2px 15px 2px 5px;
   transform: translateY(-2px);
   color: #333;
   font-size: 22px;
   border-radius: 5px;
   background-color: #ddd;
+}
+
+.view__order_price::after {
+  content: "₴";
+  display: block;
+  width: 8px;
+  height: 12px;
+  position: absolute;
+  bottom: 6px;
+  right: 5px;
+  font-size: 12px;
 }
 
 .view__order_buy {
@@ -130,13 +143,14 @@
   color: #333;
   font-size: 18px;
   margin-bottom: 10px;
+  word-wrap: break-word;
 }
 
 .view__description_title_prod {
-  display: inline;
   color: #aaa;
   font-size: 18px;
   font-weight: 400;
+  word-wrap: break-word;
 }
 
 .view__description_text {
@@ -192,6 +206,12 @@
 
   .view__order_price {
     font-size: 24px;
+  }
+
+  .view__order_price::after {
+    height: 14px;
+    bottom: 8px;
+    font-size: 14px;
   }
 
   .view__order_buy {
@@ -282,6 +302,12 @@
 
   .view__order_price {
     font-size: 26px;
+  }
+
+  .view__order_price::after {
+    height: 16px;
+    bottom: 8px;
+    font-size: 16px;
   }
 
   .view__order_buy {

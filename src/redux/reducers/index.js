@@ -1,20 +1,18 @@
 import { combineReducers } from "redux";
-import modal from "./modalReducer";
-import user from "./userReducer";
+import cart from "./cartReducer";
 import loader from "./loaderReducer";
-import view from "./viewReducer";
-import viewed from "./viewedReducer";
-import products from "./productReducer";
+import modal from "./modalReducer";
 import quantity from "./quantityReducer";
+import user from "./userReducer";
+import viewed from "./viewedReducer";
 
 const rootReducer = combineReducers({
-  modal,
-  user,
+  cart,
   loader,
-  view,
-  viewed,
-  products,
+  modal,
   quantity,
+  user,
+  viewed,
 });
 
 export default rootReducer;

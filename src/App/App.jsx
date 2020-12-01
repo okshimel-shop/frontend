@@ -1,6 +1,7 @@
 import React, { Suspense, lazy, useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { viewedSelector } from "../redux/selectors/selectors";
 import { isUserLoginOperation } from "../redux/operations/userOperation";
 
 import Header from "../Components/Header/Header";
@@ -10,9 +11,10 @@ import Footer from "../Components/Footer/Footer";
 
 import AdminModal from "../Components/AdminModal/AdminModal";
 import ModalBurger from "../Components/ModalBurger/ModalBurger";
-import ModalBasket from "../Components/ModalBasket/ModalBasket";
+import ModalCart from "../Components/ModalCart/ModalCart";
 
 import css from "./App.module.css";
+import { viewedLoad } from "../redux/actions/viewedAction";
 
 const Products = lazy(() => import("../Containers/Products/Products"));
 const View = lazy(() => import("../Containers/View/View"));
@@ -21,23 +23,21 @@ const Company = lazy(() => import("../Containers/Company/Company"));
 function App() {
   const dispatch = useDispatch();
 
+  const viewed = useSelector((state) => viewedSelector(state));
+
   useEffect(() => {
     dispatch(isUserLoginOperation());
   }, [dispatch]);
 
   useEffect(() => {
-    if (!localStorage.getItem("viewed")) {
-      localStorage.setItem("viewed", JSON.stringify([]));
-    } else {
-      const lastViewed = JSON.parse(localStorage.getItem("viewed"));
-      const filtredViewed = lastViewed.filter(
-        (item) =>
-          Math.floor(Date.now() / 60000 / 60 / 24) ===
-          Math.floor(item.date / 60000 / 60 / 24)
-      );
-      localStorage.setItem("viewed", JSON.stringify(filtredViewed));
-    }
-  }, []);
+    const filtredViewed = viewed.filter(
+      (item) =>
+        Math.floor(Date.now() / 60000 / 60 / 24) ===
+        Math.floor(item.date / 60000 / 60 / 24)
+    );
+    dispatch(viewedLoad(filtredViewed));
+    // eslint-disable-next-line
+  }, [dispatch]);
 
   return (
     <div className={css.container}>
@@ -65,7 +65,7 @@ function App() {
 
       <AdminModal />
       <ModalBurger />
-      <ModalBasket />
+      <ModalCart />
     </div>
   );
 }

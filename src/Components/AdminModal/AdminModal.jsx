@@ -22,10 +22,6 @@ const AdminModal = () => {
     }
   };
 
-  const scrollSwitcher = (type) => {
-    document.body.style.overflowY = type;
-  };
-
   return (
     <>
       <CSSTransition
@@ -55,10 +51,6 @@ const AdminModal = () => {
       </CSSTransition>
 
       <BackgroundOvarlay modalStatus={modalStatus} />
-
-      {modalStatus !== "closed"
-        ? scrollSwitcher("hidden")
-        : scrollSwitcher("scroll")}
     </>
   );
 };

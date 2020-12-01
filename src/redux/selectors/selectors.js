@@ -1,10 +1,8 @@
+export const cartSelector = (state) => state.cart;
+
 export const quantitySelector = (state) => state.quantity;
 
-export const viewSelector = (state) => state.view;
-
 export const viewedSelector = (state) => state.viewed;
-
-export const productsSelector = (state) => state.products;
 
 export const loaderSelector = (state) => state.loader;
 

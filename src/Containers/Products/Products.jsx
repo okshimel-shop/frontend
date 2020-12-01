@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import queryString from "query-string";
 import Loader from "../../Components/Loader/Loader";
@@ -9,20 +9,19 @@ import {
   getAllProducts,
   getQuantityProducts,
 } from "../../redux/operations/productOperation";
-import { productsLoad } from "../../redux/actions/productAction";
 import {
   loaderSelector,
-  productsSelector,
   quantitySelector,
 } from "../../redux/selectors/selectors";
+import { cartSet } from "../../redux/actions/cartAction";
 import css from "./Products.module.css";
 
 const Products = ({ location, history }) => {
   const [page, setPage] = useState(1);
   const [limitOnPage] = useState(12);
+  const [products, setProducts] = useState(null);
 
   const quantity = useSelector((state) => quantitySelector(state));
-  const products = useSelector((state) => productsSelector(state));
   const loaderStatus = useSelector((state) => loaderSelector(state));
 
   const dispatch = useDispatch();
@@ -32,33 +31,36 @@ const Products = ({ location, history }) => {
   useEffect(() => {
     const handlePageNumber = queryPage ? Number(queryPage) : 1;
     setPage(handlePageNumber);
-    return () => {
-      dispatch(productsLoad(null));
-    };
   }, [dispatch, queryPage]);
 
-  const getQuantityProductsHandler = useCallback(() => {
+  useEffect(() => {
     if (!quantity) {
       dispatch(getQuantityProducts());
     }
   }, [dispatch, quantity]);
 
   useEffect(() => {
-    getQuantityProductsHandler();
-  }, [getQuantityProductsHandler]);
-
-  const getAllProductsHandler = useCallback(() => {
     if (quantity) {
-      dispatch(getAllProducts(page, limitOnPage, quantity));
+      dispatch(getAllProducts(page, limitOnPage, quantity)).then((res) =>
+        setProducts(res)
+      );
     }
+
+    return () => {
+      setProducts(null);
+    };
   }, [dispatch, limitOnPage, page, quantity]);
 
-  useEffect(() => {
-    getAllProductsHandler();
-  }, [getAllProductsHandler]);
-
-  const handlePageChange = (event, value) => {
+  const pageChangeHandle = (event, value) => {
     history.push(`?page=${value}`);
+  };
+
+  const prodFavouriteHandler = ({ target }) => {
+    console.dir(target.id);
+  };
+
+  const prodCartHandler = ({ target }) => {
+    dispatch(cartSet({ id: target.id }));
   };
 
   return (
@@ -84,8 +86,7 @@ const Products = ({ location, history }) => {
                     width="130"
                     height="130"
                   />
-                </Link>
-                <Link to={`/products/view?p=${prod.id}`}>
+
                   <h3 className={css.products__list_item_title}>
                     {prod.title}
                   </h3>
@@ -95,9 +96,15 @@ const Products = ({ location, history }) => {
                   <p className={css.products__list_item_price}>{prod.price}</p>
                   <div className={css.products__list_item_favourite_wraper}>
                     <button
+                      onClick={prodFavouriteHandler}
+                      id={prod.id}
                       className={css.products__list_item_favourite}
                     ></button>
-                    <button className={css.products__list_item_btn}></button>
+                    <button
+                      onClick={prodCartHandler}
+                      id={prod.id}
+                      className={css.products__list_item_btn}
+                    ></button>
                   </div>
                 </div>
               </li>
@@ -108,7 +115,7 @@ const Products = ({ location, history }) => {
             <Pagination
               count={Math.ceil(quantity / limitOnPage)}
               page={page}
-              onChange={handlePageChange}
+              onChange={pageChangeHandle}
               variant="outlined"
               shape="rounded"
             />

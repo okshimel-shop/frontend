@@ -1,12 +1,10 @@
-import { loaderOff } from "../actions/loaderAction.js";
-
 const { db } = require("../../firebase");
 
-export const getViewedProducts = (filteredArr) => async (dispatch) => {
+export const getCartProducts = (cartId) => async (dispatch) => {
   try {
     const newArr = [];
 
-    for (const item of filteredArr) {
+    for (const item of cartId) {
       await db
         .collection("products")
         .where("id", "==", Number(item.id))
@@ -18,11 +16,9 @@ export const getViewedProducts = (filteredArr) => async (dispatch) => {
         });
     }
 
-    console.log("[VIEWED] BD request");
+    console.log("[CART] BD request");
     return newArr;
   } catch (error) {
     console.log(error);
-  } finally {
-    dispatch(loaderOff());
   }
 };

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import queryString from "query-string";
@@ -9,15 +9,19 @@ import {
   addOneView,
   getOneProduct,
 } from "../../redux/operations/viewOperation";
-import { viewLoad } from "../../redux/actions/viewAction";
-import { loaderSelector, viewSelector } from "../../redux/selectors/selectors";
+import {
+  loaderSelector,
+  viewedSelector,
+} from "../../redux/selectors/selectors";
 import css from "./View.module.css";
+import { viewedLoad } from "../../redux/actions/viewedAction";
 
 const ProductsList = ({ location, history }) => {
+  const [oneProd, setOneProd] = useState(null);
   const [imgSelected, setImgSelected] = useState(0);
 
   const loaderStatus = useSelector((state) => loaderSelector(state));
-  const view = useSelector((state) => viewSelector(state));
+  const viewed = useSelector((state) => viewedSelector(state));
 
   const dispatch = useDispatch();
 
@@ -25,43 +29,33 @@ const ProductsList = ({ location, history }) => {
   const hashId = queryString.parse(location.hash).img;
 
   useEffect(() => {
-    hashId && setImgSelected(hashId - 1);
-  }, [hashId]);
+    oneProd && hashId && setImgSelected(hashId - 1);
+  }, [oneProd, hashId]);
 
   useEffect(() => {
-    if (view) {
-      const lastViewed = JSON.parse(localStorage.getItem("viewed"));
-      const checkViewToday = lastViewed.find((item) => item.id === queryItem);
-      !checkViewToday && dispatch(addOneView(view.docId, view.views));
+    if (oneProd) {
+      const checkViewToday = viewed.find((item) => item.id === queryItem);
+      !checkViewToday && dispatch(addOneView(oneProd.docId, oneProd.views));
     }
-  }, [dispatch, view, queryItem]);
+    // eslint-disable-next-line
+  }, [dispatch, oneProd, queryItem]);
 
   useEffect(() => {
-    if (view) {
-      const lastViewed = JSON.parse(localStorage.getItem("viewed"));
-      const filterArrViewed = lastViewed.find((item) => item.id === queryItem);
+    if (oneProd) {
+      const filterArrViewed = viewed.find((item) => item.id === queryItem);
 
       if (!filterArrViewed) {
-        const newArrViewed = [
-          { id: queryItem, date: Date.now() },
-          ...lastViewed,
-        ];
-        localStorage.setItem("viewed", JSON.stringify(newArrViewed));
+        const newArrViewed = [{ id: queryItem, date: Date.now() }, ...viewed];
+        dispatch(viewedLoad(newArrViewed));
       }
     }
-  }, [view, queryItem]);
-
-  const getOneProductHandler = useCallback(() => {
-    dispatch(getOneProduct(Number(queryItem)));
-  }, [dispatch, queryItem]);
+    // eslint-disable-next-line
+  }, [dispatch, oneProd, queryItem]);
 
   useEffect(() => {
-    getOneProductHandler();
-
-    return () => {
-      dispatch(viewLoad(null));
-    };
-  }, [dispatch, getOneProductHandler]);
+    dispatch(getOneProduct(Number(queryItem))).then((res) => setOneProd(res));
+    // eslint-disable-next-line
+  }, [dispatch, queryItem]);
 
   const selectImgHandler = ({ target }) => {
     setImgSelected(Number(target.id));
@@ -70,51 +64,47 @@ const ProductsList = ({ location, history }) => {
 
   return (
     <section className={css.view}>
-      {view && (
-        <Helmet>
-          <title>{view.title} | Okshimel Shop</title>
-        </Helmet>
-      )}
+      {oneProd && <Helmet>oneProd </Helmet>}
 
       {loaderStatus && <Loader />}
 
-      {!loaderStatus && view && (
+      {!loaderStatus && oneProd && (
         <div className={css.view__wrapper}>
           <p className={css.view__category}>
-            <b>&#8249;</b> {view.category}
+            <b>&#8249;</b> {oneProd.category}
           </p>
 
-          <h2 className={css.view__title}>{view.title}</h2>
+          <h2 className={css.view__title}>{oneProd.title}</h2>
 
           <div className={css.view_main_wrapper}>
             <img
               className={css.view_preview_img}
-              src={view.images[imgSelected]}
-              alt={view.title}
+              src={oneProd.images[imgSelected]}
+              alt={oneProd.title}
             />
 
             <div className={css.view__image_picker_wrapper}>
-              {view.images.map((img, idx) => (
+              {oneProd.images.map((img, idx) => (
                 <img
                   onClick={selectImgHandler}
                   key={idx}
                   className={css.view__image_picker_item}
                   src={img}
-                  alt={view.title}
+                  alt={oneProd.title}
                   id={idx}
                 />
               ))}
             </div>
 
             <div className={css.view__order_wrapper}>
-              <p className={css.view__order_price}>{view.price} ₴</p>
+              <p className={css.view__order_price}>{oneProd.price}</p>
 
-              <Availability quantity={view.quantity} />
+              <Availability quantity={oneProd.quantity} />
 
-              {view.quantity > 0 && (
+              {oneProd.quantity > 0 && (
                 <button className={css.view__order_buy}>Купить</button>
               )}
-              {view.quantity < 1 && (
+              {oneProd.quantity < 1 && (
                 <button className={css.view__order_buy}>Под заказ</button>
               )}
             </div>
@@ -162,15 +152,17 @@ const ProductsList = ({ location, history }) => {
           <div className={css.view__description}>
             <h3 className={css.view__description_title}>
               Описание
-              <p className={css.view__description_title_prod}> {view.title}</p>
+              <span className={css.view__description_title_prod}>
+                {` ${oneProd.title}`}
+              </span>
             </h3>
 
-            <p className={css.view__description_text}>{view.desc}</p>
+            <p className={css.view__description_text}>{oneProd.desc}</p>
           </div>
         </div>
       )}
 
-      {view && <Viewed prodId={queryItem} loaderStatus={loaderStatus} />}
+      {oneProd && <Viewed prodId={queryItem} viewed={viewed} />}
     </section>
   );
 };

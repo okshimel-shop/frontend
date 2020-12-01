@@ -13,18 +13,28 @@ const BackgroundOvarlay = ({ modalStatus = "closed" }) => {
     dispatch(modalClose());
   };
 
+  const scrollSwitcher = (type) => {
+    document.body.style.overflowY = type;
+  };
+
   return (
-    <CSSTransition
-      in={modalStatus !== "closed"}
-      timeout={250}
-      classNames={animation}
-      unmountOnExit
-    >
-      <div
-        onClick={modalCloseHandler}
-        className={css.backgound_ovarlay__body}
-      ></div>
-    </CSSTransition>
+    <>
+      <CSSTransition
+        in={modalStatus !== "closed"}
+        timeout={250}
+        classNames={animation}
+        unmountOnExit
+      >
+        <div
+          onClick={modalCloseHandler}
+          className={css.backgound_ovarlay__body}
+        ></div>
+      </CSSTransition>
+
+      {modalStatus !== "closed"
+        ? scrollSwitcher("hidden")
+        : scrollSwitcher("scroll")}
+    </>
   );
 };
 

@@ -32,7 +32,7 @@ const Discounts = () => {
   return (
     <section className={css.sliders}>
       <div className={css.sliders__wrapper}>
-        <h2 className={css.sliders__title}>Акции</h2>
+        <h2 className={css.sliders__title}>Акционные</h2>
         <ul className={css.sliders__list}>
           <InfiniteCarousel {...settings}>
             <div className={css.sliders__list_item}>

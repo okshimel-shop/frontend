@@ -14,11 +14,7 @@ const ModalBurger = () => {
   const dispatch = useDispatch();
 
   const modalCloseHandler = (e) => {
-    if (e.target.id !== "modal-body") dispatch(modalClose());
-  };
-
-  const scrollSwitcher = (type) => {
-    document.body.style.overflowY = type;
+    e.target.id !== "modal-body" && dispatch(modalClose());
   };
 
   return (
@@ -45,10 +41,6 @@ const ModalBurger = () => {
       </CSSTransition>
 
       <BackgroundOvarlay modalStatus={modalStatus} />
-
-      {modalStatus !== "closed"
-        ? scrollSwitcher("hidden")
-        : scrollSwitcher("scroll")}
     </>
   );
 };

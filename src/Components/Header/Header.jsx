@@ -4,11 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { modalOpen } from "../../redux/actions/modalAction";
 import Logotype from "../Logotype/Logotype";
 import AdminBar from "../AdminBar/AdminBar";
-import { isloggedSelector } from "../../redux/selectors/selectors";
+import {
+  cartSelector,
+  isloggedSelector,
+} from "../../redux/selectors/selectors";
 import css from "./Header.module.css";
 
 const Header = () => {
   const islogged = useSelector((state) => isloggedSelector(state));
+  const cart = useSelector((state) => cartSelector(state));
 
   const dispatch = useDispatch();
 
@@ -70,8 +74,12 @@ const Header = () => {
           <div className={css.header__magnifier_icon}></div>
           <div
             onClick={() => openModalHandler("right")}
-            className={css.header__basket_icon}
-          ></div>
+            className={css.header__cart_icon}
+          >
+            {cart.length > 0 && (
+              <span className={css.header__cart_quantity}>{cart.length}</span>
+            )}
+          </div>
         </div>
       </div>
 

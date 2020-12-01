@@ -1,5 +1,5 @@
 .sliders {
-  width: 320px;
+  width: 310px;
   margin: 0 auto;
 }
 
@@ -49,8 +49,8 @@
 
 .sliders__list_item_img {
   margin: 0 auto;
-  width: 150px;
-  height: 113px;
+  width: 100%;
+  height: 110px;
   object-fit: cover;
   border-radius: 5px 5px 0 0;
   margin-bottom: 8px;
@@ -68,9 +68,6 @@
   font-size: 13px;
   font-weight: 400;
   margin-bottom: 8px;
-  /* overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap; */
 }
 
 .sliders__list_item_wrapper {
@@ -125,7 +122,7 @@
   border: none;
   outline: none;
   background-color: #ddd;
-  background-image: url(../images/interface/basket-dark.svg);
+  background-image: url(../images/interface/cart-dark.svg);
   background-size: cover;
   cursor: pointer;
 }
@@ -241,7 +238,7 @@
   }
 
   .sliders__list_item_title {
-    height: 44px;
+    height: 42px;
     font-size: 18px;
   }
 

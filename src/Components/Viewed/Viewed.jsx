@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 import InfiniteCarousel from "react-leaf-carousel";
-import { viewedClear } from "../../redux/actions/viewedAction";
+import { PropTypes } from "prop-types";
+import { useDispatch } from "react-redux";
 import { getViewedProducts } from "../../redux/operations/viewedOperation";
-import { viewedSelector } from "../../redux/selectors/selectors";
+import { Link } from "react-router-dom";
 import css from "./Viewed.module.css";
 
-const Viewed = ({ prodId, loaderStatus }) => {
-  const dispatch = useDispatch();
+const Viewed = ({ prodId, viewed }) => {
+  const [viewedProd, setViewedProd] = useState(null);
 
-  const viewed = useSelector((state) => viewedSelector(state));
+  const dispatch = useDispatch();
 
   const settings = {
     breakpoints: [
@@ -38,37 +38,43 @@ const Viewed = ({ prodId, loaderStatus }) => {
   };
 
   useEffect(() => {
-    const lastViewed = JSON.parse(localStorage.getItem("viewed"));
-    const filteredArr = lastViewed.filter(
-      (item, idx) => idx < 9 && item.id !== prodId
+    const filteredArr = viewed.filter(
+      (item, idx) => idx <= 7 && item.id !== prodId
     );
 
-    dispatch(getViewedProducts(filteredArr));
+    dispatch(getViewedProducts(filteredArr)).then((res) => setViewedProd(res));
     return () => {
-      dispatch(viewedClear([]));
+      setViewedProd(null);
     };
+    // eslint-disable-next-line
   }, [dispatch, prodId]);
 
   return (
     <>
-      {!loaderStatus && viewed.length !== 0 && (
+      {viewedProd && viewedProd.length > 0 && (
         <section className={css.viewed}>
           <div className={css.viewed__wrapper}>
             <h2 className={css.viewed__title}>Недавно смотрели</h2>
             <ul className={css.viewed__list}>
               <InfiniteCarousel {...settings}>
-                {viewed.map((item) => (
+                {viewedProd.map((item) => (
                   <div key={item.id} className={css.viewed__list_item}>
-                    <img
-                      className={css.viewed__list_item_img}
-                      src={item.images[0]}
-                      alt={item.title}
-                    />
-                    <h3 className={css.viewed__list_item_title}>
-                      {item.title}
-                    </h3>
+                    <Link to={`/products/view?p=${item.id}`}>
+                      <img
+                        className={css.viewed__list_item_img}
+                        src={item.images[0]}
+                        alt={item.title}
+                      />
+
+                      <h3 className={css.viewed__list_item_title}>
+                        {item.title}
+                      </h3>
+                    </Link>
+
                     <div className={css.viewed__list_item_wrapper}>
-                      <p className={css.viewed__list_item_price}>120</p>
+                      <p className={css.viewed__list_item_price}>
+                        {item.price}
+                      </p>
                       <div className={css.viewed__list_item_favourite_wraper}>
                         <button
                           className={css.viewed__list_item_favourite}
@@ -85,6 +91,11 @@ const Viewed = ({ prodId, loaderStatus }) => {
       )}
     </>
   );
+};
+
+Viewed.propTypes = {
+  prodId: PropTypes.string.isRequired,
+  viewed: PropTypes.array.isRequired,
 };
 
 export default Viewed;

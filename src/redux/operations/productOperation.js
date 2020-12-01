@@ -1,6 +1,5 @@
 import axios from "axios";
 import { modalClose } from "../actions/modalAction.js";
-import { productsLoad } from "../actions/productAction.js";
 import { loaderOn, loaderOff } from "../actions/loaderAction.js";
 import { quantityGet } from "../actions/quantityAction.js";
 
@@ -95,9 +94,9 @@ export const getAllProducts = (page, limitOnPage, quantityProducts) => async (
           allProdArr.push(res.data());
         });
       });
-    console.log("BD request");
+    console.log("[PRODUCTS] BD request");
 
-    dispatch(productsLoad(allProdArr));
+    return allProdArr;
   } catch (error) {
     console.log(error);
   } finally {

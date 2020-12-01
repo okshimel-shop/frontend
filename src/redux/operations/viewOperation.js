@@ -1,5 +1,4 @@
 import { loaderOn } from "../actions/loaderAction";
-import { viewLoad } from "../actions/viewAction";
 
 const { db } = require("../../firebase");
 
@@ -7,16 +6,17 @@ export const getOneProduct = (queryItem) => async (dispatch) => {
   try {
     dispatch(loaderOn());
 
-    await db
+    const product = await db
       .collection("products")
       .where("id", "==", queryItem)
       .get()
       .then((res) => {
         const data = res.docs[0].data();
-        dispatch(viewLoad(data));
+        return data;
       });
 
-    console.log("BD request");
+    console.log("[VIEW] BD request");
+    return product;
   } catch (error) {
     console.log(error);
   }

@@ -1,7 +1,9 @@
 .availability {
+  position: absolute;
+  text-outline: 15px;
+  right: 15px;
   width: 150px;
   padding: 5px 10px 5px 0;
-  transform: translateY(-2px);
   border-radius: 5px;
   background-color: #ddd;
 }
@@ -40,7 +42,4 @@
   .availability__ended {
     font-size: 20px;
   }
-}
-
-@media (min-width: 1024px) {
 }

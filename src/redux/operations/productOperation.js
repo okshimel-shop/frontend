@@ -10,6 +10,8 @@ axios.defaults.baseURL = "https://okshimel-shop-7afff.firebaseio.com";
 
 export const addNewProduct = (infoArr, imgArr) => async (dispatch) => {
   try {
+    dispatch(loaderOn());
+
     const newProdRef = await db.collection("products").doc();
     const documentId = newProdRef.id;
 
@@ -62,8 +64,12 @@ export const addNewProduct = (infoArr, imgArr) => async (dispatch) => {
     console.log(`Update next id to ${nextId.data + 1}`);
 
     dispatch(modalClose());
+
+    return nextId.data;
   } catch (error) {
     console.log(error);
+  } finally {
+    dispatch(loaderOff());
   }
 };
 
@@ -72,6 +78,7 @@ export const getQuantityProducts = () => async (dispatch) => {
     const quantityProducts = await axios.get("/counters/quantityProducts.json");
 
     dispatch(quantityGet(quantityProducts.data));
+    console.log("[QUANTITY] BD request");
   } catch (error) {
     console.log(error);
   }
@@ -100,8 +107,78 @@ export const getAllProducts = (page, limitOnPage, quantityProducts) => async (
   } catch (error) {
     console.log(error);
   } finally {
-    setTimeout(() => {
-      dispatch(loaderOff());
-    }, 500);
+    dispatch(loaderOff());
+  }
+};
+
+export const getBestsellers = (limitOnPage) => async (dispatch) => {
+  try {
+    dispatch(loaderOn());
+    const allProdArr = [];
+    await db
+      .collection("products")
+      .orderBy("views", "desc")
+      .limit(limitOnPage)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((res) => {
+          allProdArr.push(res.data());
+        });
+      });
+    console.log("[PRODUCTS] BD request");
+
+    return allProdArr;
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(loaderOff());
+  }
+};
+
+export const getDiscounts = (limitOnPage) => async (dispatch) => {
+  try {
+    dispatch(loaderOn());
+    const allProdArr = [];
+    await db
+      .collection("products")
+      .orderBy("price", "asc")
+      .limit(limitOnPage)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((res) => {
+          allProdArr.push(res.data());
+        });
+      });
+    console.log("[PRODUCTS] BD request");
+
+    return allProdArr;
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(loaderOff());
+  }
+};
+
+export const getNewProducts = (limitOnPage) => async (dispatch) => {
+  try {
+    dispatch(loaderOn());
+    const allProdArr = [];
+    await db
+      .collection("products")
+      .orderBy("id", "desc")
+      .limit(limitOnPage)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((res) => {
+          allProdArr.push(res.data());
+        });
+      });
+    console.log("[PRODUCTS] BD request");
+
+    return allProdArr;
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(loaderOff());
   }
 };

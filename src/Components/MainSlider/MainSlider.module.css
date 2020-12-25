@@ -1,5 +1,6 @@
 .main_slider {
   margin-bottom: 16px;
+  height: 200px;
 }
 
 .main_slider__img {
@@ -20,6 +21,7 @@
 @media (min-width: 768px) {
   .main_slider {
     margin-bottom: 26px;
+    height: 400px;
   }
 
   .main_slider__img {
@@ -31,6 +33,7 @@
   .main_slider {
     margin: 0 auto 36px;
     width: 990px;
+    height: 600px;
   }
 
   .main_slider__img {

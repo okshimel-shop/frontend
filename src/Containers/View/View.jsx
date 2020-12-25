@@ -5,23 +5,28 @@ import queryString from "query-string";
 import Availability from "../../Components/Availability/Availability";
 import Viewed from "../../Components/Viewed/Viewed";
 import Loader from "../../Components/Loader/Loader";
+import { viewedLoad } from "../../redux/actions/viewedAction";
+import { cartSet } from "../../redux/actions/cartAction";
 import {
   addOneView,
   getOneProduct,
 } from "../../redux/operations/viewOperation";
 import {
+  cartSelector,
   loaderSelector,
   viewedSelector,
 } from "../../redux/selectors/selectors";
 import css from "./View.module.css";
-import { viewedLoad } from "../../redux/actions/viewedAction";
+import { modalOpen } from "../../redux/actions/modalAction";
 
 const ProductsList = ({ location, history }) => {
   const [oneProd, setOneProd] = useState(null);
   const [imgSelected, setImgSelected] = useState(0);
+  const [isInCart, setIsInCart] = useState(false);
 
   const loaderStatus = useSelector((state) => loaderSelector(state));
   const viewed = useSelector((state) => viewedSelector(state));
+  const cartId = useSelector((state) => cartSelector(state));
 
   const dispatch = useDispatch();
 
@@ -57,14 +62,30 @@ const ProductsList = ({ location, history }) => {
     // eslint-disable-next-line
   }, [dispatch, queryItem]);
 
+  useEffect(() => {
+    if (cartId && oneProd) {
+      const result = cartId.some((item) => Number(item.id) === oneProd.id);
+      setIsInCart(result);
+    }
+  }, [cartId, oneProd]);
+
   const selectImgHandler = ({ target }) => {
     setImgSelected(Number(target.id));
     history.replace(`${location.search}#img=${Number(target.id) + 1}`);
   };
 
+  const prodCartHandler = ({ target }) => {
+    dispatch(modalOpen("right"));
+    dispatch(cartSet({ id: target.id }));
+  };
+
   return (
     <section className={css.view}>
-      {oneProd && <Helmet>oneProd </Helmet>}
+      {oneProd && (
+        <Helmet>
+          <title>{oneProd.title} | Okshimel Shop</title>
+        </Helmet>
+      )}
 
       {loaderStatus && <Loader />}
 
@@ -101,8 +122,20 @@ const ProductsList = ({ location, history }) => {
 
               <Availability quantity={oneProd.quantity} />
 
-              {oneProd.quantity > 0 && (
-                <button className={css.view__order_buy}>Купить</button>
+              {!isInCart && oneProd.quantity > 0 && (
+                <button
+                  onClick={prodCartHandler}
+                  className={css.view__order_buy}
+                  id={oneProd.id}
+                >
+                  Добавить в корзину
+                </button>
+              )}
+
+              {isInCart && oneProd.quantity > 0 && (
+                <button className={css.view__order_buy}>
+                  Товар уже корзине
+                </button>
               )}
               {oneProd.quantity < 1 && (
                 <button className={css.view__order_buy}>Под заказ</button>

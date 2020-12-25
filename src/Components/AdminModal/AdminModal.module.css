@@ -14,23 +14,41 @@
   }
 
   .modal_admin__body {
-    padding: 50px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 20px;
+    border-radius: 10px;
     width: 924px;
-    height: 524px;
+    min-height: 184px;
+    max-height: 624px;
     background-color: #eee;
+  }
+
+  .modal_admin__body_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    height: 60px;
+    border-radius: 10px 10px 0 0;
+    background-color: #333;
+  }
+
+  .modal_admin__body_title {
+    color: #eee;
+    font-size: 24px;
   }
 
   .modal_admin__button_close {
     width: 20px;
     height: 20px;
-    position: absolute;
-    top: 15px;
-    right: 15px;
+    background-image: url(../../images/interface/close-btn.svg);
+    background-size: cover;
     cursor: pointer;
+  }
+
+  .modal_admin__main {
+    padding: 26px 30px;
   }
 }

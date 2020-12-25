@@ -5,7 +5,7 @@ import css from "./Loader.module.css";
 const Spinner = () => {
   return (
     <div className={css.loader__wrapper}>
-      <Loader type="Oval" color="#666" height={100} width={100} />
+      <Loader type="Oval" color="#666" height={80} width={80} />
     </div>
   );
 };

@@ -7,39 +7,9 @@
   align-items: center;
 }
 
-/* MODAL TITLE */
-.add_product__modal_title {
-  width: 100%;
-  position: relative;
-  font-size: 30px;
-  text-align: center;
-}
-
-.add_product__modal_title::before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 19px;
-  left: 160px;
-  width: 80px;
-  height: 1px;
-  background-color: #333;
-}
-
-.add_product__modal_title::after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 19px;
-  right: 160px;
-  width: 80px;
-  height: 1px;
-  background-color: #333;
-}
-
 /* INPUT BLOCK */
 .add_product__input_block {
-  width: 370px;
+  width: 410px;
 }
 
 .add_product__input_block_list {
@@ -53,10 +23,11 @@
 
 .add_product__input {
   height: 30px;
-  outline-color: #333;
+  outline: none;
   border: 1px solid #aaa;
   border-radius: 5px;
   font-size: 20px;
+  transition: border 0.2s linear;
 }
 
 .add_product__input:hover {
@@ -71,11 +42,8 @@
 
 .add_product__input_category {
   padding: 0 10px;
-  width: 150px;
+  width: 180px;
   composes: add_product__input;
-}
-
-.add_product__input_category:hover {
   cursor: pointer;
 }
 
@@ -128,6 +96,7 @@
   border: 1px solid #aaa;
   border-radius: 5px;
   background-color: #fff;
+  transition: border 0.2s linear;
 }
 
 .add_product__file_image_picker:hover {
@@ -149,16 +118,34 @@
 }
 
 /* SUBMIT BUTTON */
-.add_product__submit_btn {
-  margin: 0 auto;
-  padding: 6px 16px;
-  outline-color: #333;
-  border: 1px solid #aaa;
-  border-radius: 5px;
-  background-color: #fff;
+.add_product__submit {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  right: 30px;
+  bottom: -44px;
+  padding: 0 5px 5px;
+  /* width: 300px; */
+  height: 45px;
+  border: none;
+  border-radius: 0 0 10px 10px;
+  background-color: #eee;
 }
 
-.add_product__submit_btn:hover {
-  border: 1px solid #333;
+.add_product__submit_btn {
+  width: 200px;
+  height: 40px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  color: #eee;
+  font-size: 20px;
+  background-color: #333;
+  transition: background-color 200ms linear;
   cursor: pointer;
+}
+
+.add_product__submit_btn:active {
+  background-color: #666;
 }

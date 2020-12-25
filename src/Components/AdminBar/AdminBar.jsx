@@ -22,16 +22,31 @@ const AdminBar = () => {
       <div className={css.admin_bar__wrapper}>
         <ul className={css.admin_bar__menu}>
           <li className={css.admin_bar__menu_item}>
-            <p onClick={() => openModalHandler("admin-add")}>Добавить</p>
+            <p
+              className={css.admin_bar__menu_item_btn}
+              onClick={() => openModalHandler("admin-add")}
+            >
+              Добавить
+            </p>
           </li>
           <li className={css.admin_bar__menu_item}>
-            <p onClick={() => openModalHandler("admin-list")}>Товары</p>
+            <p
+              className={css.admin_bar__menu_item_btn}
+              onClick={() => openModalHandler("admin-list")}
+            >
+              Товары
+            </p>
           </li>
           <li className={css.admin_bar__menu_item}>
             <p>{userInfo}</p>
           </li>
           <li className={css.admin_bar__menu_item}>
-            <p onClick={userLogoutHandler}>Выйти</p>
+            <p
+              className={css.admin_bar__menu_item_btn}
+              onClick={userLogoutHandler}
+            >
+              Выйти
+            </p>
           </li>
         </ul>
       </div>

@@ -34,10 +34,10 @@ const Products = ({ location, history }) => {
   }, [dispatch, queryPage]);
 
   useEffect(() => {
-    if (!quantity) {
-      dispatch(getQuantityProducts());
-    }
-  }, [dispatch, quantity]);
+    dispatch(getQuantityProducts());
+
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     if (quantity) {

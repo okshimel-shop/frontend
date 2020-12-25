@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import InfiniteCarousel from "react-leaf-carousel";
 import { PropTypes } from "prop-types";
-import { useDispatch } from "react-redux";
-import { getViewedProducts } from "../../redux/operations/viewedOperation";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getViewedProducts } from "../../redux/operations/viewedOperation";
+import { cartSet } from "../../redux/actions/cartAction";
+import { loaderSelector } from "../../redux/selectors/selectors";
 import css from "./Viewed.module.css";
 
 const Viewed = ({ prodId, viewed }) => {
   const [viewedProd, setViewedProd] = useState(null);
+
+  const loaderStatus = useSelector((state) => loaderSelector(state));
 
   const dispatch = useDispatch();
 
@@ -49,9 +53,13 @@ const Viewed = ({ prodId, viewed }) => {
     // eslint-disable-next-line
   }, [dispatch, prodId]);
 
+  const prodCartHandler = ({ target }) => {
+    dispatch(cartSet({ id: target.id }));
+  };
+
   return (
     <>
-      {viewedProd && viewedProd.length > 0 && (
+      {!loaderStatus && viewedProd && viewedProd.length > 0 && (
         <section className={css.viewed}>
           <div className={css.viewed__wrapper}>
             <h2 className={css.viewed__title}>Недавно смотрели</h2>
@@ -79,7 +87,11 @@ const Viewed = ({ prodId, viewed }) => {
                         <button
                           className={css.viewed__list_item_favourite}
                         ></button>
-                        <button className={css.viewed__list_item_btn}></button>
+                        <button
+                          onClick={prodCartHandler}
+                          className={css.viewed__list_item_btn}
+                          id={item.id}
+                        ></button>
                       </div>
                     </div>
                   </div>

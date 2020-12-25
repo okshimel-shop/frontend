@@ -1,7 +1,10 @@
+import { loaderOff, loaderOn } from "../actions/loaderAction";
+
 const { db } = require("../../firebase");
 
 export const getCartProducts = (cartId) => async (dispatch) => {
   try {
+    dispatch(loaderOn());
     const newArr = [];
 
     for (const item of cartId) {
@@ -20,5 +23,7 @@ export const getCartProducts = (cartId) => async (dispatch) => {
     return newArr;
   } catch (error) {
     console.log(error);
+  } finally {
+    dispatch(loaderOff());
   }
 };

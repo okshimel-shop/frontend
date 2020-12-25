@@ -1,7 +1,27 @@
 .loader__wrapper {
-  position: fixed;
-  top: 50%;
+  position: absolute;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #eee;
+}
+
+@media (min-width: 768px) {
+  .loader__wrapper {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #eee;
+  }
+}
+
+@media (min-width: 1024px) {
+  .loader__wrapper {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #eee;
+  }
 }

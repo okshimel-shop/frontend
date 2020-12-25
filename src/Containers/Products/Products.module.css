@@ -51,7 +51,7 @@
   height: 190px;
   border: 1px solid #aaa;
   border-radius: 5px;
-  background-color: #ddd;
+  background-color: #fff;
 }
 
 .products__list_item_img {
@@ -117,7 +117,7 @@
   height: 18px;
   border: none;
   outline: none;
-  background-color: #ddd;
+  background-color: #fff;
   background-image: url(../../images/interface/heart.svg);
   background-size: cover;
   cursor: pointer;
@@ -128,7 +128,7 @@
   height: 18px;
   border: none;
   outline: none;
-  background-color: #ddd;
+  background-color: #fff;
   background-image: url(../../images/interface/cart-dark.svg);
   background-size: cover;
   cursor: pointer;

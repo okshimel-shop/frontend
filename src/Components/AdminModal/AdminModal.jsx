@@ -2,7 +2,6 @@ import React from "react";
 import { CSSTransition } from "react-transition-group";
 import { useSelector, useDispatch } from "react-redux";
 import { modalClose } from "../../redux/actions/modalAction";
-import closeIcon from "../../images/interface/close-btn.svg";
 import animation from "./transition/AdminModal.module.css";
 
 import AdminAddProduct from "../AdminAddProduct/AdminAddProduct";
@@ -36,16 +35,24 @@ const AdminModal = () => {
           className={css.modal_admin__container}
         >
           <div className={css.modal_admin__body}>
-            <img
-              onClick={modalCloseHandler}
-              className={css.modal_admin__button_close}
-              id="modal-close"
-              src={closeIcon}
-              alt="Close icon"
-            />
+            <div className={css.modal_admin__body_header}>
+              {modalStatus.includes("add") && (
+                <p className={css.modal_admin__body_title}>ДОБАВИТЬ ТОВАР</p>
+              )}
+              {modalStatus.includes("list") && (
+                <p className={css.modal_admin__body_title}>СПИСОК ТОВАРОВ</p>
+              )}
+              <div
+                onClick={modalCloseHandler}
+                className={css.modal_admin__button_close}
+                id="modal-close"
+              ></div>
+            </div>
 
-            {modalStatus.includes("add") && <AdminAddProduct />}
-            {modalStatus.includes("list") && <AdminProductList />}
+            <div className={css.modal_admin__main}>
+              {modalStatus.includes("add") && <AdminAddProduct />}
+              {modalStatus.includes("list") && <AdminProductList />}
+            </div>
           </div>
         </div>
       </CSSTransition>

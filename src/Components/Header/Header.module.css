@@ -16,7 +16,7 @@
 }
 
 :global(.header__wrapper:hover ~ .admin_bar) {
-  transform: translateY(35px);
+  transform: translateY(34px);
 }
 
 .header__burgerMenu::after {

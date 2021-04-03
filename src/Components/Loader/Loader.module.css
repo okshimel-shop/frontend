@@ -1,6 +1,6 @@
 .loader__wrapper {
   position: absolute;
-  top: 60%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #eee;
@@ -9,7 +9,7 @@
 @media (min-width: 768px) {
   .loader__wrapper {
     position: absolute;
-    top: 60%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #eee;
@@ -19,9 +19,9 @@
 @media (min-width: 1024px) {
   .loader__wrapper {
     position: absolute;
-    top: 60%;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -25%);
     background-color: #eee;
   }
 }

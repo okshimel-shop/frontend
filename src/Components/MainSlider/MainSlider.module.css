@@ -21,23 +21,24 @@
 @media (min-width: 768px) {
   .main_slider {
     margin-bottom: 26px;
-    height: 400px;
+    height: 300px;
   }
 
   .main_slider__img {
-    height: 400px;
+    height: 300px;
   }
 }
 
 @media (min-width: 1024px) {
   .main_slider {
-    margin: 0 auto 36px;
+    margin: 20px auto 36px;
     width: 990px;
-    height: 600px;
+    height: 400px;
+    border-radius: 10px;
   }
 
   .main_slider__img {
-    height: 600px;
-    border-radius: 0 0 10px 10px;
+    height: 400px;
+    border-radius: 10px;
   }
 }

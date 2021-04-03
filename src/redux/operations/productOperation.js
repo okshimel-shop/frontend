@@ -89,7 +89,9 @@ export const getAllProducts = (page, limitOnPage, quantityProducts) => async (
 ) => {
   try {
     dispatch(loaderOn());
-    const allProdArr = [];
+
+    const productArr = []
+
     await db
       .collection("products")
       .orderBy("id", "desc")
@@ -98,12 +100,12 @@ export const getAllProducts = (page, limitOnPage, quantityProducts) => async (
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((res) => {
-          allProdArr.push(res.data());
+          productArr.push(res.data());
         });
       });
     console.log("[PRODUCTS] BD request");
 
-    return allProdArr;
+    return productArr;
   } catch (error) {
     console.log(error);
   } finally {
@@ -180,5 +182,43 @@ export const getNewProducts = (limitOnPage) => async (dispatch) => {
     console.log(error);
   } finally {
     dispatch(loaderOff());
+  }
+};
+
+export const deleteProduct = (docId, images) => async (dispatch) => {
+  try {
+    images.forEach(async (img) => {
+      const folderRef = storageRef.child(
+        decodeURIComponent(img.slice(78, 117))
+      );
+
+      await folderRef.delete().catch(function (error) {
+        console.log(error);
+      });
+    });
+
+    const deleteStatus = await db
+      .collection("products")
+      .doc(docId)
+      .delete()
+      .then(async () => {
+        const oldValue = await axios.get("/counters/quantityProducts.json");
+
+        const newValue = await axios.patch("/counters.json", {
+          quantityProducts: oldValue.data - 1,
+        });
+
+        return {
+          status: true,
+          quantityProducts: newValue.data.quantityProducts,
+        };
+      })
+      .catch(function (error) {
+        return false;
+      });
+
+    return deleteStatus;
+  } catch (error) {
+    console.log(error);
   }
 };

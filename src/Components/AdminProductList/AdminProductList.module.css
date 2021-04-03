@@ -1,3 +1,7 @@
+.admin_product__loader_wrapper {
+  height: 510px;
+}
+
 .admin_product {
   max-height: 510px;
   overflow-y: auto;
@@ -64,7 +68,7 @@
   position: absolute;
   right: 30px;
   bottom: -44px;
-  padding: 0 5px 5px 10px;
+  padding: 0 5px 5px;
   height: 45px;
   border: none;
   border-radius: 0 0 10px 10px;

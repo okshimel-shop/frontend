@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import App from "./App/App";
 import store, { persistor } from "./redux/store";
+import 'fontsource-roboto';
 import "./index.css";
 
 ReactDOM.render(

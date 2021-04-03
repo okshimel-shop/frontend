@@ -118,6 +118,8 @@ const Products = ({ location, history }) => {
               onChange={pageChangeHandle}
               variant="outlined"
               shape="rounded"
+              hidePrevButton
+              hideNextButton
             />
           </div>
         </div>

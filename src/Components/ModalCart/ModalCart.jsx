@@ -11,9 +11,10 @@ import {
   loaderSelector,
   modalStatusSelector,
 } from "../../redux/selectors/selectors";
-import { getCartProducts } from "../../redux/operations/cartOperation";
+import { getCartProducts } from "../../redux/operations/productOperation";
 import { cartSet } from "../../redux/actions/cartAction";
 import emptyCart from "../../images/pet/emptyCart.png";
+import noimage from "../../images/products/no-image.png";
 import css from "./ModalCart.module.css";
 
 const ModalCart = () => {
@@ -29,9 +30,8 @@ const ModalCart = () => {
 
   useEffect(() => {
     if (modalStatus === "right") {
-      dispatch(getCartProducts(cartId)).then((res) => setCartItems(res));
+      dispatch(getCartProducts(cartId)).then(({ data }) => setCartItems(data));
     }
-
     // eslint-disable-next-line
   }, [modalStatus]);
 
@@ -82,7 +82,7 @@ const ModalCart = () => {
                 className={css.modal_cart__button_close}
                 id="modal-close"
               ></div>
-              <p className={css.modal_cart__modal_title}>КОРЗИНА</p>
+              <p className={css.modal_cart__modal_title}>КОШИК</p>
             </div>
 
             {cartId.length === 0 && (
@@ -105,13 +105,23 @@ const ModalCart = () => {
                 {cartItems &&
                   cartItems.map((item) => (
                     <li key={item.id} className={css.modal_cart__list_item}>
-                      <img
-                        onClick={toProductPage}
-                        className={css.modal_cart__list_item_img}
-                        src={item.images[0]}
-                        alt={item.title}
-                        id={item.id}
-                      />
+                      {item.images[0] ? (
+                        <img
+                          onClick={toProductPage}
+                          className={css.modal_cart__list_item_img}
+                          src={item.images[0]}
+                          alt={item.title}
+                          id={item.id}
+                        />
+                      ) : (
+                        <img
+                          onClick={toProductPage}
+                          className={css.modal_cart__list_item_img}
+                          src={noimage}
+                          alt="Изображение не загружено"
+                          id={item.id}
+                        />
+                      )}
                       <div className={css.modal_cart__list_item_wrapper}>
                         <h3
                           onClick={toProductPage}
@@ -141,7 +151,7 @@ const ModalCart = () => {
                 </span>
 
                 <button className={css.modal_cart__receipt_submit}>
-                  Оформить заказ
+                  Оформити замовлення
                 </button>
               </div>
             )}

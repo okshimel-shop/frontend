@@ -3,10 +3,11 @@ import InfiniteCarousel from "react-leaf-carousel";
 import { PropTypes } from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getViewedProducts } from "../../redux/operations/viewedOperation";
+import { getViewedProducts } from "../../redux/operations/productOperation";
 import { cartSet } from "../../redux/actions/cartAction";
 import { loaderSelector } from "../../redux/selectors/selectors";
-import css from "./Viewed.module.css";
+import noimage from "../../images/products/no-image.png";
+import css from "../../helpers/sliders.module.css";
 
 const Viewed = ({ prodId, viewed }) => {
   const [viewedProd, setViewedProd] = useState(null);
@@ -31,22 +32,31 @@ const Viewed = ({ prodId, viewed }) => {
           slidesToShow: 3,
         },
       },
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToScroll: 4,
+          slidesToShow: 4,
+        },
+      },
     ],
     animationDuration: 500,
     arrows: true,
     dots: false,
-    slidesToScroll: 4,
-    slidesToShow: 4,
-    slidesSpacing: 0,
+    slidesToScroll: 5,
+    slidesToShow: 5,
+    slidesSpacing: 4,
     swipe: false,
   };
 
   useEffect(() => {
     const filteredArr = viewed.filter(
-      (item, idx) => idx <= 7 && item.id !== prodId
+      (item, idx) => idx <= 14 && item.id !== prodId
     );
 
-    dispatch(getViewedProducts(filteredArr)).then((res) => setViewedProd(res));
+    dispatch(getViewedProducts(filteredArr)).then(({ data }) =>
+      setViewedProd(data)
+    );
     return () => {
       setViewedProd(null);
     };
@@ -58,50 +68,119 @@ const Viewed = ({ prodId, viewed }) => {
   };
 
   return (
-    <>
+    <section className={css.sliders}>
       {!loaderStatus && viewedProd && viewedProd.length > 0 && (
-        <section className={css.viewed}>
-          <div className={css.viewed__wrapper}>
-            <h2 className={css.viewed__title}>Недавно смотрели</h2>
-            <ul className={css.viewed__list}>
-              <InfiniteCarousel {...settings}>
-                {viewedProd.map((item) => (
-                  <div key={item.id} className={css.viewed__list_item}>
-                    <Link to={`/products/view?p=${item.id}`}>
+        <div className={css.sliders__wrapper}>
+          <h2 className={css.sliders__title}>Переглянуто</h2>
+          <ul className={css.sliders__list}>
+            <InfiniteCarousel {...settings}>
+              {viewedProd.map((item) => (
+                <div key={item.id} className={css.sliders__list_item}>
+                  <Link to={`/products/view?p=${item.id}`}>
+                    {item.images[0] ? (
                       <img
-                        className={css.viewed__list_item_img}
+                        className={css.sliders__list_item_img}
                         src={item.images[0]}
                         alt={item.title}
+                        width="130"
+                        height="130"
                       />
+                    ) : (
+                      <img
+                        className={css.sliders__list_item_img}
+                        src={noimage}
+                        alt="Изображение не загружено"
+                      />
+                    )}
+                  </Link>
 
-                      <h3 className={css.viewed__list_item_title}>
+                  <div className={css.sliders__list_item_bottom_wrapper}>
+                    <Link to={`/products/view?p=${item.id}`}>
+                      <h3 className={css.sliders__list_item_title}>
                         {item.title}
                       </h3>
                     </Link>
 
-                    <div className={css.viewed__list_item_wrapper}>
-                      <p className={css.viewed__list_item_price}>
+                    <div className={css.sliders__list_item_wrapper}>
+                      <p className={css.sliders__list_item_price}>
                         {item.price}
                       </p>
-                      <div className={css.viewed__list_item_favourite_wraper}>
+                      <div className={css.sliders__list_item_favourite_wraper}>
                         <button
-                          className={css.viewed__list_item_favourite}
+                          className={css.sliders__list_item_favourite}
                         ></button>
                         <button
                           onClick={prodCartHandler}
-                          className={css.viewed__list_item_btn}
+                          className={css.sliders__list_item_btn}
                           id={item.id}
                         ></button>
                       </div>
                     </div>
                   </div>
-                ))}
-              </InfiniteCarousel>
-            </ul>
-          </div>
-        </section>
+                </div>
+              ))}
+            </InfiniteCarousel>
+          </ul>
+        </div>
       )}
-    </>
+    </section>
+
+    // <>
+    //   {!loaderStatus && viewedProd && viewedProd.length > 0 && (
+    //     <section className={css.viewed}>
+    //       <div className={css.viewed__wrapper}>
+    //         <h2 className={css.viewed__title}>Недавно смотрели</h2>
+    //         <ul className={css.viewed__list}>
+    //           <InfiniteCarousel {...settings}>
+    //             {viewedProd.map((item) => (
+    //               <div key={item.id} className={css.viewed__list_item}>
+    //                 <Link to={`/products/view?p=${item.id}`}>
+    //                   {item.images[0] ? (
+    //                     <img
+    //                       className={css.viewed__list_item_img}
+    //                       src={item.images[0]}
+    //                       alt={item.title}
+    //                     />
+    //                   ) : (
+    //                     <img
+    //                       className={css.viewed__list_item_img}
+    //                       src={noimage}
+    //                       alt="Изображение не загружено"
+    //                     />
+    //                   )}
+    //                 </Link>
+
+    //                 <div className={css.viewed__list_item_bottom_wrapper}>
+    //                   <Link to={`/products/view?p=${item.id}`}>
+    //                     <h3 className={css.viewed__list_item_title}>
+    //                       {item.title}
+    //                     </h3>
+    //                   </Link>
+
+    //                   <div className={css.viewed__list_item_wrapper}>
+    //                     <p className={css.viewed__list_item_price}>
+    //                       {item.price}
+    //                     </p>
+    //                     <div className={css.viewed__list_item_favourite_wraper}>
+    //                       <button
+    //                         className={css.viewed__list_item_favourite}
+    //                       ></button>
+    //                       <button
+    //                         onClick={prodCartHandler}
+    //                         className={css.viewed__list_item_btn}
+    //                         id={item.id}
+    //                       ></button>
+    //                     </div>
+    //                   </div>
+    //                 </div>
+    //               </div>
+    //             ))}
+    //           </InfiniteCarousel>
+    //         </ul>
+    //       </div>
+    //     </section>
+    //   )}
+    // </>
   );
 };
 

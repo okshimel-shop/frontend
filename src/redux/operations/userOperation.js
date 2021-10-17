@@ -1,35 +1,22 @@
-import { auth } from "../../firebase";
+import axios from "../../helpers/axios";
 import { loaderOn, loaderOff } from "../actions/loaderAction";
 import { userStatus } from "../actions/userAction";
-
-export const isUserLoginOperation = () => async (dispatch) => {
-  try {
-    await auth.onAuthStateChanged((user) => {
-      if (user) {
-        dispatch(userStatus(user.email));
-      } else {
-        dispatch(userStatus(""));
-      }
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 export const userLoginOperation = ({ email, password }) => async (dispatch) => {
   try {
     dispatch(loaderOn());
-    await auth.signInWithEmailAndPassword(email, password);
+    const {data} = await axios.post('/users/login', { email, password })
+    dispatch(userStatus(data.token));
   } catch (error) {
-    console.log(error);
+    console.log(error.response)
   } finally {
     dispatch(loaderOff());
   }
 };
 
-export const userLogoutOperation = () => async (dispatch) => {
+export const userLogoutOperation = () => (dispatch) => {
   try {
-    auth.signOut();
+    dispatch(userStatus(null));
   } catch (error) {
     console.log(error);
   }

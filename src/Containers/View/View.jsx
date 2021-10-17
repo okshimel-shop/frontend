@@ -2,22 +2,25 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import queryString from "query-string";
+
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Link from "@material-ui/core/Link";
+
 import Availability from "../../Components/Availability/Availability";
+import Popular from "../../Components/Popular/Popular";
 import Viewed from "../../Components/Viewed/Viewed";
 import Loader from "../../Components/Loader/Loader";
 import { viewedLoad } from "../../redux/actions/viewedAction";
 import { cartSet } from "../../redux/actions/cartAction";
-import {
-  addOneView,
-  getOneProduct,
-} from "../../redux/operations/viewOperation";
+import { getOneProduct } from "../../redux/operations/productOperation";
 import {
   cartSelector,
   loaderSelector,
   viewedSelector,
 } from "../../redux/selectors/selectors";
-import css from "./View.module.css";
 import { modalOpen } from "../../redux/actions/modalAction";
+import noimage from "../../images/products/no-image.png";
+import css from "./View.module.css";
 
 const ProductsList = ({ location, history }) => {
   const [oneProd, setOneProd] = useState(null);
@@ -30,7 +33,7 @@ const ProductsList = ({ location, history }) => {
 
   const dispatch = useDispatch();
 
-  const queryItem = queryString.parse(location.search).p;
+  const productId = queryString.parse(location.search).p;
   const hashId = queryString.parse(location.hash).img;
 
   useEffect(() => {
@@ -38,29 +41,25 @@ const ProductsList = ({ location, history }) => {
   }, [oneProd, hashId]);
 
   useEffect(() => {
-    if (oneProd) {
-      const checkViewToday = viewed.find((item) => item.id === queryItem);
-      !checkViewToday && dispatch(addOneView(oneProd.docId, oneProd.views));
-    }
+    const isViewFound = viewed.find((item) => item.id === productId);
+
+    dispatch(getOneProduct(Number(productId), !!isViewFound)).then(({ data }) =>
+      setOneProd(data)
+    );
     // eslint-disable-next-line
-  }, [dispatch, oneProd, queryItem]);
+  }, [productId]);
 
   useEffect(() => {
     if (oneProd) {
-      const filterArrViewed = viewed.find((item) => item.id === queryItem);
+      const filterArrViewed = viewed.find((item) => item.id === productId);
 
       if (!filterArrViewed) {
-        const newArrViewed = [{ id: queryItem, date: Date.now() }, ...viewed];
+        const newArrViewed = [{ id: productId, date: Date.now() }, ...viewed];
         dispatch(viewedLoad(newArrViewed));
       }
     }
     // eslint-disable-next-line
-  }, [dispatch, oneProd, queryItem]);
-
-  useEffect(() => {
-    dispatch(getOneProduct(Number(queryItem))).then((res) => setOneProd(res));
-    // eslint-disable-next-line
-  }, [dispatch, queryItem]);
+  }, [dispatch, oneProd, productId]);
 
   useEffect(() => {
     if (cartId && oneProd) {
@@ -91,111 +90,185 @@ const ProductsList = ({ location, history }) => {
 
       {!loaderStatus && oneProd && (
         <div className={css.view__wrapper}>
-          <p className={css.view__category}>
-            <b>&#8249;</b> {oneProd.category}
-          </p>
+          {oneProd?.subcategory && (
+            <span className={css.view__category}>
+              <Breadcrumbs aria-label="breadcrumb">
+                {oneProd.subcategory.category.type.title && (
+                  <Link underline="hover" color="inherit" href="#">
+                    {oneProd.subcategory.category.type.title}
+                  </Link>
+                )}
+                {oneProd.subcategory.category.title && (
+                  <Link underline="hover" color="inherit" href="#">
+                    {oneProd.subcategory.category.title}
+                  </Link>
+                )}
+                {oneProd.subcategory.title && (
+                  <Link underline="hover" color="inherit" href="#">
+                    {oneProd.subcategory.title}
+                  </Link>
+                )}
+              </Breadcrumbs>
+            </span>
+          )}
 
           <h2 className={css.view__title}>{oneProd.title}</h2>
 
           <div className={css.view_main_wrapper}>
-            <img
-              className={css.view_preview_img}
-              src={oneProd.images[imgSelected]}
-              alt={oneProd.title}
-            />
+            {oneProd.images.length > 0 ? (
+              <img
+                className={css.view_preview_img}
+                src={oneProd.images[imgSelected]}
+                alt={oneProd.title}
+              />
+            ) : (
+              <img
+                className={css.view_preview_img}
+                src={noimage}
+                alt="Изображение не загружено"
+              />
+            )}
 
             <div className={css.view__image_picker_wrapper}>
-              {oneProd.images.map((img, idx) => (
+              {oneProd.images.length > 0 ? (
+                oneProd.images.map((img, idx) => (
+                  <img
+                    onClick={selectImgHandler}
+                    key={idx}
+                    className={css.view__image_picker_item}
+                    src={img}
+                    alt={oneProd.title}
+                    id={idx}
+                  />
+                ))
+              ) : (
                 <img
-                  onClick={selectImgHandler}
-                  key={idx}
                   className={css.view__image_picker_item}
-                  src={img}
-                  alt={oneProd.title}
-                  id={idx}
+                  src={noimage}
+                  alt="Изображение не загружено"
                 />
-              ))}
+              )}
             </div>
 
             <div className={css.view__order_wrapper}>
               <p className={css.view__order_price}>{oneProd.price}</p>
 
-              <Availability quantity={oneProd.quantity} />
+              <Availability quantity={oneProd.amount} />
 
-              {!isInCart && oneProd.quantity > 0 && (
+              {!isInCart && oneProd.amount > 0 && (
                 <button
                   onClick={prodCartHandler}
-                  className={css.view__order_buy}
+                  className={`${css.view__order_button} ${css.view__order_button_buy}`}
                   id={oneProd.id}
                 >
-                  Добавить в корзину
+                  Додати в кошик
                 </button>
               )}
 
-              {isInCart && oneProd.quantity > 0 && (
-                <button className={css.view__order_buy}>
-                  Товар уже корзине
+              {isInCart && oneProd.amount > 0 && (
+                <button
+                  className={`${css.view__order_button} ${css.view__order_button_in_cart}`}
+                >
+                  Товар вже в кошику
                 </button>
               )}
-              {oneProd.quantity < 1 && (
-                <button className={css.view__order_buy}>Под заказ</button>
+
+              {oneProd.amount < 1 && (
+                <button
+                  className={`${css.view__order_button} ${css.view__order_button_under_the_order}`}
+                >
+                  Під замовлення
+                </button>
               )}
             </div>
 
             <div className={css.view__delivery_wrapper}>
-              <h3 className={css.view__delivery_title}>Доставка в: КИЕВ</h3>
+              <h3 className={css.view__delivery_title}>Доставка в: Київ</h3>
 
               <ul className={css.view__delivery_list}>
                 <li className={css.view__delivery_list_item}>
                   <p className={css.view__delivery_list_item_title}>
-                    Самовывоз по нашему адресу
+                    Самовивіз з нашої адреси
                   </p>
                   <p className={css.view__delivery_list_item_price}>
-                    Бесплатно
+                    Безкоштовно
                   </p>
                 </li>
                 <li className={css.view__delivery_list_item}>
                   <p className={css.view__delivery_list_item_title}>
-                    Самовывоз из Новой Почты
+                    Самовивіз з Нової Пошти
                   </p>
                   <p className={css.view__delivery_list_item_price}>
-                    По тарифам перевозчика
+                    за тарифами перевізника
                   </p>
                 </li>
                 <li className={css.view__delivery_list_item}>
                   <p className={css.view__delivery_list_item_title}>
-                    Самовывоз из Укрпочты
+                    Самовивіз з Укрпошти
                   </p>
                   <p className={css.view__delivery_list_item_price}>
-                    По тарифам перевозчика
+                    за тарифами перевізника
                   </p>
                 </li>
                 <li className={css.view__delivery_list_item}>
                   <p className={css.view__delivery_list_item_title}>
-                    Самовывоз из Justin
+                    Самовивіз з JustIn
                   </p>
                   <p className={css.view__delivery_list_item_price}>
-                    По тарифам перевозчика
+                    за тарифами перевізника
                   </p>
                 </li>
               </ul>
             </div>
+
+            <div
+              className={`${css.view__payment_info_wrapper} ${css.view__payment_info_block_one}`}
+            >
+              <h3 className={css.view__payment_info_title}>Способи оплати</h3>
+              <p className={css.view__payment_info_text}>
+                Оплата під час самовивозу, картою онлайн, Apple Pay, Google Pay
+              </p>
+            </div>
           </div>
 
-          <div className={css.view__description}>
-            <h3 className={css.view__description_title}>
-              Описание
-              <span className={css.view__description_title_prod}>
-                {` ${oneProd.title}`}
-              </span>
-            </h3>
+          <div className={css.view__bottom_info_wrapper}>
+            <div className={css.view__description}>
+              <h3 className={css.view__description_title}>Опис товару</h3>
 
-            <p className={css.view__description_text}>{oneProd.desc}</p>
+              <p className={css.view__description_text}>
+                {oneProd.descriptions}
+              </p>
+            </div>
+
+            <div
+              className={`${css.view__payment_info_wrapper} ${css.view__payment_info_block_two}`}
+            >
+              <h3 className={css.view__payment_info_title}>Способи оплати</h3>
+              <p className={css.view__payment_info_text}>
+                Оплата під час самовивозу, картою онлайн, Apple Pay, Google Pay
+              </p>
+            </div>
+
+            <div className={css.view__reviews_wrapper}>
+              <div className={css.view__reviews_header_block}>
+                <h3 className={css.view__reviews_header_title}>
+                  Відгуки та питання
+                  <span className={css.view__reviews_header_counter}> 0</span>
+                </h3>
+                <button className={css.view__reviews_header_add_btn}>
+                  Написати
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}
 
-      {oneProd && <Viewed prodId={queryItem} viewed={viewed} />}
+      {oneProd && viewed.length > 1 ? (
+        <Viewed prodId={productId} viewed={viewed} />
+      ) : (
+        <Popular />
+      )}
     </section>
   );
 };

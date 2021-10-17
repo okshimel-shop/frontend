@@ -5,20 +5,26 @@ const Availability = ({ quantity }) => {
   return (
     <>
       {quantity > 1 && (
-        <div className={css.availability}>
-          <p className={css.availability__stock}>Есть в наличии</p>
+        <div
+          className={`${css.availability} ${css.availability__bg_color_stock}`}
+        >
+          <p className={css.availability__stock}>Є в наявності</p>
         </div>
       )}
 
       {quantity === 1 && (
-        <div className={css.availability}>
-          <p className={css.availability__ends}>Заканчивается</p>
+        <div
+          className={`${css.availability} ${css.availability__bg_color_ends}`}
+        >
+          <p className={css.availability__ends}>Закінчується</p>
         </div>
       )}
 
       {quantity < 1 && (
-        <div className={css.availability}>
-          <p className={css.availability__ended}>Нет в наличии</p>
+        <div
+          className={`${css.availability} ${css.availability__bg_color_ended}`}
+        >
+          <p className={css.availability__ended}>Закінчився</p>
         </div>
       )}
     </>

@@ -61,7 +61,6 @@
 
 .modal_cart__list_item {
   display: flex;
-  border: 1px solid #aaa;
   border-radius: 5px;
   background-color: #fff;
 }
@@ -70,7 +69,8 @@
   width: 100px;
   height: 75px;
   object-fit: cover;
-  border-radius: 5px 0 0 5px;
+  border: 5px solid #fff;
+  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -129,8 +129,8 @@
   padding: 5px 10px;
   width: 270px;
   height: 60px;
-  border: 1px solid #aaa;
   border-radius: 5px;
+  background-color: #fff;
 }
 
 .modal_cart__receipt_total {
@@ -272,7 +272,7 @@
   .modal_cart__header {
     flex-direction: row-reverse;
     padding: 0 30px;
-    height: 60px;
+    height: 45px;
     border-radius: 10px 10px 0 0;
   }
 

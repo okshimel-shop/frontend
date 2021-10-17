@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addNewProduct } from "../../redux/operations/productOperation";
@@ -6,18 +6,23 @@ import { loaderSelector } from "../../redux/selectors/selectors";
 import imageCompression from "browser-image-compression";
 import Loader from "../../Components/Loader/Loader";
 import css from "./AdminAddProduct.module.css";
+import * as API from "../../redux/operations/catalogsOperation";
 
 const initialState = {
   title: "",
-  category: "",
+  type: "",
+  subcategory: "",
   price: 0,
-  quantity: 0,
+  amount: 0,
   keywords: "",
-  desc: "",
+  descriptions: "",
 };
 
 const AdminAddProduct = () => {
   const [inputForm, setInputForm] = useState(initialState);
+  const [types, setTypes] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [subcategories, setSubcategories] = useState([]);
   const [fileImg, setFileImg] = useState([]);
   const [base64Img, setBase64Img] = useState([]);
 
@@ -26,8 +31,36 @@ const AdminAddProduct = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const inputHandler = ({ target }) => {
+  useEffect(() => {
+    dispatch(API.listAllTypes()).then(({ data }) => setTypes(data));
+  }, [dispatch]);
+
+  const inputHandler = async ({ target }) => {
     const { name, value } = target;
+
+    if (name === "type") {
+      setCategories(types[value - 1]?.categories || []);
+    }
+
+    if (name === "category") {
+      setSubcategories(categories[value - 1]?.subcategories || []);
+    }
+
+    if (name === "category" && value === "back") {
+      return setCategories([]);
+    }
+
+    if (name === "subcategory" && value === "back") {
+      return setSubcategories([]);
+    }
+
+    if (name === "keywords") {
+      return setInputForm((state) => ({
+        ...state,
+        [name]: value.replace(/[, ]+/g, ", ").trim(),
+      }));
+    }
+
     setInputForm((state) => ({ ...state, [name]: value }));
   };
 
@@ -53,8 +86,8 @@ const AdminAddProduct = () => {
 
   const imgCompressHandler = async (newArr) => {
     const options = {
-      maxSizeMB: 0.2,
-      maxWidthOrHeight: 1000,
+      maxSizeMB: 0.5,
+      maxWidthOrHeight: 1200,
       useWebWorker: true,
       fileType: "image/jpeg",
     };
@@ -120,30 +153,75 @@ const AdminAddProduct = () => {
                 placeholder="Название товара"
               />
 
-              <select
-                className={css.add_product__input_category}
-                onChange={inputHandler}
-                name="category"
-                defaultValue="unidentified"
-                required
-              >
-                <option value="unidentified" disabled>
-                  Категория
-                </option>
-                <optgroup label="Лето">
-                  <option value="June">Июнь</option>
-                  <option value="July">Июль</option>
-                  <option value="Agust">Август</option>
-                </optgroup>
-                data
-              </select>
+              {categories.length === 0 && (
+                <select
+                  className={css.add_product__input_category}
+                  defaultValue="default"
+                  onChange={inputHandler}
+                  name="type"
+                >
+                  <option value="default" disabled>
+                    Выберите тип
+                  </option>
+                  {types?.map(
+                    (item) =>
+                      item.categories.length > 0 && (
+                        <option key={item.id} value={item.id}>
+                          {item.title}
+                        </option>
+                      )
+                  )}
+                </select>
+              )}
+
+              {categories.length > 0 && subcategories.length === 0 && (
+                <select
+                  className={css.add_product__input_category}
+                  defaultValue="default"
+                  onChange={inputHandler}
+                  name="category"
+                >
+                  <option value="back">Назад к типам</option>
+                  <option value="default" disabled>
+                    Выберите категорию
+                  </option>
+                  {categories?.map(
+                    (item) =>
+                      item.subcategories.length > 0 && (
+                        <option key={item.id} value={item.id}>
+                          {item.title}
+                        </option>
+                      )
+                  )}
+                </select>
+              )}
+
+              {subcategories.length > 0 && (
+                <select
+                  className={css.add_product__input_category}
+                  defaultValue="default"
+                  onChange={inputHandler}
+                  name="subcategory"
+                >
+                  <option value="back">Назад к категориям</option>
+                  <option value="default" disabled>
+                    Выберите подкатегорию
+                  </option>
+                  {subcategories?.map((item, idx) => (
+                    <option key={item.id} value={item.id}>
+                      {item.title}
+                    </option>
+                  ))}
+                </select>
+              )}
+
               <input
                 className={css.add_product__input_price}
                 onChange={inputHandler}
                 type="number"
                 name="price"
                 autoComplete="off"
-                min="0"
+                min="1"
                 max="9999"
                 required
                 placeholder="Цена"
@@ -152,9 +230,9 @@ const AdminAddProduct = () => {
                 className={css.add_product__input_quantity}
                 onChange={inputHandler}
                 type="number"
-                name="quantity"
+                name="amount"
                 autoComplete="off"
-                min="0"
+                min="1"
                 max="999"
                 required
                 placeholder="Кол. шт."
@@ -163,7 +241,7 @@ const AdminAddProduct = () => {
                 className={css.add_product__input_desc}
                 onChange={inputHandler}
                 type="text"
-                name="desc"
+                name="descriptions"
                 autoComplete="off"
                 required
                 placeholder="Описание товара"
@@ -173,6 +251,7 @@ const AdminAddProduct = () => {
                 onChange={inputHandler}
                 type="text"
                 name="keywords"
+                value={inputForm.keywords}
                 autoComplete="off"
                 required
                 placeholder="Ключевые слова"

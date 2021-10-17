@@ -2,7 +2,6 @@ import React, { Suspense, lazy, useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { viewedSelector } from "../redux/selectors/selectors";
-import { isUserLoginOperation } from "../redux/operations/userOperation";
 
 import Header from "../Components/Header/Header";
 import Admin from "../Containers/Admin/Admin";
@@ -24,10 +23,6 @@ function App() {
   const dispatch = useDispatch();
 
   const viewed = useSelector((state) => viewedSelector(state));
-
-  useEffect(() => {
-    dispatch(isUserLoginOperation());
-  }, [dispatch]);
 
   useEffect(() => {
     const filtredViewed = viewed.filter(

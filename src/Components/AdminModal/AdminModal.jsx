@@ -6,6 +6,7 @@ import animation from "./transition/AdminModal.module.css";
 
 import AdminAddProduct from "../AdminAddProduct/AdminAddProduct";
 import AdminProductList from "../AdminProductList/AdminProductList";
+import AdminCatalogs from "../AdminCatalogs/AdminCatalogs";
 
 import BackgroundOvarlay from "../BackgoundOvarlay/BackgroundOvarlay";
 import { modalStatusSelector } from "../../redux/selectors/selectors";
@@ -37,10 +38,13 @@ const AdminModal = () => {
           <div className={css.modal_admin__body}>
             <div className={css.modal_admin__body_header}>
               {modalStatus.includes("add") && (
-                <p className={css.modal_admin__body_title}>ДОБАВИТЬ ТОВАР</p>
+                <p className={css.modal_admin__body_title}>Створення товару</p>
               )}
               {modalStatus.includes("list") && (
-                <p className={css.modal_admin__body_title}>СПИСОК ТОВАРОВ</p>
+                <p className={css.modal_admin__body_title}>Список товарів</p>
+              )}
+              {modalStatus.includes("catalogs") && (
+                <p className={css.modal_admin__body_title}>Каталоги</p>
               )}
               <div
                 onClick={modalCloseHandler}
@@ -52,6 +56,7 @@ const AdminModal = () => {
             <div className={css.modal_admin__main}>
               {modalStatus.includes("add") && <AdminAddProduct />}
               {modalStatus.includes("list") && <AdminProductList />}
+              {modalStatus.includes("catalogs") && <AdminCatalogs />}
             </div>
           </div>
         </div>

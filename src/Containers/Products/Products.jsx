@@ -5,20 +5,18 @@ import { Link } from "react-router-dom";
 import queryString from "query-string";
 import Loader from "../../Components/Loader/Loader";
 import Pagination from "@material-ui/lab/Pagination";
-import {
-  getAllProducts,
-  getQuantityProducts,
-} from "../../redux/operations/productOperation";
+import { getAllProducts } from "../../redux/operations/productOperation";
 import {
   loaderSelector,
   quantitySelector,
 } from "../../redux/selectors/selectors";
 import { cartSet } from "../../redux/actions/cartAction";
+import noimage from "../../images/products/no-image.png";
 import css from "./Products.module.css";
 
 const Products = ({ location, history }) => {
   const [page, setPage] = useState(1);
-  const [limitOnPage] = useState(12);
+  const [limitOnPage] = useState(25);
   const [products, setProducts] = useState(null);
 
   const quantity = useSelector((state) => quantitySelector(state));
@@ -31,25 +29,18 @@ const Products = ({ location, history }) => {
   useEffect(() => {
     const handlePageNumber = queryPage ? Number(queryPage) : 1;
     setPage(handlePageNumber);
-  }, [dispatch, queryPage]);
+  }, [queryPage]);
 
   useEffect(() => {
-    dispatch(getQuantityProducts());
-
-    // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    if (quantity) {
-      dispatch(getAllProducts(page, limitOnPage, quantity)).then((res) =>
-        setProducts(res)
-      );
-    }
+    dispatch(getAllProducts(page - 1, limitOnPage)).then((res) =>
+      setProducts(res)
+    );
 
     return () => {
       setProducts(null);
     };
-  }, [dispatch, limitOnPage, page, quantity]);
+    // eslint-disable-next-line
+  }, [page]);
 
   const pageChangeHandle = (event, value) => {
     history.push(`?page=${value}`);
@@ -77,34 +68,48 @@ const Products = ({ location, history }) => {
 
           <ul className={css.products__list}>
             {products.map((prod) => (
-              <li key={prod.docId} className={css.products__list_item}>
+              <li key={prod.id} className={css.products__list_item}>
                 <Link to={`/products/view?p=${prod.id}`}>
-                  <img
-                    className={css.products__list_item_img}
-                    src={prod.images[0]}
-                    alt={prod.title}
-                    width="130"
-                    height="130"
-                  />
-
-                  <h3 className={css.products__list_item_title}>
-                    {prod.title}
-                  </h3>
+                  {prod.images[0] ? (
+                    <img
+                      className={css.products__list_item_img}
+                      src={prod.images[0]}
+                      alt={prod.title}
+                      width="130"
+                      height="130"
+                    />
+                  ) : (
+                    <img
+                      className={css.products__list_item_img}
+                      src={noimage}
+                      alt="Изображение не загружено"
+                    />
+                  )}
                 </Link>
 
-                <div className={css.products__list_item_wrapper}>
-                  <p className={css.products__list_item_price}>{prod.price}</p>
-                  <div className={css.products__list_item_favourite_wraper}>
-                    <button
-                      onClick={prodFavouriteHandler}
-                      id={prod.id}
-                      className={css.products__list_item_favourite}
-                    ></button>
-                    <button
-                      onClick={prodCartHandler}
-                      id={prod.id}
-                      className={css.products__list_item_btn}
-                    ></button>
+                <div className={css.products__list_item_bottom_wrapper}>
+                  <Link to={`/products/view?p=${prod.id}`}>
+                    <h3 className={css.products__list_item_title}>
+                      {prod.title}
+                    </h3>
+                  </Link>
+
+                  <div className={css.products__list_item_wrapper}>
+                    <p className={css.products__list_item_price}>
+                      {prod.price}
+                    </p>
+                    <div className={css.products__list_item_favourite_wraper}>
+                      <button
+                        onClick={prodFavouriteHandler}
+                        id={prod.id}
+                        className={css.products__list_item_favourite}
+                      ></button>
+                      <button
+                        onClick={prodCartHandler}
+                        id={prod.id}
+                        className={css.products__list_item_btn}
+                      ></button>
+                    </div>
                   </div>
                 </div>
               </li>

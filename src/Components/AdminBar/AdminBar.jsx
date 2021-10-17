@@ -26,7 +26,15 @@ const AdminBar = () => {
               className={css.admin_bar__menu_item_btn}
               onClick={() => openModalHandler("admin-add")}
             >
-              Добавить
+              Створити
+            </p>
+          </li>
+          <li className={css.admin_bar__menu_item}>
+            <p
+              className={css.admin_bar__menu_item_btn}
+              onClick={() => openModalHandler("admin-catalogs")}
+            >
+              Каталоги
             </p>
           </li>
           <li className={css.admin_bar__menu_item}>
@@ -34,7 +42,7 @@ const AdminBar = () => {
               className={css.admin_bar__menu_item_btn}
               onClick={() => openModalHandler("admin-list")}
             >
-              Товары
+              Товари
             </p>
           </li>
           <li className={css.admin_bar__menu_item}>
@@ -45,7 +53,7 @@ const AdminBar = () => {
               className={css.admin_bar__menu_item_btn}
               onClick={userLogoutHandler}
             >
-              Выйти
+              Вийти
             </p>
           </li>
         </ul>

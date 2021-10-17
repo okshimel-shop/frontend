@@ -66,12 +66,19 @@ const Header = () => {
         <div className={css.header__phone_wrapper}>
           <div className={css.header__phone_icon}></div>
           <a className={css.header__phone_link} href="tel:0975452910">
-            (097) 54-52-910
+            (097) 545-29-10
           </a>
         </div>
 
         <div className={css.header__icon_wrapper}>
+          <input
+            className={css.header__search_input}
+            type="text"
+            placeholder="Поиск по сайту"
+          />
+
           <div className={css.header__magnifier_icon}></div>
+
           <div
             onClick={() => openModalHandler("right")}
             className={css.header__cart_icon}

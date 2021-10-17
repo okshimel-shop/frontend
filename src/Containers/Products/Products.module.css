@@ -46,12 +46,8 @@
 }
 
 .products__list_item {
-  padding-bottom: 8px;
   width: 150px;
-  height: 190px;
-  border: 1px solid #aaa;
-  border-radius: 5px;
-  background-color: #fff;
+  height: 182px;
 }
 
 .products__list_item_img {
@@ -59,8 +55,14 @@
   object-fit: cover;
   width: 150px;
   height: 113px;
+  border: 5px solid #fff;
   border-radius: 5px 5px 0 0;
-  margin-bottom: 8px;
+}
+
+.products__list_item_bottom_wrapper {
+  padding: 3px 0 5px;
+  border-radius: 0 0 5px 5px;
+  background-color: #fff;
 }
 
 .products__list_item_title {
@@ -178,7 +180,7 @@
 
   .products__list_item {
     width: 236px;
-    height: 264px;
+    height: 256px;
   }
 
   .products__list_item_img {
@@ -254,7 +256,7 @@
 
   .products__list_item {
     width: 240px;
-    height: 275px;
+    height: 266px;
   }
 
   .products__list_item:not(:nth-child(4n)) {
@@ -267,6 +269,80 @@
 
   .products__list_item_img {
     width: 240px;
+    height: 180px;
+  }
+
+  .products__list_item_title {
+    height: 42px;
+    font-size: 18px;
+  }
+
+  .products__list_item_price {
+    font-size: 24px;
+  }
+
+  .products__list_item_price::after {
+    bottom: 8px;
+    right: 0px;
+    font-size: 16px;
+  }
+
+  .products__list_item_favourite {
+    width: 22px;
+    height: 22px;
+  }
+
+  .products__list_item_btn {
+    width: 22px;
+    height: 22px;
+  }
+
+  .products__pagination {
+    padding-top: 40px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .products {
+    padding-top: 36px;
+    width: 1200px;
+  }
+
+  .products__wrapper {
+    margin-bottom: 40px;
+  }
+
+  .products__title {
+    font-size: 26px;
+  }
+
+  .products__title::before {
+    top: 14px;
+    left: 210px;
+    width: 150px;
+  }
+
+  .products__title::after {
+    top: 14px;
+    right: 210px;
+    width: 150px;
+  }
+
+  .products__list_item {
+    width: 230px;
+    height: 260px;
+  }
+
+  .products__list_item:not(:nth-child(5n)) {
+    margin-right: 10px;
+  }
+
+  .products__list_item:not(:nth-last-child(-n + 5)) {
+    margin-bottom: 40px;
+  }
+
+  .products__list_item_img {
+    width: 230px;
     height: 180px;
   }
 

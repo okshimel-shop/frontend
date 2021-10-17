@@ -38,7 +38,7 @@ const Login = ({ history }) => {
     <section className={css.login}>
       <div className={css.login__wrapper}>
         {loaderStatus && <Spinner />}
-        {!loaderStatus && islogged === "" && (
+        {!loaderStatus && islogged === null && (
           <form className={css.login__form} onSubmit={submitHandler}>
             <p className={css.login__form_title}>Админ панель</p>
             <input

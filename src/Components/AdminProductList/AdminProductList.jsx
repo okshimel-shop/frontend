@@ -13,8 +13,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import {
   deleteProduct,
   getAllProducts,
-  getQuantityProducts,
 } from "../../redux/operations/productOperation";
+import noimage from "../../images/products/no-image.png";
 import css from "./AdminProductList.module.css";
 
 const AdminProductList = () => {
@@ -29,30 +29,25 @@ const AdminProductList = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if (!quantity) dispatch(getQuantityProducts());
-    if (quantity) {
-      dispatch(getAllProducts(page, limitOnPage, quantity)).then((res) => {
-        console.log(res);
-        return setProducts(res);
-      });
-    }
+    dispatch(getAllProducts(page - 1, limitOnPage)).then((res) =>
+      setProducts(res)
+    );
 
     return () => {
       setProducts(null);
     };
-  }, [dispatch, limitOnPage, page, quantity]);
+    // eslint-disable-next-line
+  }, [page]);
 
-  const productDeleteHandler = (docId, images) => {
-    dispatch(deleteProduct(docId, images)).then(
-      ({ status, quantityProducts }) => {
-        status &&
-          setTimeout(() => {
-            dispatch(
-              getAllProducts(page, limitOnPage, quantityProducts)
-            ).then((res) => setProducts(res));
-          }, 500);
-      }
-    );
+  const productDeleteHandler = (id) => {
+    dispatch(deleteProduct(id)).then(({ status }) => {
+      status &&
+        setTimeout(() => {
+          dispatch(getAllProducts(page - 1, limitOnPage)).then((res) =>
+            setProducts(res)
+          );
+        }, 500);
+    });
   };
 
   const pageChangeHandle = (event, value) => {
@@ -84,21 +79,27 @@ const AdminProductList = () => {
       <ul className={css.admin_product}>
         {products &&
           products.map((prod) => (
-            <li
-              key={prod.docId}
-              className={css.admin_product__item}
-              id={prod.id}
-            >
+            <li key={prod.id} className={css.admin_product__item} id={prod.id}>
               <p className={css.admin_product__item_id}>#{prod.id}</p>
-              <img
-                onClick={toProductPage}
-                className={css.admin_product__item_img}
-                src={prod.images[0]}
-                alt={prod.title}
-                width="130"
-                height="130"
-                id={prod.id}
-              />
+              {prod.images[0] ? (
+                <img
+                  onClick={toProductPage}
+                  className={css.admin_product__item_img}
+                  src={prod.images[0]}
+                  alt={prod.title}
+                  width="130"
+                  height="130"
+                  id={prod.id}
+                />
+              ) : (
+                <img
+                  onClick={toProductPage}
+                  className={css.admin_product__item_img}
+                  src={noimage}
+                  alt="Изображение не загружено"
+                  id={prod.id}
+                />
+              )}
               <div className={css.admin_product__item_wrapper}>
                 <p
                   onClick={toProductPage}
@@ -111,7 +112,7 @@ const AdminProductList = () => {
                   Цена: {prod.price}
                 </p>
                 <p className={css.admin_product__item_quantity}>
-                  Количество: {prod.quantity} шт.
+                  Количество: {prod.amount} шт.
                 </p>
                 <p className={css.admin_product__item_view}>
                   Просмотров: {prod.views}
@@ -120,10 +121,10 @@ const AdminProductList = () => {
                   Категория: {prod.category}
                 </p>
               </div>
-              <div>{timeConverter(prod.date)}</div>
+              <div>{timeConverter(prod.createdAt)}</div>
 
               <IconButton
-                onClick={() => productDeleteHandler(prod.docId, prod.images)}
+                onClick={() => productDeleteHandler(prod.id)}
                 aria-label="delete"
                 size="small"
               >

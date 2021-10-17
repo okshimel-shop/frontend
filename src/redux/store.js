@@ -15,7 +15,7 @@ import rootReducer from "./reducers";
 const persistConfig = {
   key: "data",
   storage,
-  whitelist: ["cart", "viewed"],
+  whitelist: ["cart", "viewed", "user"],
 };
 
 const middleware = getDefaultMiddleware({

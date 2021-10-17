@@ -1,71 +1,39 @@
-import axios from "axios";
+import axios from "../../helpers/axios";
 import { modalClose } from "../actions/modalAction.js";
 import { loaderOn, loaderOff } from "../actions/loaderAction.js";
 import { quantityGet } from "../actions/quantityAction.js";
-
-const { db, storage } = require("../../firebase");
-const storageRef = storage.ref();
-
-axios.defaults.baseURL = "https://okshimel-shop-7afff.firebaseio.com";
 
 export const addNewProduct = (infoArr, imgArr) => async (dispatch) => {
   try {
     dispatch(loaderOn());
 
-    const newProdRef = await db.collection("products").doc();
-    const documentId = newProdRef.id;
-
-    const nextId = await axios.get("/counters/nextProductId.json");
-
-    const pathImgArr = [];
-    for (let i = 1; i <= imgArr.length; i++) {
-      const imagesRef = storageRef.child(`products/${documentId}/${i}.jpg`);
-      const resultImgLoad = await imagesRef.put(imgArr[i - 1]);
-      const pathRef = storage.ref(resultImgLoad.metadata.fullPath);
-      pathImgArr.push(pathRef);
-      console.log(`Load img # ${i}`);
-    }
-
-    const linkImgArr = [];
-    for (const item of pathImgArr) {
-      await item.getDownloadURL().then((res) => {
-        const slicedLink = res.slice(0, -43);
-        linkImgArr.push(slicedLink);
-      });
-      console.log(`Create link ${item.name}`);
-    }
-
     const combinedObject = {
       ...infoArr,
-      price: Number(infoArr.price),
-      quantity: Number(infoArr.quantity),
-      images: linkImgArr,
-      date: Date.now(),
-      docId: documentId,
+      price: +infoArr.price,
+      amount: +infoArr.amount,
+      images: [],
       views: 0,
-      id: nextId.data,
     };
 
-    await newProdRef.set(combinedObject);
-    console.log("Add products to BD");
+    const bodyFormData = new FormData();
+    imgArr.forEach((item) => bodyFormData.append(`img`, item))
 
-    const oldValue = await axios.get("/counters/quantityProducts.json");
+    for (const item in combinedObject) {
+      bodyFormData.append(item, combinedObject[item])
+    }
 
-    await axios.patch("/counters.json", {
-      quantityProducts: oldValue.data + 1,
-    });
-
-    console.log(`Update prod quantity to ${oldValue.data + 1}`);
-
-    await axios.patch("/counters.json", {
-      nextProductId: nextId.data + 1,
-    });
-
-    console.log(`Update next id to ${nextId.data + 1}`);
+    const {data} = await axios({
+      method: 'post',
+      url: '/products',
+      data: bodyFormData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
 
     dispatch(modalClose());
 
-    return nextId.data;
+    return data.id
   } catch (error) {
     console.log(error);
   } finally {
@@ -73,63 +41,57 @@ export const addNewProduct = (infoArr, imgArr) => async (dispatch) => {
   }
 };
 
-export const getQuantityProducts = () => async (dispatch) => {
+export const getOneProduct = (queryItem, isViewFound) => (dispatch) => {
   try {
-    const quantityProducts = await axios.get("/counters/quantityProducts.json");
+    dispatch(loaderOn());
 
-    dispatch(quantityGet(quantityProducts.data));
-    console.log("[QUANTITY] BD request");
+    return axios.get(`/products/${queryItem}?viewed=${isViewFound}`)
   } catch (error) {
     console.log(error);
   }
 };
 
-export const getAllProducts = (page, limitOnPage, quantityProducts) => async (
+export const getViewedProducts = (filteredArr) => (dispatch) => {
+  try {
+    let idsObject = {}
+    for (const item of filteredArr) {
+      const { id } = item
+      idsObject = { ...idsObject, [id]: id }
+    }
+
+  return axios.get(`/products/byids`, { params: { ...idsObject } })
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(loaderOff());
+  }
+};
+
+export const getAllProducts = (page, limit) => async (
   dispatch
 ) => {
   try {
     dispatch(loaderOn());
 
-    const productArr = []
+    const result = await axios.get(`/products?page=${page}&limit=${limit}`)
 
-    await db
-      .collection("products")
-      .orderBy("id", "desc")
-      .startAt(quantityProducts - (page - 1) * limitOnPage)
-      .limit(limitOnPage)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((res) => {
-          productArr.push(res.data());
-        });
-      });
-    console.log("[PRODUCTS] BD request");
+    const { count, rows } = result.data
 
-    return productArr;
+    dispatch(quantityGet(count))
+
+    return rows
   } catch (error) {
-    console.log(error);
+    console.log(error.response);
   } finally {
     dispatch(loaderOff());
   }
 };
 
-export const getBestsellers = (limitOnPage) => async (dispatch) => {
+export const getPopular = (limitOnPage) => async (dispatch) => {
   try {
     dispatch(loaderOn());
-    const allProdArr = [];
-    await db
-      .collection("products")
-      .orderBy("views", "desc")
-      .limit(limitOnPage)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((res) => {
-          allProdArr.push(res.data());
-        });
-      });
-    console.log("[PRODUCTS] BD request");
 
-    return allProdArr;
+    return axios.get(`/products/popular?limit=${limitOnPage}`)
   } catch (error) {
     console.log(error);
   } finally {
@@ -137,23 +99,11 @@ export const getBestsellers = (limitOnPage) => async (dispatch) => {
   }
 };
 
-export const getDiscounts = (limitOnPage) => async (dispatch) => {
+export const getDiscounts = (limitOnPage) => (dispatch) => {
   try {
     dispatch(loaderOn());
-    const allProdArr = [];
-    await db
-      .collection("products")
-      .orderBy("price", "asc")
-      .limit(limitOnPage)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((res) => {
-          allProdArr.push(res.data());
-        });
-      });
-    console.log("[PRODUCTS] BD request");
 
-    return allProdArr;
+    return axios.get(`/products/discount?limit=${limitOnPage}`)
   } catch (error) {
     console.log(error);
   } finally {
@@ -161,23 +111,11 @@ export const getDiscounts = (limitOnPage) => async (dispatch) => {
   }
 };
 
-export const getNewProducts = (limitOnPage) => async (dispatch) => {
+export const getNewProducts = (limitOnPage) => (dispatch) => {
   try {
     dispatch(loaderOn());
-    const allProdArr = [];
-    await db
-      .collection("products")
-      .orderBy("id", "desc")
-      .limit(limitOnPage)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((res) => {
-          allProdArr.push(res.data());
-        });
-      });
-    console.log("[PRODUCTS] BD request");
 
-    return allProdArr;
+    return axios.get(`/products/new?limit=${limitOnPage}`)
   } catch (error) {
     console.log(error);
   } finally {
@@ -185,39 +123,27 @@ export const getNewProducts = (limitOnPage) => async (dispatch) => {
   }
 };
 
-export const deleteProduct = (docId, images) => async (dispatch) => {
+export const getCartProducts = (cartIds) => (dispatch) => {
   try {
-    images.forEach(async (img) => {
-      const folderRef = storageRef.child(
-        decodeURIComponent(img.slice(78, 117))
-      );
+    dispatch(loaderOn());
 
-      await folderRef.delete().catch(function (error) {
-        console.log(error);
-      });
-    });
+    let idsObject = {}
+    for (const item of cartIds) {
+      const { id } = item
+      idsObject = { ...idsObject, [id]: id }
+    }
 
-    const deleteStatus = await db
-      .collection("products")
-      .doc(docId)
-      .delete()
-      .then(async () => {
-        const oldValue = await axios.get("/counters/quantityProducts.json");
+    return axios.get(`/products/byids`, { params: { ...idsObject } })
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(loaderOff());
+  }
+};
 
-        const newValue = await axios.patch("/counters.json", {
-          quantityProducts: oldValue.data - 1,
-        });
-
-        return {
-          status: true,
-          quantityProducts: newValue.data.quantityProducts,
-        };
-      })
-      .catch(function (error) {
-        return false;
-      });
-
-    return deleteStatus;
+export const deleteProduct = (id) => () => {
+  try {
+    return axios.delete(`/products/${id}`)
   } catch (error) {
     console.log(error);
   }

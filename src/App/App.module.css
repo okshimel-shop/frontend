@@ -2,7 +2,7 @@
   margin: 0 auto;
   min-height: 100vh;
   position: relative;
-  background-color: #eee;
+  background-color: #ddd;
   padding-bottom: 132px;
 }
 
@@ -13,6 +13,12 @@
 }
 
 @media (min-width: 1024px) {
+  .container {
+    padding-bottom: 71px;
+  }
+}
+
+@media (min-width: 1280px) {
   .container {
     padding-bottom: 71px;
   }

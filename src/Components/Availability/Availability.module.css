@@ -1,45 +1,109 @@
 .availability {
   position: absolute;
-  text-outline: 15px;
   right: 15px;
-  width: 150px;
-  padding: 5px 10px 5px 0;
+  padding: 5px 10px 5px 30px;
   border-radius: 5px;
-  background-color: #ddd;
+  text-outline: 15px;
+}
+
+.availability__bg_color_stock {
+  background-color: #f4faf6;
 }
 
 .availability__stock {
-  color: rgba(33, 165, 0, 0.925);
+  position: relative;
+  color: hsla(108, 100%, 32%, 0.925);
   font-size: 18px;
   text-align: right;
 }
 
+.availability__stock::before {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 2px;
+  left: -25px;
+  background-image: url(../../images/products/icons/checkmark.svg);
+}
+
+.availability__bg_color_ends {
+  background-color: #fff7f2;
+}
+
 .availability__ends {
+  position: relative;
   color: #ff7c2f;
   font-size: 18px;
   text-align: right;
 }
 
+.availability__ends::before {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 2px;
+  left: -25px;
+  background-image: url(../../images/products/icons/clock.svg);
+}
+
+.availability__bg_color_ended {
+  background-color: #f5f5f5;
+}
+
 .availability__ended {
+  position: relative;
   color: #666;
   font-size: 18px;
   text-align: right;
 }
 
+.availability__ended::before {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 2px;
+  left: -25px;
+  background-image: url(../../images/products/icons/minus.svg);
+}
+
 @media (min-width: 768px) {
   .availability {
-    width: 160px;
+    padding: 5px 10px 5px 35px;
   }
 
   .availability__stock {
     font-size: 20px;
   }
 
+  .availability__stock::before {
+    width: 18px;
+    height: 18px;
+    left: -28px;
+  }
+
   .availability__ends {
     font-size: 20px;
   }
 
+  .availability__ends::before {
+    width: 18px;
+    height: 18px;
+    left: -28px;
+  }
+
   .availability__ended {
     font-size: 20px;
+  }
+
+  .availability__ended::before {
+    width: 18px;
+    height: 18px;
+    left: -28px;
   }
 }

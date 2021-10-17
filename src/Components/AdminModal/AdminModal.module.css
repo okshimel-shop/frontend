@@ -18,11 +18,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 10px;
     width: 924px;
     min-height: 184px;
     max-height: 624px;
-    background-color: #eee;
   }
 
   .modal_admin__body_header {
@@ -30,7 +28,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 30px;
-    height: 60px;
+    height: 45px;
     border-radius: 10px 10px 0 0;
     background-color: #333;
   }
@@ -50,5 +48,7 @@
 
   .modal_admin__main {
     padding: 26px 30px;
+    border-radius: 0 0 10px 10px;
+    background-color: #eee;
   }
 }

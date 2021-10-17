@@ -16,9 +16,9 @@ const MainSlider = () => {
     autoPlay: true,
     infiniteLoop: true,
     swipeable: false,
-    axis: "vertical",
-    interval: 5000,
-    transitionTime: 500,
+    axis: "horizontal",
+    interval: 10000,
+    transitionTime: 250,
   };
 
   return (
@@ -27,7 +27,13 @@ const MainSlider = () => {
         <div>
           <img
             className={css.main_slider__img}
-            src="https://images.wallpaperscraft.ru/image/ulitsa_nochnoj_gorod_neon_187651_3840x2160.jpg"
+            src={
+              process.env.NODE_ENV === "production"
+                ? `${process.env.REACT_APP_PRODUCT_SERVER_URL}` +
+                  `/banners/main/banner1.jpg`
+                : `${process.env.REACT_APP_LOCAL_SERVER_URL}` +
+                  `/banners/main/banner1.jpg`
+            }
             alt=""
           />
           <Link to="/products?page=1" className={css.main_slider__img_link} />
@@ -36,16 +42,28 @@ const MainSlider = () => {
         <div>
           <img
             className={css.main_slider__img}
-            src="https://images.wallpaperscraft.ru/image/skaly_vid_sverhu_more_187641_3840x2160.jpg"
+            src={
+              process.env.NODE_ENV === "production"
+                ? `${process.env.REACT_APP_PRODUCT_SERVER_URL}` +
+                  `/banners/main/banner2.jpg`
+                : `${process.env.REACT_APP_LOCAL_SERVER_URL}` +
+                  `/banners/main/banner2.jpg`
+            }
             alt=""
           />
           <Link to="/products?page=2" className={css.main_slider__img_link} />
         </div>
 
-        <div to="/products?page=1">
+        <div>
           <img
             className={css.main_slider__img}
-            src="https://images.wallpaperscraft.ru/image/apelsin_tsitrus_frukt_184594_3840x2160.jpg"
+            src={
+              process.env.NODE_ENV === "production"
+                ? `${process.env.REACT_APP_PRODUCT_SERVER_URL}` +
+                  `/banners/main/banner3.jpg`
+                : `${process.env.REACT_APP_LOCAL_SERVER_URL}` +
+                  `/banners/main/banner3.jpg`
+            }
             alt=""
           />
           <Link to="/products?page=3" className={css.main_slider__img_link} />

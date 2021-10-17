@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import MainSlider from "../../Components/MainSlider/MainSlider";
 import NewProducts from "../../Components/NewProducts/NewProducts";
 import Discounts from "../../Components/Discounts/Discounts";
-import Bestsellers from "../../Components/Bestsellers/Bestsellers";
+import Popular from "../../Components/Popular/Popular";
 
 const Main = () => {
   return (
@@ -14,7 +14,7 @@ const Main = () => {
 
       <MainSlider />
 
-      <Bestsellers />
+      <Popular />
       <Discounts />
       <NewProducts />
     </>

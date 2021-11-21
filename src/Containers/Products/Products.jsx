@@ -62,73 +62,75 @@ const Products = ({ location, history }) => {
 
       {loaderStatus && <Loader />}
 
-      {!loaderStatus && products && (
-        <div className={css.products__wrapper}>
-          <h2 className={css.products__title}>Все товары</h2>
+      <div className={css.products__wrapper}>
+        <h2 className={css.products__title}>Все товары</h2>
 
-          <ul className={css.products__list}>
-            {products.map((prod) => (
-              <li key={prod.id} className={css.products__list_item}>
-                <Link to={`/products/view?p=${prod.id}`}>
-                  {prod.images[0] ? (
-                    <img
-                      className={css.products__list_item_img}
-                      src={prod.images[0]}
-                      alt={prod.title}
-                      width="130"
-                      height="130"
-                    />
-                  ) : (
-                    <img
-                      className={css.products__list_item_img}
-                      src={noimage}
-                      alt="Изображение не загружено"
-                    />
-                  )}
-                </Link>
-
-                <div className={css.products__list_item_bottom_wrapper}>
+        {!loaderStatus && products && (
+          <>
+            <ul className={css.products__list}>
+              {products.map((prod) => (
+                <li key={prod.id} className={css.products__list_item}>
                   <Link to={`/products/view?p=${prod.id}`}>
-                    <h3 className={css.products__list_item_title}>
-                      {prod.title}
-                    </h3>
+                    {prod.images[0] ? (
+                      <img
+                        className={css.products__list_item_img}
+                        src={prod.images[0]}
+                        alt={prod.title}
+                        width="130"
+                        height="130"
+                      />
+                    ) : (
+                      <img
+                        className={css.products__list_item_img}
+                        src={noimage}
+                        alt="Изображение не загружено"
+                      />
+                    )}
                   </Link>
 
-                  <div className={css.products__list_item_wrapper}>
-                    <p className={css.products__list_item_price}>
-                      {prod.price}
-                    </p>
-                    <div className={css.products__list_item_favourite_wraper}>
-                      <button
-                        onClick={prodFavouriteHandler}
-                        id={prod.id}
-                        className={css.products__list_item_favourite}
-                      ></button>
-                      <button
-                        onClick={prodCartHandler}
-                        id={prod.id}
-                        className={css.products__list_item_btn}
-                      ></button>
+                  <div className={css.products__list_item_bottom_wrapper}>
+                    <Link to={`/products/view?p=${prod.id}`}>
+                      <h3 className={css.products__list_item_title}>
+                        {prod.title}
+                      </h3>
+                    </Link>
+
+                    <div className={css.products__list_item_wrapper}>
+                      <p className={css.products__list_item_price}>
+                        {prod.price}
+                      </p>
+                      <div className={css.products__list_item_favourite_wraper}>
+                        <button
+                          onClick={prodFavouriteHandler}
+                          id={prod.id}
+                          className={css.products__list_item_favourite}
+                        ></button>
+                        <button
+                          onClick={prodCartHandler}
+                          id={prod.id}
+                          className={css.products__list_item_btn}
+                        ></button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-            ))}
-          </ul>
+                </li>
+              ))}
+            </ul>
 
-          <div className={css.products__pagination}>
-            <Pagination
-              count={Math.ceil(quantity / limitOnPage)}
-              page={page}
-              onChange={pageChangeHandle}
-              variant="outlined"
-              shape="rounded"
-              hidePrevButton
-              hideNextButton
-            />
-          </div>
-        </div>
-      )}
+            <div className={css.products__pagination}>
+              <Pagination
+                count={Math.ceil(quantity / limitOnPage)}
+                page={page}
+                onChange={pageChangeHandle}
+                variant="outlined"
+                shape="rounded"
+                hidePrevButton
+                hideNextButton
+              />
+            </div>
+          </>
+        )}
+      </div>
     </section>
   );
 };

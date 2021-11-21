@@ -264,10 +264,8 @@ const ProductsList = ({ location, history }) => {
         </div>
       )}
 
-      {oneProd && viewed.length > 1 ? (
+      {viewed && viewed.length > 1 && (
         <Viewed prodId={productId} viewed={viewed} />
-      ) : (
-        <Popular />
       )}
     </section>
   );

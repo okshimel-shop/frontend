@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useSnackbar } from "notistack";
 import { addNewProduct } from "../../redux/operations/productOperation";
 import { loaderSelector } from "../../redux/selectors/selectors";
+import TextField from "@material-ui/core/TextField";
+import MenuItem from "@material-ui/core/MenuItem";
 import imageCompression from "browser-image-compression";
 import Loader from "../../Components/Loader/Loader";
 import css from "./AdminAddProduct.module.css";
@@ -10,12 +13,20 @@ import * as API from "../../redux/operations/catalogsOperation";
 
 const initialState = {
   title: "",
+  price: "",
   type: "",
+  category: "",
   subcategory: "",
-  price: 0,
-  amount: 0,
-  keywords: "",
+  subcategoryId: "",
+  amount: "",
+  size: "",
+  material: "",
+  color: "",
+  age: "",
+  gender: "",
   descriptions: "",
+  keywords: "",
+  video: "",
 };
 
 const AdminAddProduct = () => {
@@ -25,33 +36,47 @@ const AdminAddProduct = () => {
   const [subcategories, setSubcategories] = useState([]);
   const [fileImg, setFileImg] = useState([]);
   const [base64Img, setBase64Img] = useState([]);
-
+  console.log(inputForm);
   const loaderStatus = useSelector((state) => loaderSelector(state));
 
   const dispatch = useDispatch();
   const history = useHistory();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     dispatch(API.listAllTypes()).then(({ data }) => setTypes(data));
   }, [dispatch]);
 
-  const inputHandler = async ({ target }) => {
+  const inputHandler = async ({ target, currentTarget }) => {
     const { name, value } = target;
+    const { id } = currentTarget.dataset;
+    console.log(id);
 
     if (name === "type") {
-      setCategories(types[value - 1]?.categories || []);
+      setCategories(types[value]?.categories || []);
+      setSubcategories([]);
+      setInputForm((state) => ({
+        ...state,
+        [name]: value,
+        category: "",
+        subcategory: "",
+      }));
+      return;
     }
 
     if (name === "category") {
-      setSubcategories(categories[value - 1]?.subcategories || []);
+      setSubcategories(categories[value]?.subcategories || []);
+      setInputForm((state) => ({ ...state, [name]: value, subcategory: "" }));
+      return;
     }
 
-    if (name === "category" && value === "back") {
-      return setCategories([]);
-    }
-
-    if (name === "subcategory" && value === "back") {
-      return setSubcategories([]);
+    if (name === "subcategory") {
+      setInputForm((state) => ({
+        ...state,
+        [name]: value,
+        subcategoryId: id,
+      }));
+      return;
     }
 
     if (name === "keywords") {
@@ -127,6 +152,36 @@ const AdminAddProduct = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
+    if (inputForm.title.length < 10) {
+      return enqueueSnackbar("В назві має бути мінімум 10 символів", {
+        variant: "warning",
+      });
+    }
+
+    if (inputForm.price < 1) {
+      return enqueueSnackbar("Ціна має бути більша ніж 0", {
+        variant: "warning",
+      });
+    }
+
+    if (inputForm.amount === "" || inputForm.amount < 0) {
+      return enqueueSnackbar("Кількість має бути не менше ніж 0", {
+        variant: "warning",
+      });
+    }
+
+    if (inputForm.keywords.length < 10) {
+      return enqueueSnackbar("Мінімум 10 символів для ключових слів", {
+        variant: "warning",
+      });
+    }
+
+    if (fileImg.length < 1) {
+      return enqueueSnackbar("Товар має включати хоча б одне зображення", {
+        variant: "warning",
+      });
+    }
+
     dispatch(addNewProduct(inputForm, fileImg)).then((res) =>
       history.push(`/products/view?p=${res}`)
     );
@@ -140,121 +195,203 @@ const AdminAddProduct = () => {
         <form className={css.add_product} onSubmit={submitHandler}>
           <div className={css.add_product__input_block}>
             <div className={css.add_product__input_block_list}>
-              <input
+              <TextField
                 className={css.add_product__input_title}
-                onChange={inputHandler}
-                type="text"
                 name="title"
-                autoComplete="off"
-                minLength="6"
-                maxLength="60"
-                required
+                value={inputForm.title}
+                onChange={inputHandler}
+                label="Заголовок"
+                variant="outlined"
+                size="small"
                 autoFocus
-                placeholder="Название товара"
+                required
               />
 
-              {categories.length === 0 && (
-                <select
-                  className={css.add_product__input_category}
-                  defaultValue="default"
-                  onChange={inputHandler}
-                  name="type"
-                >
-                  <option value="default" disabled>
-                    Выберите тип
-                  </option>
-                  {types?.map(
-                    (item) =>
-                      item.categories.length > 0 && (
-                        <option key={item.id} value={item.id}>
-                          {item.title}
-                        </option>
-                      )
-                  )}
-                </select>
-              )}
-
-              {categories.length > 0 && subcategories.length === 0 && (
-                <select
-                  className={css.add_product__input_category}
-                  defaultValue="default"
-                  onChange={inputHandler}
-                  name="category"
-                >
-                  <option value="back">Назад к типам</option>
-                  <option value="default" disabled>
-                    Выберите категорию
-                  </option>
-                  {categories?.map(
-                    (item) =>
-                      item.subcategories.length > 0 && (
-                        <option key={item.id} value={item.id}>
-                          {item.title}
-                        </option>
-                      )
-                  )}
-                </select>
-              )}
-
-              {subcategories.length > 0 && (
-                <select
-                  className={css.add_product__input_category}
-                  defaultValue="default"
-                  onChange={inputHandler}
-                  name="subcategory"
-                >
-                  <option value="back">Назад к категориям</option>
-                  <option value="default" disabled>
-                    Выберите подкатегорию
-                  </option>
-                  {subcategories?.map((item, idx) => (
-                    <option key={item.id} value={item.id}>
-                      {item.title}
-                    </option>
-                  ))}
-                </select>
-              )}
-
-              <input
+              <TextField
                 className={css.add_product__input_price}
-                onChange={inputHandler}
                 type="number"
                 name="price"
-                autoComplete="off"
-                min="1"
-                max="9999"
-                required
-                placeholder="Цена"
-              />
-              <input
-                className={css.add_product__input_quantity}
+                value={inputForm.price}
                 onChange={inputHandler}
+                label="Ціна"
+                variant="outlined"
+                size="small"
+                required
+              />
+
+              <TextField
+                className={css.add_product__input_category}
+                name="type"
+                value={inputForm.type}
+                onChange={inputHandler}
+                label="Тип"
+                variant="outlined"
+                size="small"
+                select
+                required
+              >
+                {types?.map(
+                  (item, idx) =>
+                    item.categories.length > 0 && (
+                      <MenuItem key={item.id} value={idx}>
+                        {item.title}
+                      </MenuItem>
+                    )
+                )}
+              </TextField>
+
+              <TextField
+                className={css.add_product__input_category}
+                name="category"
+                value={inputForm.category}
+                onChange={inputHandler}
+                label="Категорія"
+                variant="outlined"
+                size="small"
+                disabled={!categories.length}
+                select
+                required
+              >
+                {categories?.map(
+                  (item, idx) =>
+                    item.subcategories.length > 0 && (
+                      <MenuItem key={item.id} value={idx}>
+                        {item.title}
+                      </MenuItem>
+                    )
+                )}
+              </TextField>
+
+              <TextField
+                className={css.add_product__input_category}
+                name="subcategory"
+                value={inputForm.subcategory}
+                onChange={inputHandler}
+                label="Підкатегорія"
+                variant="outlined"
+                size="small"
+                disabled={!subcategories.length}
+                select
+                required
+              >
+                {subcategories?.map((item, idx) => (
+                  <MenuItem key={item.id} value={idx} data-id={item.id}>
+                    {item.title}
+                  </MenuItem>
+                ))}
+              </TextField>
+
+              <TextField
+                className={css.add_product__input_quantity}
                 type="number"
                 name="amount"
-                autoComplete="off"
-                min="1"
-                max="999"
-                required
-                placeholder="Кол. шт."
-              />
-              <textarea
-                className={css.add_product__input_desc}
+                value={inputForm.amount}
                 onChange={inputHandler}
-                type="text"
+                label="Кількість"
+                variant="outlined"
+                size="small"
+                required
+              />
+
+              <TextField
+                className={css.add_product__input_quantity}
+                type="number"
+                name="size"
+                value={inputForm.size}
+                onChange={inputHandler}
+                label="Розмір"
+                variant="outlined"
+                size="small"
+                required
+              />
+
+              <TextField
+                className={css.add_product__input_quantity}
+                name="material"
+                value={inputForm.material}
+                onChange={inputHandler}
+                label="Матеріал"
+                variant="outlined"
+                size="small"
+                required
+              />
+
+              <TextField
+                className={css.add_product__input_quantity}
+                name="color"
+                value={inputForm.color}
+                onChange={inputHandler}
+                label="Колір"
+                variant="outlined"
+                size="small"
+                required
+              />
+
+              <TextField
+                className={css.add_product__input_category}
+                name="age"
+                value={inputForm.age}
+                onChange={inputHandler}
+                label="Вік"
+                variant="outlined"
+                size="small"
+                select
+                required
+              >
+                <MenuItem value="0-2">0-2</MenuItem>
+                <MenuItem value="2-5">2-5</MenuItem>
+                <MenuItem value="4-7">4-7</MenuItem>
+                <MenuItem value="6+">6+</MenuItem>
+              </TextField>
+
+              <TextField
+                className={css.add_product__input_category}
+                name="gender"
+                value={inputForm.gender}
+                onChange={inputHandler}
+                label="Стать"
+                variant="outlined"
+                size="small"
+                select
+                required
+              >
+                <MenuItem value="Чоловіча">Чоловіча</MenuItem>
+                <MenuItem value="Жіноча">Жіноча</MenuItem>
+                <MenuItem value="Унісекс">Унісекс</MenuItem>
+              </TextField>
+
+              <TextField
+                className={css.add_product__input}
                 name="descriptions"
-                autoComplete="off"
-                required
-                placeholder="Описание товара"
-              />
-              <input
-                className={css.add_product__input_keywords}
+                value={inputForm.descriptions}
                 onChange={inputHandler}
-                type="text"
+                label="Опис товару"
+                variant="outlined"
+                size="small"
+                minRows="3"
+                maxRows="3"
+                multiline
+              />
+
+              <TextField
+                className={css.add_product__input}
                 name="keywords"
                 value={inputForm.keywords}
-                autoComplete="off"
+                onChange={inputHandler}
+                label="Ключові слова"
+                variant="outlined"
+                size="small"
                 required
-                placeholder="Ключевые слова"
+              />
+
+              <TextField
+                className={css.add_product__input}
+                name="video"
+                value={inputForm.video}
+                onChange={inputHandler}
+                label="Посилання на відео"
+                variant="outlined"
+                size="small"
               />
             </div>
           </div>
@@ -295,7 +432,7 @@ const AdminAddProduct = () => {
 
           <div className={css.add_product__submit}>
             <button className={css.add_product__submit_btn}>
-              Отправить на сервер
+              Додати товар
             </button>
           </div>
         </form>

@@ -8,6 +8,8 @@
 .admin_catalogs__list_wrapper {
   padding-bottom: 10px;
   width: 260px;
+  max-height: 510px;
+  overflow-y: auto;
 }
 
 .admin_catalogs__list {

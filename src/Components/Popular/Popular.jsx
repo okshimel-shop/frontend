@@ -62,10 +62,10 @@ const Popular = () => {
     <section className={css.sliders}>
       {loaderStatus && <Loader />}
 
-      {!loaderStatus && popular && (
-        <div className={css.sliders__wrapper}>
-          <h2 className={css.sliders__title}>Популярные</h2>
-          <ul className={css.sliders__list}>
+      <div className={css.sliders__wrapper}>
+        <h2 className={css.sliders__title}>Популярные</h2>
+        <ul className={css.sliders__list}>
+          {!loaderStatus && popular && (
             <InfiniteCarousel {...settings}>
               {popular.map((prod) => (
                 <div key={prod.id} className={css.sliders__list_item}>
@@ -109,9 +109,9 @@ const Popular = () => {
                 </div>
               ))}
             </InfiniteCarousel>
-          </ul>
-        </div>
-      )}
+          )}
+        </ul>
+      </div>
     </section>
   );
 };

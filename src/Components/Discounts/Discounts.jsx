@@ -62,10 +62,10 @@ const Discounts = () => {
     <section className={css.sliders}>
       {loaderStatus && <Loader />}
 
-      {!loaderStatus && discounts && (
-        <div className={css.sliders__wrapper}>
-          <h2 className={css.sliders__title}>Акционные</h2>
-          <ul className={css.sliders__list}>
+      <div className={css.sliders__wrapper}>
+        <h2 className={css.sliders__title}>Акционные</h2>
+        <ul className={css.sliders__list}>
+          {!loaderStatus && discounts && (
             <InfiniteCarousel {...settings}>
               {discounts.map((prod) => (
                 <div key={prod.id} className={css.sliders__list_item}>
@@ -109,9 +109,9 @@ const Discounts = () => {
                 </div>
               ))}
             </InfiniteCarousel>
-          </ul>
-        </div>
-      )}
+          )}
+        </ul>
+      </div>
     </section>
   );
 };

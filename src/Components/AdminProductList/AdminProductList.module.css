@@ -11,10 +11,12 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 10px;
-  /* border: 1px solid #ddd; */
   border-radius: 5px;
   background-color: #fff;
+}
+
+.admin_product__item:not(:last-child) {
+  margin-bottom: 10px;
 }
 
 .admin_product__item_id {

@@ -1,4 +1,4 @@
-import axios from "../../helpers/axios";
+import axios from "../../helpers/package/axios";
 import { modalClose } from "../actions/modalAction.js";
 import { loaderOn, loaderOff } from "../actions/loaderAction.js";
 import { quantityGet } from "../actions/quantityAction.js";
@@ -48,6 +48,8 @@ export const getOneProduct = (queryItem, isViewFound) => (dispatch) => {
     return axios.get(`/products/${queryItem}?viewed=${isViewFound}`)
   } catch (error) {
     console.log(error);
+  } finally {
+    dispatch(loaderOff());
   }
 };
 

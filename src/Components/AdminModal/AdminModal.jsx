@@ -40,6 +40,11 @@ const AdminModal = () => {
               {modalStatus.includes("add") && (
                 <p className={css.modal_admin__body_title}>Створення товару</p>
               )}
+              {modalStatus.includes("edit") && (
+                <p className={css.modal_admin__body_title}>
+                  Редагування товару
+                </p>
+              )}
               {modalStatus.includes("list") && (
                 <p className={css.modal_admin__body_title}>Список товарів</p>
               )}
@@ -55,6 +60,7 @@ const AdminModal = () => {
 
             <div className={css.modal_admin__main}>
               {modalStatus.includes("add") && <AdminAddProduct />}
+              {modalStatus.includes("edit") && <AdminAddProduct />}
               {modalStatus.includes("list") && <AdminProductList />}
               {modalStatus.includes("catalogs") && <AdminCatalogs />}
             </div>

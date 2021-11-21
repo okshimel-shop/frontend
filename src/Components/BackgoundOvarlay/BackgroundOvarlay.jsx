@@ -6,7 +6,7 @@ import { modalClose } from "../../redux/actions/modalAction";
 import animation from "./transition/BackgoundOvarlay.module.css";
 import css from "./BackgroundOvarlay.module.css";
 
-const BackgroundOvarlay = ({ modalStatus = "closed" }) => {
+const BackgroundOvarlay = ({ modalStatus = "hidden" }) => {
   const dispatch = useDispatch();
 
   const modalCloseHandler = () => {
@@ -20,7 +20,7 @@ const BackgroundOvarlay = ({ modalStatus = "closed" }) => {
   return (
     <>
       <CSSTransition
-        in={modalStatus !== "closed"}
+        in={modalStatus !== "hidden"}
         timeout={250}
         classNames={animation}
         unmountOnExit
@@ -31,7 +31,7 @@ const BackgroundOvarlay = ({ modalStatus = "closed" }) => {
         ></div>
       </CSSTransition>
 
-      {modalStatus !== "closed"
+      {modalStatus !== "hidden"
         ? scrollSwitcher("hidden")
         : scrollSwitcher("scroll")}
     </>

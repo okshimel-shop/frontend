@@ -63,10 +63,10 @@ const NewProducts = () => {
       <section className={css.sliders}>
         {loaderStatus && <Loader />}
 
-        {!loaderStatus && newProducts && (
-          <div className={css.sliders__wrapper}>
-            <h2 className={css.sliders__title}>Новинки</h2>
-            <ul className={css.sliders__list}>
+        <div className={css.sliders__wrapper}>
+          <h2 className={css.sliders__title}>Новинки</h2>
+          <ul className={css.sliders__list}>
+            {!loaderStatus && newProducts && (
               <InfiniteCarousel {...settings}>
                 {newProducts.map((prod) => (
                   <div key={prod.id} className={css.sliders__list_item}>
@@ -114,9 +114,9 @@ const NewProducts = () => {
                   </div>
                 ))}
               </InfiniteCarousel>
-            </ul>
-          </div>
-        )}
+            )}
+          </ul>
+        </div>
       </section>
     </>
   );

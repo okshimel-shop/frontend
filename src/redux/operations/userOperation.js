@@ -1,4 +1,4 @@
-import axios from "../../helpers/axios";
+import axios from "../../helpers/package/axios";
 import { loaderOn, loaderOff } from "../actions/loaderAction";
 import { userStatus } from "../actions/userAction";
 

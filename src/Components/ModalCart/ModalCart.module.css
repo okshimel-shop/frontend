@@ -12,7 +12,6 @@
   top: 0;
   right: 0;
   width: 300px;
-  background-color: #eee;
 }
 
 .modal_cart__header {
@@ -35,6 +34,11 @@
 .modal_cart__modal_title {
   color: #eee;
   font-size: 20px;
+}
+
+.modal_cart__main {
+  height: 100%;
+  background-color: #eee;
 }
 
 .modal_cart__empty_wrapper {
@@ -262,16 +266,15 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 10px;
     width: 924px;
-    min-height: 234px;
+    min-height: 220px;
     max-height: 624px;
-    background-color: #eee;
+    background-color: transparent;
   }
 
   .modal_cart__header {
     flex-direction: row-reverse;
-    padding: 0 30px;
+    padding: 0 15px;
     height: 45px;
     border-radius: 10px 10px 0 0;
   }
@@ -283,6 +286,13 @@
   .modal_cart__empty_wrapper {
     padding: 25px 0;
     text-align: center;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .modal_cart__main {
+    min-height: 150px;
+    background-color: #eee;
+    border-radius: 0 0 10px 10px;
   }
 
   .modal_cart__empty_img {
@@ -297,8 +307,8 @@
     display: flex;
     flex-wrap: wrap;
     max-height: 540px;
-    padding: 26px 10px 0 30px;
-    margin-bottom: 26px;
+    padding: 26px 10px 26px 30px;
+    margin-bottom: 0;
   }
 
   .modal_cart__list_item {

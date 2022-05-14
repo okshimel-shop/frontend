@@ -20,7 +20,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",
-    "react-leaf-carousel": "^2.0.3",
+    "react-leaf-carousel": "^3.0.0",
     "react-loader-spinner": "^3.1.14",
     "react-redux": "^7.2.1",
     "react-responsive-carousel": "^3.2.10",

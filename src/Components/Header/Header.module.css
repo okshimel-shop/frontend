@@ -54,19 +54,11 @@
   transform: translateY(6px);
 }
 
-.header__main_menu {
+.header__catalog_button {
   display: none;
 }
 
-.header__phone_wrapper {
-  display: none;
-}
-
-.header__search_input {
-  display: none;
-}
-
-.header__magnifier_icon {
+.header__search_input_wrapper {
   display: none;
 }
 
@@ -109,35 +101,48 @@
     display: none;
   }
 
-  .header__main_menu {
-    display: flex;
-  }
-
-  .header__main_menu_item:not(:last-child) {
-    margin-right: 25px;
-  }
-
-  .header__main_menu_item_link {
+  .header__catalog_button {
+    display: block;
+    padding: 5px 10px 5px 40px;
     color: #eee;
     font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #666;
+    background-image: url(../../images/interface/catalog.svg);
+    background-repeat: no-repeat;
+    background-size: 15%;
+    background-position: 12px 8px;
+    cursor: pointer;
   }
 
-  .header__phone_wrapper {
+  .header__search_input_wrapper {
     display: flex;
-    align-items: center;
+    margin-right: 40px;
   }
 
-  .header__phone_icon {
+  .header__search_input {
     display: block;
-    width: 24px;
-    height: 24px;
-    margin-right: 12px;
-    background-image: url(../../images/interface/phone.svg);
-    background-size: cover;
+    padding: 0 5px 0 38px;
+    width: 420px;
+    height: 33px;
+    outline: none;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    background-image: url(../../images/interface/magnifier.svg);
+    background-repeat: no-repeat;
+    background-size: 4%;
+    background-position: 12px 8px;
+    background-color: #eee;
   }
 
-  .header__phone_link {
+  .header__search_input_button {
+    width: 80px;
     color: #eee;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    background-color: #666;
+    cursor: pointer;
   }
 
   .header__icon_wrapper {
@@ -145,12 +150,12 @@
     align-items: center;
   }
 
-  .header__magnifier_icon {
-    display: block;
-    width: 24px;
-    height: 24px;
-    margin-right: 20px;
-    background-image: url(../../images/interface/magnifier.svg);
+  .header__favorite_icon {
+    position: relative;
+    margin-right: 8px;
+    width: 30px;
+    height: 30px;
+    background-image: url(../../images/interface/heart-header.svg);
     background-size: cover;
     cursor: pointer;
   }
@@ -173,55 +178,6 @@
     padding: 0;
     width: 1200px;
     height: 70px;
-  }
-
-  .header__main_menu_item:not(:last-child) {
-    margin-right: 20px;
-  }
-
-  .header__main_menu_item_link {
-    color: #eee;
-    font-size: 22px;
-  }
-
-  .header__phone_icon {
-    display: block;
-    width: 24px;
-    height: 24px;
-    margin-right: 12px;
-    background-image: url(../../images/interface/phone.svg);
-    background-size: cover;
-  }
-
-  .header__phone_link {
-    color: #eee;
-    font-size: 18px;
-  }
-
-  .header__search_input {
-    display: block;
-    margin-right: 20px;
-    padding: 0 5px 0 35px;
-    width: 220px;
-    height: 30px;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    background-image: url(../../images/interface/magnifier.svg);
-    background-repeat: no-repeat;
-    background-size: 10%;
-    background-position: 5px 5px;
-    background-color: #ddd;
-  }
-
-  .header__magnifier_icon {
-    display: none;
-    width: 24px;
-    height: 24px;
-    margin-right: 20px;
-    background-image: url(../../images/interface/magnifier.svg);
-    background-size: cover;
-    cursor: pointer;
   }
 
   .header__cart_icon {

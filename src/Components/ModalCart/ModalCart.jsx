@@ -13,7 +13,7 @@ import {
 } from "../../redux/selectors/selectors";
 import { getCartProducts } from "../../redux/operations/productOperation";
 import { cartSet } from "../../redux/actions/cartAction";
-import emptyCart from "../../images/pet/emptyCart.png";
+import emptyCart from "../../images/pet/empty.png";
 import noimage from "../../images/products/no-image.png";
 import css from "./ModalCart.module.css";
 
@@ -85,76 +85,76 @@ const ModalCart = () => {
               <p className={css.modal_cart__modal_title}>КОШИК</p>
             </div>
 
-            {cartId.length === 0 && (
-              <div className={css.modal_cart__empty_wrapper}>
-                <img
-                  className={css.modal_cart__empty_img}
-                  src={emptyCart}
-                  alt=""
-                />
-                <span className={css.modal_cart__empty_text}>
-                  Корзина пуста
-                </span>
-              </div>
-            )}
+            <div className={css.modal_cart__main}>
+              {cartId.length === 0 && (
+                <div className={css.modal_cart__empty_wrapper}>
+                  <img
+                    className={css.modal_cart__empty_img}
+                    src={emptyCart}
+                    alt=""
+                  />
+                  <span className={css.modal_cart__empty_text}>Пусто</span>
+                </div>
+              )}
 
-            {loaderStatus && <Loader />}
+              {loaderStatus && <Loader />}
 
-            {!loaderStatus && cartId.length > 0 && (
-              <ul className={css.modal_cart__list}>
-                {cartItems &&
-                  cartItems.map((item) => (
-                    <li key={item.id} className={css.modal_cart__list_item}>
-                      {item.images[0] ? (
-                        <img
-                          onClick={toProductPage}
-                          className={css.modal_cart__list_item_img}
-                          src={item.images[0]}
-                          alt={item.title}
-                          id={item.id}
-                        />
-                      ) : (
-                        <img
-                          onClick={toProductPage}
-                          className={css.modal_cart__list_item_img}
-                          src={noimage}
-                          alt="Изображение не загружено"
-                          id={item.id}
-                        />
-                      )}
-                      <div className={css.modal_cart__list_item_wrapper}>
-                        <h3
-                          onClick={toProductPage}
-                          className={css.modal_cart__list_item_title}
-                          id={item.id}
-                        >
-                          {item.title}
-                        </h3>
+              {!loaderStatus && cartId.length > 0 && (
+                <ul className={css.modal_cart__list}>
+                  {cartItems &&
+                    cartItems.map((item) => (
+                      <li key={item.id} className={css.modal_cart__list_item}>
+                        {item.images[0] ? (
+                          <img
+                            onClick={toProductPage}
+                            className={css.modal_cart__list_item_img}
+                            src={item.images[0]}
+                            alt={item.title}
+                            id={item.id}
+                          />
+                        ) : (
+                          <img
+                            onClick={toProductPage}
+                            className={css.modal_cart__list_item_img}
+                            src={noimage}
+                            alt="Изображение не загружено"
+                            id={item.id}
+                          />
+                        )}
+                        <div className={css.modal_cart__list_item_wrapper}>
+                          <h3
+                            onClick={toProductPage}
+                            className={css.modal_cart__list_item_title}
+                            id={item.id}
+                          >
+                            {item.title}
+                          </h3>
 
-                        <p className={css.modal_cart__list_item_price}>
-                          {item.price}
-                        </p>
-                        <div
-                          className={css.modal_cart__list_item_delete}
-                          onClick={removeProductHandler}
-                          id={item.id}
-                        ></div>
-                      </div>
-                    </li>
-                  ))}
-              </ul>
-            )}
-            {!loaderStatus && cartId.length > 0 && (
-              <div className={css.modal_cart__receipt}>
-                <span className={css.modal_cart__receipt_total}>
-                  {totalPrice}
-                </span>
+                          <p className={css.modal_cart__list_item_price}>
+                            {item.price}
+                          </p>
+                          <div
+                            className={css.modal_cart__list_item_delete}
+                            onClick={removeProductHandler}
+                            id={item.id}
+                          ></div>
+                        </div>
+                      </li>
+                    ))}
+                </ul>
+              )}
+              {!loaderStatus && cartId.length > 0 && (
+                <div className={css.modal_cart__receipt}>
+                  <span className={css.modal_cart__receipt_total}>
+                    {totalPrice}
+                  </span>
 
-                <button className={css.modal_cart__receipt_submit}>
-                  Оформити замовлення
-                </button>
-              </div>
-            )}
+                  <button className={css.modal_cart__receipt_submit}>
+                    Оформити замовлення
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </CSSTransition>

@@ -6,8 +6,8 @@ import queryString from "query-string";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Link from "@material-ui/core/Link";
 
+import { Carousel } from "react-responsive-carousel";
 import Availability from "../../Components/Availability/Availability";
-import Popular from "../../Components/Popular/Popular";
 import Viewed from "../../Components/Viewed/Viewed";
 import Loader from "../../Components/Loader/Loader";
 import { viewedLoad } from "../../redux/actions/viewedAction";
@@ -19,12 +19,11 @@ import {
   viewedSelector,
 } from "../../redux/selectors/selectors";
 import { modalOpen } from "../../redux/actions/modalAction";
-import noimage from "../../images/products/no-image.png";
+import review from "../../images/pet/review.png";
 import css from "./View.module.css";
 
 const ProductsList = ({ location, history }) => {
   const [oneProd, setOneProd] = useState(null);
-  const [imgSelected, setImgSelected] = useState(0);
   const [isInCart, setIsInCart] = useState(false);
 
   const loaderStatus = useSelector((state) => loaderSelector(state));
@@ -33,12 +32,23 @@ const ProductsList = ({ location, history }) => {
 
   const dispatch = useDispatch();
 
-  const productId = queryString.parse(location.search).p;
-  const hashId = queryString.parse(location.hash).img;
+  const settings = {
+    showArrows: true,
+    showIndicators: true,
+    showStatus: false,
+    showThumbs: false,
+    useKeyboardArrows: false,
+    stopOnHover: false,
+    dynamicHeight: false,
+    autoPlay: false,
+    infiniteLoop: true,
+    swipeable: false,
+    axis: "horizontal",
+    interval: 0,
+    transitionTime: 250,
+  };
 
-  useEffect(() => {
-    oneProd && hashId && setImgSelected(hashId - 1);
-  }, [oneProd, hashId]);
+  const productId = queryString.parse(location.search).p;
 
   useEffect(() => {
     const isViewFound = viewed.find((item) => item.id === productId);
@@ -67,11 +77,6 @@ const ProductsList = ({ location, history }) => {
       setIsInCart(result);
     }
   }, [cartId, oneProd]);
-
-  const selectImgHandler = ({ target }) => {
-    setImgSelected(Number(target.id));
-    history.replace(`${location.search}#img=${Number(target.id) + 1}`);
-  };
 
   const prodCartHandler = ({ target }) => {
     dispatch(modalOpen("right"));
@@ -115,40 +120,18 @@ const ProductsList = ({ location, history }) => {
           <h2 className={css.view__title}>{oneProd.title}</h2>
 
           <div className={css.view_main_wrapper}>
-            {oneProd.images.length > 0 ? (
-              <img
-                className={css.view_preview_img}
-                src={oneProd.images[imgSelected]}
-                alt={oneProd.title}
-              />
-            ) : (
-              <img
-                className={css.view_preview_img}
-                src={noimage}
-                alt="Изображение не загружено"
-              />
-            )}
-
-            <div className={css.view__image_picker_wrapper}>
-              {oneProd.images.length > 0 ? (
-                oneProd.images.map((img, idx) => (
+            <ul className={css.view_preview_img_list}>
+              <Carousel {...settings}>
+                {oneProd.images.map((item, idx) => (
                   <img
-                    onClick={selectImgHandler}
                     key={idx}
-                    className={css.view__image_picker_item}
-                    src={img}
+                    className={css.view_preview_img_item}
+                    src={item}
                     alt={oneProd.title}
-                    id={idx}
                   />
-                ))
-              ) : (
-                <img
-                  className={css.view__image_picker_item}
-                  src={noimage}
-                  alt="Изображение не загружено"
-                />
-              )}
-            </div>
+                ))}
+              </Carousel>
+            </ul>
 
             <div className={css.view__order_wrapper}>
               <p className={css.view__order_price}>{oneProd.price}</p>
@@ -204,14 +187,6 @@ const ProductsList = ({ location, history }) => {
                 </li>
                 <li className={css.view__delivery_list_item}>
                   <p className={css.view__delivery_list_item_title}>
-                    Самовивіз з Укрпошти
-                  </p>
-                  <p className={css.view__delivery_list_item_price}>
-                    за тарифами перевізника
-                  </p>
-                </li>
-                <li className={css.view__delivery_list_item}>
-                  <p className={css.view__delivery_list_item_title}>
                     Самовивіз з JustIn
                   </p>
                   <p className={css.view__delivery_list_item_price}>
@@ -226,7 +201,7 @@ const ProductsList = ({ location, history }) => {
             >
               <h3 className={css.view__payment_info_title}>Способи оплати</h3>
               <p className={css.view__payment_info_text}>
-                Оплата під час самовивозу, картою онлайн, Apple Pay, Google Pay
+                Оплата під час самовивозу або картою онлайн
               </p>
             </div>
           </div>
@@ -245,7 +220,7 @@ const ProductsList = ({ location, history }) => {
             >
               <h3 className={css.view__payment_info_title}>Способи оплати</h3>
               <p className={css.view__payment_info_text}>
-                Оплата під час самовивозу, картою онлайн, Apple Pay, Google Pay
+                Оплата під час самовивозу або картою онлайн
               </p>
             </div>
 
@@ -253,11 +228,46 @@ const ProductsList = ({ location, history }) => {
               <div className={css.view__reviews_header_block}>
                 <h3 className={css.view__reviews_header_title}>
                   Відгуки та питання
-                  <span className={css.view__reviews_header_counter}> 0</span>
+                  <span className={css.view__reviews_header_counter}> 2</span>
                 </h3>
                 <button className={css.view__reviews_header_add_btn}>
-                  Написати
+                  Додати
                 </button>
+              </div>
+
+              {/* <div>
+                <img src={review} alt="test" width="64" height="64" />
+              </div> */}
+
+              <div className={css.view__reviews_list_wrapper}>
+                <ul className={css.view__reviews_list}>
+                  <li className={css.view__reviews_list_item}>
+                    <div className={css.view__reviews_list_item_header}>
+                      <span className={css.view__reviews_list_item_name}>
+                        Andrew Oskolok
+                      </span>
+                      <span className={css.view__reviews_list_item_date}>
+                        19.02.2022
+                      </span>
+                    </div>
+                    <p className={css.view__reviews_list_item_comment}>
+                      My comment shasiohasas asdihg ashguhasiupg hpasiu gpas
+                    </p>
+                  </li>
+                  <li className={css.view__reviews_list_item}>
+                    <div className={css.view__reviews_list_item_header}>
+                      <span className={css.view__reviews_list_item_name}>
+                        Ruslan Danik
+                      </span>
+                      <span className={css.view__reviews_list_item_date}>
+                        19.02.2022
+                      </span>
+                    </div>
+                    <p className={css.view__reviews_list_item_comment}>
+                      My comment jaas sajhg jhasdkgh asklhgaskldg k
+                    </p>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

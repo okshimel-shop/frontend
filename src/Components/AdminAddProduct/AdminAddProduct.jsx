@@ -36,7 +36,7 @@ const AdminAddProduct = () => {
   const [subcategories, setSubcategories] = useState([]);
   const [fileImg, setFileImg] = useState([]);
   const [base64Img, setBase64Img] = useState([]);
-  console.log(inputForm);
+
   const loaderStatus = useSelector((state) => loaderSelector(state));
 
   const dispatch = useDispatch();
@@ -50,7 +50,6 @@ const AdminAddProduct = () => {
   const inputHandler = async ({ target, currentTarget }) => {
     const { name, value } = target;
     const { id } = currentTarget.dataset;
-    console.log(id);
 
     if (name === "type") {
       setCategories(types[value]?.categories || []);

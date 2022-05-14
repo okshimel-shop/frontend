@@ -4,17 +4,39 @@
 }
 
 .logo__link {
+  display: flex;
+  align-items: center;
   color: #eee;
+}
+
+.logo__icon {
+  display: block;
+  padding: 2px;
+  margin-left: 8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
 }
 
 @media (min-width: 1024px) {
   .logo {
     font-size: 30px;
+    line-height: 40px;
+  }
+
+  .logo__icon {
+    width: 30px;
+    height: 30px;
   }
 }
 
 @media (min-width: 1280px) {
   .logo {
     font-size: 36px;
+  }
+
+  .logo__icon {
+    width: 36px;
+    height: 36px;
   }
 }

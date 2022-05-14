@@ -107,3 +107,39 @@
     left: -28px;
   }
 }
+
+@media (min-width: 1280px) {
+  .availability {
+    padding: 7px 12px 7px 37px;
+  }
+
+  .availability__stock {
+    font-size: 24px;
+  }
+
+  .availability__stock::before {
+    width: 22px;
+    height: 22px;
+    left: -28px;
+  }
+
+  .availability__ends {
+    font-size: 24px;
+  }
+
+  .availability__ends::before {
+    width: 22px;
+    height: 22px;
+    left: -28px;
+  }
+
+  .availability__ended {
+    font-size: 24px;
+  }
+
+  .availability__ended::before {
+    width: 22px;
+    height: 22px;
+    left: -28px;
+  }
+}

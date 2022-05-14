@@ -32,53 +32,19 @@ const Header = () => {
 
         <Logotype />
 
-        <ul className={css.header__main_menu}>
-          <li className={css.header__main_menu_item}>
-            <Link
-              to="/products?page=1"
-              className={css.header__main_menu_item_link}
-            >
-              Товары
-            </Link>
-          </li>
-          <li className={css.header__main_menu_item}>
-            <Link to="/about" className={css.header__main_menu_item_link}>
-              О компании
-            </Link>
-          </li>
-          <li className={css.header__main_menu_item}>
-            <Link to="/contacts" className={css.header__main_menu_item_link}>
-              Контакты
-            </Link>
-          </li>
-          <li className={css.header__main_menu_item}>
-            <Link to="/deliveries" className={css.header__main_menu_item_link}>
-              Доставка
-            </Link>
-          </li>
-          <li className={css.header__main_menu_item}>
-            <Link to="/payments" className={css.header__main_menu_item_link}>
-              Оплата
-            </Link>
-          </li>
-        </ul>
+        <button className={css.header__catalog_button}>Каталог</button>
 
-        <div className={css.header__phone_wrapper}>
-          <div className={css.header__phone_icon}></div>
-          <a className={css.header__phone_link} href="tel:0975452910">
-            (097) 545-29-10
-          </a>
-        </div>
-
-        <div className={css.header__icon_wrapper}>
+        <div className={css.header__search_input_wrapper}>
           <input
             className={css.header__search_input}
             type="text"
-            placeholder="Поиск по сайту"
+            placeholder="Я ищу..."
           />
+          <button className={css.header__search_input_button}>Найти</button>
+        </div>
 
-          <div className={css.header__magnifier_icon}></div>
-
+        <div className={css.header__icon_wrapper}>
+          <div className={css.header__favorite_icon}></div>
           <div
             onClick={() => openModalHandler("right")}
             className={css.header__cart_icon}

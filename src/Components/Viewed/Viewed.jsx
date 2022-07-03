@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import InfiniteCarousel from "react-leaf-carousel";
 import { PropTypes } from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getViewedProducts } from "../../redux/operations/productOperation";
 import { cartSet } from "../../redux/actions/cartAction";
-import { loaderSelector } from "../../redux/selectors/selectors";
+//import { loaderSelector } from "../../redux/selectors/selectors";
 import noimage from "../../images/products/no-image.png";
 import css from "../../helpers/sliders.module.css";
 

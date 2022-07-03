@@ -12,7 +12,7 @@ import css from "../../helpers/sliders.module.css";
 const Viewed = ({ prodId, viewed }) => {
   const [viewedProd, setViewedProd] = useState(null);
 
-  const loaderStatus = useSelector((state) => loaderSelector(state));
+  //const loaderStatus = useSelector((state) => loaderSelector(state));
 
   const dispatch = useDispatch();
 

@@ -37,7 +37,9 @@ export const addNewProduct = (infoArr, imgArr) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   } finally {
-    dispatch(loaderOff());
+    setTimeout(() => {
+      dispatch(loaderOff());
+    }, 1000);
   }
 };
 
@@ -49,7 +51,9 @@ export const getOneProduct = (queryItem, isViewFound) => (dispatch) => {
   } catch (error) {
     console.log(error);
   } finally {
-    dispatch(loaderOff());
+    setTimeout(() => {
+      dispatch(loaderOff());
+    }, 1000);
   }
 };
 
@@ -65,7 +69,9 @@ export const getViewedProducts = (filteredArr) => (dispatch) => {
   } catch (error) {
     console.log(error);
   } finally {
-    dispatch(loaderOff());
+    setTimeout(() => {
+      dispatch(loaderOff());
+    }, 1000);
   }
 };
 
@@ -85,7 +91,9 @@ export const getAllProducts = (page, limit) => async (
   } catch (error) {
     console.log(error.response);
   } finally {
-    dispatch(loaderOff());
+    setTimeout(() => {
+      dispatch(loaderOff());
+    }, 1000);
   }
 };
 
@@ -97,7 +105,9 @@ export const getPopular = (limitOnPage) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   } finally {
-    dispatch(loaderOff());
+    setTimeout(() => {
+      dispatch(loaderOff());
+    }, 1000);
   }
 };
 
@@ -109,7 +119,9 @@ export const getDiscounts = (limitOnPage) => (dispatch) => {
   } catch (error) {
     console.log(error);
   } finally {
-    dispatch(loaderOff());
+    setTimeout(() => {
+      dispatch(loaderOff());
+    }, 1000);
   }
 };
 
@@ -121,7 +133,9 @@ export const getNewProducts = (limitOnPage) => (dispatch) => {
   } catch (error) {
     console.log(error);
   } finally {
-    dispatch(loaderOff());
+    setTimeout(() => {
+      dispatch(loaderOff());
+    }, 1000);
   }
 };
 
@@ -139,7 +153,9 @@ export const getCartProducts = (cartIds) => (dispatch) => {
   } catch (error) {
     console.log(error);
   } finally {
-    dispatch(loaderOff());
+    setTimeout(() => {
+      dispatch(loaderOff());
+    }, 1000);
   }
 };
 

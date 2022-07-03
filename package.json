@@ -51,7 +51,6 @@
     ]
   },
   "devDependencies": {
-    "ftp-deploy": "^2.3.7",
     "prop-types": "^15.7.2"
   }
 }

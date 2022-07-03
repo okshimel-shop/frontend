@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { modalOpen } from "../../redux/actions/modalAction";
 import Logotype from "../Logotype/Logotype";

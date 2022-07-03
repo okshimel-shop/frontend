@@ -23,5 +23,6 @@ jobs:
       with:
         server: 109.251.233.11
         username: ftpuser
-        password: 12039500O
+        password: ${{ secrets.FTP_PASSWORD}}
         port: 21
+        local-dir: ./build/

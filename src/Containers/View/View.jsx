@@ -19,7 +19,7 @@ import {
   viewedSelector,
 } from "../../redux/selectors/selectors";
 import { modalOpen } from "../../redux/actions/modalAction";
-import review from "../../images/pet/review.png";
+//import review from "../../images/pet/review.png";
 import css from "./View.module.css";
 
 const ProductsList = ({ location, history }) => {

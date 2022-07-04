@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import { addNewProduct } from "../../redux/operations/productOperation";
-import { loaderSelector } from "../../redux/selectors/selectors";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 import imageCompression from "browser-image-compression";
@@ -36,8 +35,7 @@ const AdminAddProduct = () => {
   const [subcategories, setSubcategories] = useState([]);
   const [fileImg, setFileImg] = useState([]);
   const [base64Img, setBase64Img] = useState([]);
-
-  const loaderStatus = useSelector((state) => loaderSelector(state));
+  const [loaderStatus, setLoaderStatus] = useState(false);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -181,9 +179,14 @@ const AdminAddProduct = () => {
       });
     }
 
-    dispatch(addNewProduct(inputForm, fileImg)).then((res) =>
-      history.push(`/products/view?p=${res}`)
-    );
+    setLoaderStatus(true);
+    dispatch(addNewProduct(inputForm, fileImg))
+      .then((res) => history.push(`/products/view?p=${res}`))
+      .finally(
+        setInterval(() => {
+          setLoaderStatus(false);
+        }, 500)
+      );
   };
 
   return (

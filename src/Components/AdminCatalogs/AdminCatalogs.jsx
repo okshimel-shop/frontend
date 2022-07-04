@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import cyrillicToTranslit from "cyrillic-to-translit-js";
-import { loaderSelector } from "../../redux/selectors/selectors";
 import List from "@material-ui/core/List";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import ListItem from "@material-ui/core/ListItem";
@@ -37,13 +36,19 @@ const AdminCatalogs = () => {
   const [usedItems, setUsedItems] = useState(initialUsedItems);
   const [addingProcess, setAddingProcess] = useState(initialProcess);
   const [newCatalogTitle, setNewCatalogTitle] = useState("");
-
-  const loaderStatus = useSelector((state) => loaderSelector(state));
+  const [loaderStatus, setLoaderStatus] = useState(false);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(API.listAllTypes()).then(({ data }) => setTypes(data));
+    setLoaderStatus(true);
+    dispatch(API.listAllTypes())
+      .then(({ data }) => setTypes(data))
+      .finally(
+        setTimeout(() => {
+          setLoaderStatus(false);
+        }, 500)
+      );
   }, [dispatch]);
 
   const handleChangeNewCatalogTitle = ({ target }) => {

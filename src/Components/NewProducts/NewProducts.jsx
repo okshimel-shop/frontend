@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import InfiniteCarousel from "react-leaf-carousel";
 import { getNewProducts } from "../../redux/operations/productOperation";
-import { loaderSelector } from "../../redux/selectors/selectors";
 import noimage from "../../images/products/no-image.png";
 import Loader from "../../Components/Loader/Loader";
 import css from "../../helpers/sliders.module.css";
 
 const NewProducts = () => {
   const [newProducts, setNewProducts] = useState(null);
-
-  const loaderStatus = useSelector((state) => loaderSelector(state));
+  const [loaderStatus, setLoaderStatus] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -49,9 +47,14 @@ const NewProducts = () => {
   };
 
   useEffect(() => {
+    setLoaderStatus(true);
     dispatch(getNewProducts(15))
       .then(({ data }) => setNewProducts(data))
-      .catch((err) => console.log(err));
+      .finally(
+        setTimeout(() => {
+          setLoaderStatus(false);
+        }, 1500)
+      );
 
     return () => {
       setNewProducts(null);

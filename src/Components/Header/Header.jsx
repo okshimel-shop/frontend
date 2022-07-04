@@ -6,12 +6,12 @@ import Logotype from "../Logotype/Logotype";
 import AdminBar from "../AdminBar/AdminBar";
 import {
   cartSelector,
-  isloggedSelector,
+  isLoggedSelector,
 } from "../../redux/selectors/selectors";
 import css from "./Header.module.css";
 
 const Header = () => {
-  const islogged = useSelector((state) => isloggedSelector(state));
+  const isLogged = useSelector((state) => isLoggedSelector(state));
   const cart = useSelector((state) => cartSelector(state));
 
   const dispatch = useDispatch();
@@ -56,7 +56,7 @@ const Header = () => {
         </div>
       </div>
 
-      {islogged && <AdminBar />}
+      {isLogged && <AdminBar />}
     </header>
   );
 };

@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import {
-  loaderSelector,
-  quantitySelector,
-} from "../../redux/selectors/selectors";
+import { quantitySelector } from "../../redux/selectors/selectors";
 import { modalClose } from "../../redux/actions/modalAction";
 import Loader from "../../Components/Loader/Loader";
 import Pagination from "@material-ui/lab/Pagination";
@@ -21,17 +18,22 @@ const AdminProductList = () => {
   const [page, setPage] = useState(1);
   const [limitOnPage] = useState(12);
   const [products, setProducts] = useState(null);
+  const [loaderStatus, setLoaderStatus] = useState(false);
 
   const quantity = useSelector((state) => quantitySelector(state));
-  const loaderStatus = useSelector((state) => loaderSelector(state));
 
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(getAllProducts(page - 1, limitOnPage)).then((res) =>
-      setProducts(res)
-    );
+    setLoaderStatus(true);
+    dispatch(getAllProducts(page - 1, limitOnPage))
+      .then((res) => setProducts(res))
+      .finally(
+        setTimeout(() => {
+          setLoaderStatus(false);
+        }, 1000)
+      );
 
     return () => {
       setProducts(null);

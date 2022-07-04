@@ -8,7 +8,6 @@ import animation from "./transition/ModalCart.module.css";
 import BackgroundOvarlay from "../BackgoundOvarlay/BackgroundOvarlay";
 import {
   cartSelector,
-  loaderSelector,
   modalStatusSelector,
 } from "../../redux/selectors/selectors";
 import { getCartProducts } from "../../redux/operations/productOperation";
@@ -20,17 +19,24 @@ import css from "./ModalCart.module.css";
 const ModalCart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [loaderStatus, setLoaderStatus] = useState(false);
 
   const cartId = useSelector((state) => cartSelector(state));
   const modalStatus = useSelector((state) => modalStatusSelector(state));
-  const loaderStatus = useSelector((state) => loaderSelector(state));
 
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
     if (modalStatus === "right") {
-      dispatch(getCartProducts(cartId)).then(({ data }) => setCartItems(data));
+      setLoaderStatus(true);
+      dispatch(getCartProducts(cartId))
+        .then(({ data }) => setCartItems(data))
+        .finally(
+          setTimeout(() => {
+            setLoaderStatus(false);
+          }, 500)
+        );
     }
     // eslint-disable-next-line
   }, [modalStatus]);

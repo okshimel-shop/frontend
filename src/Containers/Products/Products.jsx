@@ -18,9 +18,9 @@ const Products = ({ location, history }) => {
   const [page, setPage] = useState(1);
   const [limitOnPage] = useState(25);
   const [products, setProducts] = useState(null);
+  const [loaderStatus, setLoaderStatus] = useState(false);
 
   const quantity = useSelector((state) => quantitySelector(state));
-  const loaderStatus = useSelector((state) => loaderSelector(state));
 
   const dispatch = useDispatch();
 
@@ -32,9 +32,14 @@ const Products = ({ location, history }) => {
   }, [queryPage]);
 
   useEffect(() => {
-    dispatch(getAllProducts(page - 1, limitOnPage)).then((res) =>
-      setProducts(res)
-    );
+    setLoaderStatus(true);
+    dispatch(getAllProducts(page - 1, limitOnPage))
+      .then((res) => setProducts(res))
+      .finally(
+        setTimeout(() => {
+          setLoaderStatus(false);
+        }, 1000)
+      );
 
     return () => {
       setProducts(null);

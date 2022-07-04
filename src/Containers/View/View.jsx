@@ -13,11 +13,7 @@ import Loader from "../../Components/Loader/Loader";
 import { viewedLoad } from "../../redux/actions/viewedAction";
 import { cartSet } from "../../redux/actions/cartAction";
 import { getOneProduct } from "../../redux/operations/productOperation";
-import {
-  cartSelector,
-  loaderSelector,
-  viewedSelector,
-} from "../../redux/selectors/selectors";
+import { cartSelector, viewedSelector } from "../../redux/selectors/selectors";
 import { modalOpen } from "../../redux/actions/modalAction";
 //import review from "../../images/pet/review.png";
 import css from "./View.module.css";
@@ -25,8 +21,8 @@ import css from "./View.module.css";
 const ProductsList = ({ location, history }) => {
   const [oneProd, setOneProd] = useState(null);
   const [isInCart, setIsInCart] = useState(false);
+  const [loaderStatus, setLoaderStatus] = useState(false);
 
-  const loaderStatus = useSelector((state) => loaderSelector(state));
   const viewed = useSelector((state) => viewedSelector(state));
   const cartId = useSelector((state) => cartSelector(state));
 
@@ -53,9 +49,14 @@ const ProductsList = ({ location, history }) => {
   useEffect(() => {
     const isViewFound = viewed.find((item) => item.id === productId);
 
-    dispatch(getOneProduct(Number(productId), !!isViewFound)).then(({ data }) =>
-      setOneProd(data)
-    );
+    setLoaderStatus(true);
+    dispatch(getOneProduct(Number(productId), !!isViewFound))
+      .then(({ data }) => setOneProd(data))
+      .finally(
+        setTimeout(() => {
+          setLoaderStatus(false);
+        }, 500)
+      );
     // eslint-disable-next-line
   }, [productId]);
 

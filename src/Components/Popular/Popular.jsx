@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 import InfiniteCarousel from "react-leaf-carousel";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getPopular } from "../../redux/operations/productOperation";
-import { loaderSelector } from "../../redux/selectors/selectors";
 import noimage from "../../images/products/no-image.png";
 import Loader from "../Loader/Loader";
 import css from "../../helpers/sliders.module.css";
 
 const Popular = () => {
   const [popular, setPopular] = useState(null);
-
-  const loaderStatus = useSelector((state) => loaderSelector(state));
+  const [loaderStatus, setLoaderStatus] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -49,9 +47,14 @@ const Popular = () => {
   };
 
   useEffect(() => {
+    setLoaderStatus(true);
     dispatch(getPopular(15))
       .then(({ data }) => setPopular(data))
-      .catch((err) => console.log(err));
+      .finally(
+        setTimeout(() => {
+          setLoaderStatus(false);
+        }, 500)
+      );
 
     return () => {
       setPopular(null);

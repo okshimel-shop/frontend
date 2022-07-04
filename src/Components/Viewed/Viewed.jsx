@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import InfiniteCarousel from "react-leaf-carousel";
 import { PropTypes } from "prop-types";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getViewedProducts } from "../../redux/operations/productOperation";
 import { cartSet } from "../../redux/actions/cartAction";
-//import { loaderSelector } from "../../redux/selectors/selectors";
+import Loader from "../../Components/Loader/Loader";
 import noimage from "../../images/products/no-image.png";
 import css from "../../helpers/sliders.module.css";
 
 const Viewed = ({ prodId, viewed }) => {
   const [viewedProd, setViewedProd] = useState(null);
-
-  //const loaderStatus = useSelector((state) => loaderSelector(state));
+  const [loaderStatus, setLoaderStatus] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -54,9 +54,14 @@ const Viewed = ({ prodId, viewed }) => {
       (item, idx) => idx <= 14 && item.id !== prodId
     );
 
-    dispatch(getViewedProducts(filteredArr)).then(({ data }) =>
-      setViewedProd(data)
-    );
+    setLoaderStatus(true);
+    dispatch(getViewedProducts(filteredArr))
+      .then(({ data }) => setViewedProd(data))
+      .finally(
+        setTimeout(() => {
+          setLoaderStatus(false);
+        }, 1000)
+      );
     return () => {
       setViewedProd(null);
     };
@@ -69,7 +74,9 @@ const Viewed = ({ prodId, viewed }) => {
 
   return (
     <section className={css.sliders}>
-      {viewedProd?.length > 0 && (
+      {loaderStatus && <Loader />}
+
+      {!loaderStatus && viewedProd?.length > 0 && (
         <div className={css.sliders__wrapper}>
           <h2 className={css.sliders__title}>Переглянуто</h2>
           <ul className={css.sliders__list}>

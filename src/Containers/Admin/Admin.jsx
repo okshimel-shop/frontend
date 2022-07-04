@@ -2,27 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../Components/Loader/Loader";
 import { userLoginOperation } from "../../redux/operations/userOperation";
-import {
-  isloggedSelector,
-  loaderSelector,
-} from "../../redux/selectors/selectors";
+import { isLoggedSelector } from "../../redux/selectors/selectors";
 import css from "./Admin.module.css";
 
 const initialState = { email: "", password: "" };
 
 const Login = ({ history }) => {
   const [form, setForm] = useState(initialState);
+  const [loaderStatus, setLoaderStatus] = useState(false);
 
-  const islogged = useSelector((state) => isloggedSelector(state));
-  const loaderStatus = useSelector((state) => loaderSelector(state));
+  const isLogged = useSelector((state) => isLoggedSelector(state));
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (islogged) {
+    if (isLogged) {
       history.push("/");
     }
-  }, [history, islogged]);
+  }, [history, isLogged]);
 
   const inputHandler = ({ target }) => {
     const { name, value } = target;
@@ -31,14 +28,20 @@ const Login = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(userLoginOperation(form));
+
+    setLoaderStatus(true);
+    dispatch(userLoginOperation(form)).finally(
+      setTimeout(() => {
+        setLoaderStatus(false);
+      }, 500)
+    );
   };
 
   return (
     <section className={css.login}>
       <div className={css.login__wrapper}>
         {loaderStatus && <Spinner />}
-        {!loaderStatus && islogged === null && (
+        {!loaderStatus && isLogged === null && (
           <form className={css.login__form} onSubmit={submitHandler}>
             <p className={css.login__form_title}>Админ панель</p>
             <input

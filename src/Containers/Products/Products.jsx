@@ -6,10 +6,7 @@ import queryString from "query-string";
 import Loader from "../../Components/Loader/Loader";
 import Pagination from "@material-ui/lab/Pagination";
 import { getAllProducts } from "../../redux/operations/productOperation";
-import {
-  loaderSelector,
-  quantitySelector,
-} from "../../redux/selectors/selectors";
+import { quantitySelector } from "../../redux/selectors/selectors";
 import { cartSet } from "../../redux/actions/cartAction";
 import noimage from "../../images/products/no-image.png";
 import css from "./Products.module.css";

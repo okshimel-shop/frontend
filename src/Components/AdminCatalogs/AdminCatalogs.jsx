@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import cyrillicToTranslit from "cyrillic-to-translit-js";
 import List from "@material-ui/core/List";
 import ListSubheader from "@material-ui/core/ListSubheader";

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import InfiniteCarousel from "react-leaf-carousel";
 import { PropTypes } from "prop-types";
 import { useDispatch } from "react-redux";

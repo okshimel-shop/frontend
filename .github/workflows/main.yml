@@ -19,11 +19,5 @@ jobs:
         npm run build
     
     - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.3.0
-      with:
-        server: 109.251.233.11
-        username: ftpuser
-        password: ${{ secrets.FTP_PASSWORD }}
-        port: 21
-        local-dir: ./build/
-        dangerous-clean-slate: true
+      run: |
+        node deploy

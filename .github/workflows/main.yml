@@ -21,13 +21,16 @@ jobs:
         npm run build
     
     - name: 📂 Sync files
-      uses: buxianshan/fine-sftp-deployer@v0.1.5
+      uses: sand4rt/ftp-deployer@v1.4
       with:
-        username: ${{ secrets.FTP_USERNAME }}
-        server: ${{ secrets.FTP_HOST }}
+        sftp: true
+        host: ${{ secrets.FTP_HOST }}
         port: 22
-        ssh_private_key: ${{ secrets.FTP_PASSWORD }}
-        local_path: ./build/
-        # dist file path on your server
-        remote_path: ${{ secrets.FTP_REMOTE_FOLDER }}
-        clear_remote_path: true
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        remote_folder: ${{ secrets.FTP_REMOTE_FOLDER }}
+        local_folder: build
+        cleanup: true
+        include: '["*", "**/*", ".*"]'
+        exclude: '[]'
+        pasive: true

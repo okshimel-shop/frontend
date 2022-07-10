@@ -10,21 +10,21 @@ const Footer = () => {
         <ul className={css.footer__help_list}>
           <li className={css.footer__help_list_item}>
             <Link to="/about" className={css.footer__help_list_item_link}>
-              О компании
+              Інформація
             </Link>
           </li>
           <li className={css.footer__help_list_item}>
-            <Link to="/contacts" className={css.footer__help_list_item_link}>
-              Контакты
+            <Link to="/contact" className={css.footer__help_list_item_link}>
+              Контакти
             </Link>
           </li>
           <li className={css.footer__help_list_item}>
-            <Link to="/deliveries" className={css.footer__help_list_item_link}>
+            <Link to="/delivery" className={css.footer__help_list_item_link}>
               Доставка
             </Link>
           </li>
           <li className={css.footer__help_list_item}>
-            <Link to="/payments" className={css.footer__help_list_item_link}>
+            <Link to="/payment" className={css.footer__help_list_item_link}>
               Оплата
             </Link>
           </li>
@@ -32,12 +32,12 @@ const Footer = () => {
         <Social />
 
         <div className={css.footer__working_wrapper}>
-          <p className={css.footer__working_title}>Режим работы: Пн-Вс</p>
-          <p className={css.footer__working_desc}>с 10:00 - до 20:00</p>
+          <p className={css.footer__working_title}>Режим работы: Пн-Нд</p>
+          <p className={css.footer__working_desc}>з 10:00 - до 20:00</p>
         </div>
 
         <p className={css.footer__copyright}>
-          Copyright © 2020-2021 Магазин Okshimel
+          Copyright © 2020-2022 Магазин Okshimel
         </p>
       </div>
     </footer>

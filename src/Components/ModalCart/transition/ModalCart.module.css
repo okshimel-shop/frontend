@@ -18,18 +18,22 @@
 
 @media (min-width: 1024px) {
   .enter {
-    transform: scale(0);
+    transform: translateX(0);
+    opacity: 0;
   }
 
   .enterActive {
-    transform: scale(1);
+    opacity: 1;
+    transition: opacity 250ms linear;
   }
 
   .exit {
-    transform: scale(1);
+    opacity: 1;
   }
 
   .exitActive {
-    transform: scale(0);
+    transform: translateX(0);
+    opacity: 0;
+    transition: opacity 250ms linear;
   }
 }

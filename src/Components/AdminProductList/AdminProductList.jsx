@@ -32,7 +32,7 @@ const AdminProductList = () => {
       .finally(
         setTimeout(() => {
           setLoaderStatus(false);
-        }, 1000)
+        }, 500)
       );
 
     return () => {

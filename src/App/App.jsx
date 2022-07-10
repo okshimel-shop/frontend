@@ -17,7 +17,10 @@ import { viewedLoad } from "../redux/actions/viewedAction";
 
 const Products = lazy(() => import("../Containers/Products/Products"));
 const View = lazy(() => import("../Containers/View/View"));
-const Company = lazy(() => import("../Containers/Company/Company"));
+const About = lazy(() => import("../Containers/About/About"));
+const Contact = lazy(() => import("../Containers/Contact/Contact"));
+const Delivery = lazy(() => import("../Containers/Delivery/Delivery"));
+const Payment = lazy(() => import("../Containers/Payment/Payment"));
 
 function App() {
   const dispatch = useDispatch();
@@ -45,10 +48,10 @@ function App() {
           <Route exact path="/products" component={Products} />
           <Route exact path="/products/view" component={View} />
 
-          <Route exact path="/about" component={Company} />
-          <Route exact path="/contacts" component={Company} />
-          <Route exact path="/deliveries" component={Company} />
-          <Route exact path="/payments" component={Company} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/contact" component={Contact} />
+          <Route exact path="/delivery" component={Delivery} />
+          <Route exact path="/payment" component={Payment} />
 
           <Route exact path="/admin" component={Admin} />
 

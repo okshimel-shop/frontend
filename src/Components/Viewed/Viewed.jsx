@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getViewedProducts } from "../../redux/operations/productOperation";
 import { cartSet } from "../../redux/actions/cartAction";
-import Loader from "../../Components/Loader/Loader";
 import noimage from "../../images/products/no-image.png";
 import css from "../../helpers/sliders.module.css";
 
@@ -59,7 +58,7 @@ const Viewed = ({ prodId, viewed }) => {
       .finally(
         setTimeout(() => {
           setLoaderStatus(false);
-        }, 1000)
+        }, 500)
       );
     return () => {
       setViewedProd(null);
@@ -73,8 +72,6 @@ const Viewed = ({ prodId, viewed }) => {
 
   return (
     <section className={css.sliders}>
-      {loaderStatus && <Loader />}
-
       {!loaderStatus && viewedProd?.length > 0 && (
         <div className={css.sliders__wrapper}>
           <h2 className={css.sliders__title}>Переглянуто</h2>

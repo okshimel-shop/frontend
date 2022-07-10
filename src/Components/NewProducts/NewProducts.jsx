@@ -53,7 +53,7 @@ const NewProducts = () => {
       .finally(
         setTimeout(() => {
           setLoaderStatus(false);
-        }, 1500)
+        }, 500)
       );
 
     return () => {

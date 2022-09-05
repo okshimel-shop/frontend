@@ -8,7 +8,7 @@ const Logotype = () => {
   return (
     <h1 className={css.logo}>
       <Link to="/" className={css.logo__link}>
-        Okshimel test
+        Okshimel
         <img
           className={css.logo__icon}
           src={owner}

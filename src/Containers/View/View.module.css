@@ -39,7 +39,7 @@
 }
 
 .view_preview_img_item {
-  height: 232px;
+  min-height: 232px;
 }
 
 .view__order_wrapper {
@@ -78,7 +78,7 @@
   padding: 0 0 0 30px;
   position: absolute;
   left: 15px;
-  rigth: 15px;
+  right: 15px;
   bottom: 15px;
   width: 280px;
   height: 40px;
@@ -357,6 +357,62 @@
   background-color: #fff;
 }
 
+@media (min-width: 360px) {
+  .view__wrapper {
+    width: 350px;
+  }
+
+  .view__order_wrapper {
+    width: 350px;
+  }
+
+  .view__delivery_wrapper {
+    width: 350px;
+  }
+
+  .view__payment_info_wrapper {
+    width: 350px;
+  }
+
+  .view__reviews_wrapper {
+    width: 350px;
+  }
+
+  .view__order_button {
+    width: 320px;
+  }
+}
+
+@media (min-width: 412px) {
+  .view__wrapper {
+    width: 402px;
+  }
+
+  .view__order_wrapper {
+    width: 402px;
+  }
+
+  .view__delivery_wrapper {
+    width: 402px;
+  }
+
+  .view__payment_info_wrapper {
+    width: 402px;
+  }
+
+  .view__reviews_wrapper {
+    width: 402px;
+  }
+
+  .view__order_button {
+    width: 372px;
+  }
+
+  .view__payment_info_text::before {
+    top: -8px;
+  }
+}
+
 @media (min-width: 768px) {
   .view__wrapper {
     padding: 10px 0 0;
@@ -392,6 +448,7 @@
   .view__order_wrapper {
     margin: 0;
     height: 120px;
+    width: 310px;
   }
 
   .view__order_price {
@@ -406,6 +463,7 @@
 
   .view__order_button {
     font-size: 18px;
+    width: 280px;
   }
 
   .view__order_button_buy::before {
@@ -423,6 +481,7 @@
   .view__delivery_wrapper {
     margin-bottom: 0;
     padding: 15px;
+    width: 310px;
   }
 
   .view__delivery_title {
@@ -440,6 +499,10 @@
 
   .view__delivery_list_item_price {
     font-size: 16px;
+  }
+
+  .view__payment_info_wrapper {
+    width: 310px;
   }
 
   .view__payment_info_block_one {

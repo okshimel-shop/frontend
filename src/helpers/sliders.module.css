@@ -41,7 +41,7 @@
 }
 
 .sliders__list_item {
-  width: 150px;
+  min-width: 150px;
 }
 
 .sliders__list_item_img {
@@ -127,6 +127,28 @@
   background-image: url(../images/interface/cart-dark.svg);
   background-size: cover;
   cursor: pointer;
+}
+
+@media (min-width: 360px) {
+  .sliders {
+    min-width: 350px;
+    min-height: 260px;
+  }
+
+  .sliders__list_item_img {
+    width: 170px;
+    height: 127px;
+  }
+}
+@media (min-width: 412px) {
+  .sliders {
+    min-width: 402px;
+    min-height: 270px;
+  }
+  .sliders__list_item_img {
+    width: 180px;
+    height: 135px;
+  }
 }
 
 @media (max-width: 767px) {

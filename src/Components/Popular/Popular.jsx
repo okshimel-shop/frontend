@@ -66,7 +66,7 @@ const Popular = () => {
       {loaderStatus && <Loader />}
 
       <div className={css.sliders__wrapper}>
-        <h2 className={css.sliders__title}>Популярные</h2>
+        <h2 className={css.sliders__title}>Популярні</h2>
         <ul className={css.sliders__list}>
           {!loaderStatus && popular && (
             <InfiniteCarousel {...settings}>

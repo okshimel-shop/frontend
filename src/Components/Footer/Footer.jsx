@@ -32,7 +32,7 @@ const Footer = () => {
         <Social />
 
         <div className={css.footer__working_wrapper}>
-          <p className={css.footer__working_title}>Режим работы: Пн-Нд</p>
+          <p className={css.footer__working_title}>Режим роботи: Пн-Нд</p>
           <p className={css.footer__working_desc}>з 10:00 - до 20:00</p>
         </div>
 

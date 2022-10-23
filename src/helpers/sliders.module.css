@@ -1,3 +1,5 @@
+@import "../fonts/fonts.css";
+
 .sliders {
   position: relative;
   margin: 0 auto;
@@ -13,9 +15,12 @@
 .sliders__title {
   text-align: center;
   color: #333;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 900;
   font-size: 18px;
   text-transform: uppercase;
   margin-bottom: 15px;
+  letter-spacing: 1.5px;
 }
 
 .sliders__title::before {
@@ -23,7 +28,7 @@
   display: block;
   position: absolute;
   top: 10px;
-  left: 15px;
+  left: 20px;
   background-color: #333;
   width: 50px;
   height: 1px;
@@ -34,7 +39,7 @@
   display: block;
   position: absolute;
   top: 10px;
-  right: 15px;
+  right: 20px;
   background-color: #333;
   width: 50px;
   height: 1px;
@@ -68,6 +73,7 @@
   height: 28px;
   border-radius: 5px;
   color: #333;
+  font-family: "Fira Sans", sans-serif;
   font-size: 13px;
   font-weight: 400;
   margin-bottom: 8px;
@@ -87,6 +93,8 @@
   padding-right: 10px;
   position: relative;
   color: #222;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 400;
   font-size: 20px;
 }
 
@@ -98,6 +106,8 @@
   position: absolute;
   bottom: 4px;
   right: 0px;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 400;
   font-size: 12px;
 }
 
@@ -139,6 +149,19 @@
     width: 170px;
     height: 127px;
   }
+
+  .sliders__list_item_title {
+    font-size: 16px;
+    height: 32px;
+  }
+
+  .sliders__title::before {
+    left: 40px;
+  }
+
+  .sliders__title::after {
+    right: 40px;
+  }
 }
 @media (min-width: 412px) {
   .sliders {
@@ -148,6 +171,18 @@
   .sliders__list_item_img {
     width: 180px;
     height: 135px;
+  }
+
+  .sliders__list_item_title {
+    height: 34px;
+  }
+
+  .sliders__title::before {
+    left: 66px;
+  }
+
+  .sliders__title::after {
+    right: 66px;
   }
 }
 

@@ -117,16 +117,16 @@ const AdminProductList = () => {
                       {prod.title}
                     </p>
                     <p className={css.admin_product__item_price}>
-                      Цена: {prod.price}
+                      Ціна: {prod.price}
                     </p>
                     <p className={css.admin_product__item_quantity}>
-                      Количество: {prod.amount} шт.
+                      Кількість: {prod.amount} шт.
                     </p>
                     <p className={css.admin_product__item_view}>
-                      Просмотров: {prod.views}
+                      Переглядів: {prod.views}
                     </p>
                     <p className={css.admin_product__item_cat}>
-                      Категория: {prod.category}
+                      Категорія: {prod.category}
                     </p>
                   </div>
                   <div>{timeConverter(prod.createdAt)}</div>

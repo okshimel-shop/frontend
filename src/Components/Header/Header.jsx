@@ -32,15 +32,18 @@ const Header = () => {
 
         <Logotype />
 
-        <button className={css.header__catalog_button}>Каталог</button>
+        <button className={css.header__catalog_button}>
+          Каталог
+          <span className={css.header__catalog_button_title}>товарів</span>
+        </button>
 
         <div className={css.header__search_input_wrapper}>
           <input
             className={css.header__search_input}
             type="text"
-            placeholder="Я ищу..."
+            placeholder="Я шукаю..."
           />
-          <button className={css.header__search_input_button}>Найти</button>
+          <button className={css.header__search_input_button}>Знайти</button>
         </div>
 
         <div className={css.header__icon_wrapper}>
@@ -53,6 +56,7 @@ const Header = () => {
               <span className={css.header__cart_quantity}>{cart.length}</span>
             )}
           </div>
+          <div className={css.header__profile_icon}></div>
         </div>
       </div>
 

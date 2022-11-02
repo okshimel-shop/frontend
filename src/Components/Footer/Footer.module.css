@@ -33,6 +33,11 @@
   text-align: center;
 }
 
+.footer__help_list_item_delivery {
+  composes: footer__help_list_item;
+  width: 130px;
+}
+
 .footer__help_list_item_link {
   display: block;
   color: #eee;
@@ -92,6 +97,11 @@
     width: 80px;
   }
 
+  .footer__help_list_item_delivery {
+    composes: footer__help_list_item;
+    width: 200px;
+  }
+
   .footer__help_list_item_link {
     font-size: 14px;
   }
@@ -127,6 +137,11 @@
 
   .footer__help_list_item {
     width: 100px;
+  }
+
+  .footer__help_list_item_delivery {
+    composes: footer__help_list_item;
+    width: 200px;
   }
 
   .footer__help_list_item_link {

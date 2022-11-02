@@ -4,6 +4,8 @@
   padding: 10px 0 0;
   width: 310px;
   margin: 0 auto;
+  background-color: #eeeeee;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
 }
 
 .view__category {
@@ -18,14 +20,15 @@
 
 .view__title {
   font-family: "Fira Sans", sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   padding: 5px 10px;
   color: #333;
   font-size: 24px;
   margin-bottom: 16px;
   word-wrap: break-word;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #eeeeee;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
 }
 
 .view_main_wrapper {
@@ -53,7 +56,8 @@
   height: 116px;
   padding: 15px;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #eeeeee;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
 }
 
 .view__order_price {
@@ -174,13 +178,14 @@
   padding: 15px;
   width: 310px;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #eeeeee;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
 }
 
 .view__delivery_title {
   color: #333;
   font-family: "Fira Sans", sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 18px;
   margin-bottom: 15px;
 }
@@ -239,7 +244,8 @@
   padding: 15px;
   width: 310px;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #eeeeee;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
 }
 
 .view__payment_info_block_one {
@@ -253,7 +259,7 @@
 .view__payment_info_title {
   color: #333;
   font-family: "Fira Sans", sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 18px;
   margin-bottom: 15px;
 }
@@ -282,13 +288,14 @@
   padding: 15px;
   margin-bottom: 20px;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #eeeeee;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
 }
 
 .view__description_title {
   color: #333;
   font-family: "Fira Sans", sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 18px;
   margin-bottom: 15px;
   word-wrap: break-word;
@@ -308,7 +315,8 @@
   padding: 15px;
   width: 310px;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #eeeeee;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
 }
 
 .view__reviews_header_block {
@@ -321,14 +329,14 @@
 .view__reviews_header_title {
   color: #333;
   font-family: "Fira Sans", sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 18px;
 }
 
 .view__reviews_header_counter {
   color: #ccc;
   font-family: "Fira Sans", sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 16px;
 }
 
@@ -374,7 +382,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1px;
-  padding: 2px 5px;
+  padding: 5px 10px;
   background-color: #fff;
   border-radius: 5px 5px 0 0;
 }
@@ -383,7 +391,7 @@
   display: inline-block;
   font-family: "Fira Sans", sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 16px;
 }
 
@@ -585,7 +593,7 @@
   }
 
   .view__payment_info_text {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   .view__payment_info_text::before {
@@ -645,7 +653,7 @@
   }
 
   .view__reviews_list_item_name {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 18px;
   }
 
@@ -690,6 +698,8 @@
 
   .view__order_wrapper {
     height: 130px;
+    background-color: #eeeeee;
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
   }
 
   .view__order_price {
@@ -734,6 +744,8 @@
   .view__delivery_wrapper {
     padding: 10px 15px 15px;
     width: 310px;
+    background-color: #eeeeee;
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
   }
 
   .view__delivery_title {
@@ -765,6 +777,8 @@
 
   .view__payment_info_wrapper {
     width: 310px;
+    background-color: #eeeeee;
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
   }
 
   .view__payment_info_block_one {
@@ -791,6 +805,8 @@
 
   .view__bottom_info_wrapper {
     margin-bottom: 40px;
+    background-color: #eeeeee;
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
   }
 
   .view__description {
@@ -808,6 +824,8 @@
   /* ============================================================================ */
   .view__reviews_wrapper {
     width: 100%;
+    background-color: #eeeeee;
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
   }
 
   .view__reviews_header_title {
@@ -837,7 +855,7 @@
   }
 
   .view__reviews_list_item_name {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 24px;
   }
 
@@ -951,7 +969,7 @@
     width: 430px;
     height: 140px;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: #eeeeee;
   }
 
   .view__payment_info_title {
@@ -1021,7 +1039,7 @@
   }
 
   .view__reviews_list_item_name {
-    font-size: 22px;
+    font-size: 19px;
     line-height: 22px;
   }
 

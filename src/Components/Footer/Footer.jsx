@@ -10,7 +10,7 @@ const Footer = () => {
         <ul className={css.footer__help_list}>
           <li className={css.footer__help_list_item}>
             <Link to="/about" className={css.footer__help_list_item_link}>
-              Інформація
+              Про нас
             </Link>
           </li>
           <li className={css.footer__help_list_item}>
@@ -18,14 +18,9 @@ const Footer = () => {
               Контакти
             </Link>
           </li>
-          <li className={css.footer__help_list_item}>
+          <li className={css.footer__help_list_item_delivery}>
             <Link to="/delivery" className={css.footer__help_list_item_link}>
-              Доставка
-            </Link>
-          </li>
-          <li className={css.footer__help_list_item}>
-            <Link to="/payment" className={css.footer__help_list_item_link}>
-              Оплата
+              Доставка та оплата
             </Link>
           </li>
         </ul>

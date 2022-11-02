@@ -5,7 +5,7 @@ const About = () => {
   return (
     <div>
       <Helmet>
-        <title>Інформація | Okshimel Shop</title>
+        <title>Про нас | Okshimel Shop</title>
       </Helmet>
 
       <h2 style={{ marginTop: 300, textAlign: "center" }}>About test</h2>

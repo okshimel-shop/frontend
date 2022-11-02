@@ -1,3 +1,5 @@
+@import "../../fonts/fonts.css";
+
 .footer {
   padding: 15px 0;
   width: 100%;
@@ -31,9 +33,16 @@
   text-align: center;
 }
 
+.footer__help_list_item_delivery {
+  composes: footer__help_list_item;
+  width: 130px;
+}
+
 .footer__help_list_item_link {
   display: block;
   color: #eee;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 400;
   font-size: 12px;
 }
 
@@ -51,17 +60,23 @@
 }
 
 .footer__working_title {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 500;
   font-size: 12px;
   margin-bottom: 5px;
 }
 
 .footer__working_desc {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 300;
   font-size: 12px;
 }
 
 .footer__copyright {
   text-align: center;
   color: #eee;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 300;
   font-size: 10px;
 }
 
@@ -80,6 +95,11 @@
 
   .footer__help_list_item {
     width: 80px;
+  }
+
+  .footer__help_list_item_delivery {
+    composes: footer__help_list_item;
+    width: 200px;
   }
 
   .footer__help_list_item_link {
@@ -117,6 +137,11 @@
 
   .footer__help_list_item {
     width: 100px;
+  }
+
+  .footer__help_list_item_delivery {
+    composes: footer__help_list_item;
+    width: 200px;
   }
 
   .footer__help_list_item_link {

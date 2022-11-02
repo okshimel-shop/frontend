@@ -79,9 +79,9 @@ const ProductsList = ({ location, history }) => {
     }
   }, [cartId, oneProd]);
 
-  const prodCartHandler = ({ target }) => {
+  const prodCartHandler = ({ currentTarget }) => {
     dispatch(modalOpen("right"));
-    dispatch(cartSet({ id: target.id }));
+    dispatch(cartSet({ id: currentTarget.id }));
   };
 
   return (
@@ -145,7 +145,9 @@ const ProductsList = ({ location, history }) => {
                   className={`${css.view__order_button} ${css.view__order_button_buy}`}
                   id={oneProd.id}
                 >
-                  Додати в кошик
+                  <span className={css.view__order_button_title}>
+                    Додати в кошик
+                  </span>
                 </button>
               )}
 
@@ -208,14 +210,15 @@ const ProductsList = ({ location, history }) => {
           </div>
 
           <div className={css.view__bottom_info_wrapper}>
-            <div className={css.view__description}>
-              <h3 className={css.view__description_title}>Опис товару</h3>
+            {oneProd.descriptions && (
+              <div className={css.view__description}>
+                <h3 className={css.view__description_title}>Опис товару</h3>
 
-              <p className={css.view__description_text}>
-                {oneProd.descriptions}
-              </p>
-            </div>
-
+                <p className={css.view__description_text}>
+                  {oneProd.descriptions}
+                </p>
+              </div>
+            )}
             <div
               className={`${css.view__payment_info_wrapper} ${css.view__payment_info_block_two}`}
             >

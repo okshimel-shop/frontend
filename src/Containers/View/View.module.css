@@ -1,7 +1,11 @@
+@import "../../fonts/fonts.css";
+
 .view__wrapper {
   padding: 10px 0 0;
   width: 310px;
   margin: 0 auto;
+  background-color: #eeeeee;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
 }
 
 .view__category {
@@ -15,13 +19,16 @@
 }
 
 .view__title {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 500;
   padding: 5px 10px;
   color: #333;
   font-size: 24px;
   margin-bottom: 16px;
   word-wrap: break-word;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #eeeeee;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
 }
 
 .view_main_wrapper {
@@ -39,7 +46,7 @@
 }
 
 .view_preview_img_item {
-  height: 232px;
+  min-height: 232px;
 }
 
 .view__order_wrapper {
@@ -49,7 +56,8 @@
   height: 116px;
   padding: 15px;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #eeeeee;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
 }
 
 .view__order_price {
@@ -58,6 +66,8 @@
   left: 15px;
   padding: 2px 15px 2px 5px;
   color: #333;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 500;
   font-size: 22px;
   border-radius: 5px;
   background-color: #f5f5f5;
@@ -71,19 +81,24 @@
   position: absolute;
   bottom: 6px;
   right: 5px;
+  font-family: "Fira Sans", sans-serif;
   font-size: 12px;
 }
 
 .view__order_button {
-  padding: 0 0 0 30px;
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   left: 15px;
-  rigth: 15px;
+  right: 15px;
   bottom: 15px;
   width: 280px;
   height: 40px;
   outline: none;
   border: none;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 300;
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
@@ -101,15 +116,25 @@
   background-color: #eee;
 }
 
-.view__order_button_buy::before {
+.view__order_button_title {
+  padding-left: 30px;
+  width: 100%;
+  line-height: 2.1;
+}
+
+.view__order_button_title::before {
   content: "";
   display: block;
   width: 20px;
   height: 20px;
   position: absolute;
   top: 10px;
-  left: 70px;
+  left: 65px;
   background-image: url(../../images/interface/cart.svg);
+}
+
+.view__order_button_title:hover::before {
+  background-image: url(../../images/interface/cart-dark.svg);
 }
 
 .view__order_button_buy:hover::before {
@@ -128,7 +153,7 @@
   height: 20px;
   position: absolute;
   top: 10px;
-  left: 60px;
+  left: 35px;
   background-image: url(../../images/interface/cart-dark.svg);
 }
 
@@ -144,7 +169,7 @@
   height: 20px;
   position: absolute;
   top: 10px;
-  left: 70px;
+  left: 65px;
   background-image: url(../../images/interface/clock_gray.svg);
 }
 
@@ -153,11 +178,14 @@
   padding: 15px;
   width: 310px;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #eeeeee;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
 }
 
 .view__delivery_title {
   color: #333;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 500;
   font-size: 18px;
   margin-bottom: 15px;
 }
@@ -200,11 +228,15 @@
 
 .view__delivery_list_item_title {
   color: #333;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 400;
   font-size: 16px;
 }
 
 .view__delivery_list_item_price {
   color: #aaa;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 400;
   font-size: 14px;
 }
 
@@ -212,7 +244,8 @@
   padding: 15px;
   width: 310px;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #eeeeee;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
 }
 
 .view__payment_info_block_one {
@@ -225,6 +258,8 @@
 
 .view__payment_info_title {
   color: #333;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 500;
   font-size: 18px;
   margin-bottom: 15px;
 }
@@ -233,6 +268,8 @@
   padding: 0 0 0 40px;
   position: relative;
   color: #333;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 400;
   font-size: 16px;
 }
 
@@ -251,11 +288,14 @@
   padding: 15px;
   margin-bottom: 20px;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #eeeeee;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
 }
 
 .view__description_title {
   color: #333;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 500;
   font-size: 18px;
   margin-bottom: 15px;
   word-wrap: break-word;
@@ -263,6 +303,8 @@
 
 .view__description_text {
   padding: 0 5px;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 400;
   font-size: 14px;
   line-height: 24px;
   word-wrap: break-word;
@@ -273,7 +315,8 @@
   padding: 15px;
   width: 310px;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #eeeeee;
+  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
 }
 
 .view__reviews_header_block {
@@ -285,11 +328,15 @@
 
 .view__reviews_header_title {
   color: #333;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 500;
   font-size: 18px;
 }
 
 .view__reviews_header_counter {
   color: #ccc;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 500;
   font-size: 16px;
 }
 
@@ -300,6 +347,8 @@
   border: none;
   border-radius: 5px;
   color: #eee;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 500;
   font-size: 16px;
   background-color: #333;
   cursor: pointer;
@@ -333,28 +382,105 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1px;
-  padding: 2px 5px;
+  padding: 5px 10px;
   background-color: #fff;
   border-radius: 5px 5px 0 0;
 }
 
 .view__reviews_list_item_name {
   display: inline-block;
-  font-size: 16px;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
   line-height: 16px;
 }
 
 .view__reviews_list_item_date {
   display: inline-block;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 300;
   font-size: 10px;
   line-height: 16px;
 }
 
 .view__reviews_list_item_comment {
   padding: 10px;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 300;
   font-size: 12px;
   border-radius: 0 0 5px 5px;
   background-color: #fff;
+}
+
+@media (min-width: 360px) {
+  .view__wrapper {
+    width: 350px;
+  }
+
+  .view__order_wrapper {
+    width: 350px;
+  }
+
+  .view__delivery_wrapper {
+    width: 350px;
+  }
+
+  .view__payment_info_wrapper {
+    width: 350px;
+  }
+
+  .view__reviews_wrapper {
+    width: 350px;
+  }
+
+  .view__order_button {
+    width: 320px;
+  }
+
+  .view__order_button_title::before {
+    left: 85px;
+  }
+  .view__order_button_in_cart::before {
+    left: 55px;
+  }
+}
+
+@media (min-width: 412px) {
+  .view__wrapper {
+    width: 402px;
+  }
+
+  .view__order_wrapper {
+    width: 402px;
+  }
+
+  .view__delivery_wrapper {
+    width: 402px;
+  }
+
+  .view__payment_info_wrapper {
+    width: 402px;
+  }
+
+  .view__reviews_wrapper {
+    width: 402px;
+  }
+
+  .view__order_button {
+    width: 372px;
+  }
+
+  .view__order_button_in_cart::before {
+    left: 80px;
+  }
+
+  .view__order_button_title::before {
+    left: 110px;
+  }
+
+  .view__payment_info_text::before {
+    top: -8px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -392,6 +518,7 @@
   .view__order_wrapper {
     margin: 0;
     height: 120px;
+    width: 310px;
   }
 
   .view__order_price {
@@ -406,6 +533,11 @@
 
   .view__order_button {
     font-size: 18px;
+    width: 280px;
+  }
+
+  .view__order_button_title::before {
+    left: 60px;
   }
 
   .view__order_button_buy::before {
@@ -413,7 +545,7 @@
   }
 
   .view__order_button_in_cart::before {
-    left: 50px;
+    left: 25px;
   }
 
   .view__order_button_under_the_order::before {
@@ -423,6 +555,7 @@
   .view__delivery_wrapper {
     margin-bottom: 0;
     padding: 15px;
+    width: 310px;
   }
 
   .view__delivery_title {
@@ -442,6 +575,10 @@
     font-size: 16px;
   }
 
+  .view__payment_info_wrapper {
+    width: 100%;
+  }
+
   .view__payment_info_block_one {
     display: none;
   }
@@ -456,11 +593,11 @@
   }
 
   .view__payment_info_text {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   .view__payment_info_text::before {
-    top: 4px;
+    top: -8px;
   }
 
   .view__bottom_info_wrapper {
@@ -516,7 +653,7 @@
   }
 
   .view__reviews_list_item_name {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 18px;
   }
 
@@ -561,6 +698,8 @@
 
   .view__order_wrapper {
     height: 130px;
+    background-color: #eeeeee;
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
   }
 
   .view__order_price {
@@ -577,6 +716,10 @@
     font-size: 22px;
   }
 
+  .view__order_button_title::before {
+    left: 45px;
+  }
+
   .view__order_button_buy::before {
     width: 24px;
     height: 24px;
@@ -588,7 +731,7 @@
     width: 24px;
     height: 24px;
     top: 8px;
-    left: 30px;
+    left: 5px;
   }
 
   .view__order_button_under_the_order::before {
@@ -601,6 +744,8 @@
   .view__delivery_wrapper {
     padding: 10px 15px 15px;
     width: 310px;
+    background-color: #eeeeee;
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
   }
 
   .view__delivery_title {
@@ -630,6 +775,12 @@
     margin-bottom: 5px;
   }
 
+  .view__payment_info_wrapper {
+    width: 310px;
+    background-color: #eeeeee;
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
+  }
+
   .view__payment_info_block_one {
     display: block;
   }
@@ -654,6 +805,8 @@
 
   .view__bottom_info_wrapper {
     margin-bottom: 40px;
+    background-color: #eeeeee;
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
   }
 
   .view__description {
@@ -670,7 +823,9 @@
   }
   /* ============================================================================ */
   .view__reviews_wrapper {
-    width: 662px;
+    width: 100%;
+    background-color: #eeeeee;
+    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
   }
 
   .view__reviews_header_title {
@@ -700,7 +855,7 @@
   }
 
   .view__reviews_list_item_name {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 24px;
   }
 
@@ -749,6 +904,13 @@
     font-size: 24px;
   }
 
+  .view__order_button_title::before {
+    left: 85px;
+    top: 12px;
+    width: 25px;
+    height: 25px;
+  }
+
   .view__order_button_buy::before {
     width: 28px;
     height: 28px;
@@ -760,7 +922,7 @@
     width: 28px;
     height: 28px;
     top: 10px;
-    left: 75px;
+    left: 40px;
   }
 
   .view__order_button_under_the_order::before {
@@ -807,7 +969,7 @@
     width: 430px;
     height: 140px;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: #eeeeee;
   }
 
   .view__payment_info_title {
@@ -847,7 +1009,7 @@
   }
   /* ============================================================================ */
   .view__reviews_wrapper {
-    width: 752px;
+    width: 100%;
   }
 
   .view__reviews_header_title {
@@ -877,7 +1039,7 @@
   }
 
   .view__reviews_list_item_name {
-    font-size: 22px;
+    font-size: 19px;
     line-height: 22px;
   }
 

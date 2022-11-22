@@ -5,7 +5,6 @@
   width: 310px;
   margin: 0 auto;
   background-color: #eeeeee;
-  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
 }
 
 .view__category {
@@ -21,14 +20,14 @@
 .view__title {
   font-family: "Fira Sans", sans-serif;
   font-weight: 500;
+  width: 99%;
+  margin: 0 auto 16px;
   padding: 5px 10px;
   color: #333;
   font-size: 24px;
-  margin-bottom: 16px;
   word-wrap: break-word;
   border-radius: 5px;
-  background-color: #eeeeee;
-  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
 }
 
 .view_main_wrapper {
@@ -50,14 +49,13 @@
 }
 
 .view__order_wrapper {
-  margin-bottom: 20px;
   position: relative;
-  width: 310px;
+  width: 305px;
   height: 116px;
   padding: 15px;
+  margin: 0 auto 20px;
   border-radius: 5px;
-  background-color: #eeeeee;
-  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
 }
 
 .view__order_price {
@@ -174,12 +172,11 @@
 }
 
 .view__delivery_wrapper {
-  margin-bottom: 20px;
   padding: 15px;
-  width: 310px;
+  margin: 0 auto 20px;
+  width: 305px;
   border-radius: 5px;
-  background-color: #eeeeee;
-  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
 }
 
 .view__delivery_title {
@@ -242,10 +239,10 @@
 
 .view__payment_info_wrapper {
   padding: 15px;
-  width: 310px;
+  width: 305px;
   border-radius: 5px;
-  background-color: #eeeeee;
-  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  background-color: #fff;
 }
 
 .view__payment_info_block_one {
@@ -285,11 +282,11 @@
 }
 
 .view__description {
+  width: 305px;
   padding: 15px;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
   border-radius: 5px;
-  background-color: #eeeeee;
-  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
 }
 
 .view__description_title {
@@ -311,12 +308,11 @@
 }
 
 .view__reviews_wrapper {
-  margin-bottom: 30px;
   padding: 15px;
-  width: 310px;
+  width: 305px;
+  margin: 0 auto 30px;
   border-radius: 5px;
-  background-color: #eeeeee;
-  box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
 }
 
 .view__reviews_header_block {
@@ -698,8 +694,7 @@
 
   .view__order_wrapper {
     height: 130px;
-    background-color: #eeeeee;
-    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
   }
 
   .view__order_price {
@@ -744,8 +739,7 @@
   .view__delivery_wrapper {
     padding: 10px 15px 15px;
     width: 310px;
-    background-color: #eeeeee;
-    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
   }
 
   .view__delivery_title {
@@ -777,8 +771,7 @@
 
   .view__payment_info_wrapper {
     width: 310px;
-    background-color: #eeeeee;
-    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
   }
 
   .view__payment_info_block_one {
@@ -805,8 +798,7 @@
 
   .view__bottom_info_wrapper {
     margin-bottom: 40px;
-    background-color: #eeeeee;
-    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
   }
 
   .view__description {
@@ -824,8 +816,7 @@
   /* ============================================================================ */
   .view__reviews_wrapper {
     width: 100%;
-    background-color: #eeeeee;
-    box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
   }
 
   .view__reviews_header_title {
@@ -969,7 +960,7 @@
     width: 430px;
     height: 140px;
     border-radius: 5px;
-    background-color: #eeeeee;
+    background-color: #fff;
   }
 
   .view__payment_info_title {

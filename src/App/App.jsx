@@ -14,6 +14,7 @@ import ModalCart from "../Components/ModalCart/ModalCart";
 
 import css from "./App.module.css";
 import { viewedLoad } from "../redux/actions/viewedAction";
+import ModalReviews from "../Components/ModalReviews/ModalReviews";
 
 const Products = lazy(() => import("../Containers/Products/Products"));
 const View = lazy(() => import("../Containers/View/View"));
@@ -64,6 +65,7 @@ function App() {
       <AdminModal />
       <ModalBurger />
       <ModalCart />
+      <ModalReviews />
     </div>
   );
 }

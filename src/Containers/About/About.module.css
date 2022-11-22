@@ -1,0 +1,62 @@
+.about__section {
+  padding-top: 50px;
+  padding-bottom: 30px;
+}
+
+.about__title {
+  margin-bottom: 30px;
+  text-align: center;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.about__wrap {
+  width: 280px;
+  margin: 0 auto;
+  padding: 20px 10px;
+  background-color: #eeeeee;
+  border-radius: 5px;
+  box-shadow: 1px 1px 29px 8px rgba(0, 0, 0, 0.24);
+}
+
+@media (min-width: 412px) {
+  .about__title {
+    font-size: 16px;
+  }
+
+  .about__wrap {
+    width: 380px;
+  }
+}
+
+@media (min-width: 768px) {
+  .about__title {
+    font-size: 18px;
+  }
+
+  .about__wrap {
+    width: 700px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about__title {
+    font-size: 21px;
+  }
+
+  .about__wrap {
+    width: 990px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .about__title {
+    font-size: 26px;
+  }
+
+  .about__wrap {
+    width: 1200px;
+  }
+}

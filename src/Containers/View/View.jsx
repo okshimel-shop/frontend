@@ -84,6 +84,10 @@ const ProductsList = ({ location, history }) => {
     dispatch(cartSet({ id: currentTarget.id }));
   };
 
+  const openModalHandler = (btnType) => {
+    dispatch(modalOpen(btnType));
+  };
+
   return (
     <section className={css.view}>
       {oneProd && (
@@ -234,7 +238,10 @@ const ProductsList = ({ location, history }) => {
                   Відгуки та питання
                   <span className={css.view__reviews_header_counter}> 2</span>
                 </h3>
-                <button className={css.view__reviews_header_add_btn}>
+                <button
+                  className={css.view__reviews_header_add_btn}
+                  onClick={() => openModalHandler("review")}
+                >
                   Додати
                 </button>
               </div>

@@ -75,6 +75,7 @@
   color: #333;
   font-family: "Fira Sans", sans-serif;
   font-size: 13px;
+  letter-spacing: -0.05em;
   font-weight: 400;
   margin-bottom: 8px;
 }
@@ -95,6 +96,7 @@
   color: #222;
   font-family: "Fira Sans", sans-serif;
   font-weight: 400;
+  letter-spacing: -0.05em;
   font-size: 20px;
 }
 

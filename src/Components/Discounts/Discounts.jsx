@@ -6,6 +6,7 @@ import { getDiscounts } from "../../redux/operations/productOperation";
 import noimage from "../../images/products/no-image.png";
 import Loader from "../../Components/Loader/Loader";
 import css from "../../helpers/sliders.module.css";
+import { cartSet } from "../../redux/actions/cartAction";
 
 const Discounts = () => {
   const [discounts, setDiscounts] = useState(null);
@@ -61,6 +62,10 @@ const Discounts = () => {
     };
   }, [dispatch]);
 
+  const prodCartHandler = ({ target }) => {
+    dispatch(cartSet({ id: target.id }));
+  };
+
   return (
     <section className={css.sliders}>
       {loaderStatus && <Loader />}
@@ -105,7 +110,11 @@ const Discounts = () => {
                         <button
                           className={css.sliders__list_item_favourite}
                         ></button>
-                        <button className={css.sliders__list_item_btn}></button>
+                        <button
+                          onClick={prodCartHandler}
+                          id={prod.id}
+                          className={css.sliders__list_item_btn}
+                        ></button>
                       </div>
                     </div>
                   </div>

@@ -11,6 +11,7 @@ import Footer from "../Components/Footer/Footer";
 import AdminModal from "../Components/AdminModal/AdminModal";
 import ModalBurger from "../Components/ModalBurger/ModalBurger";
 import ModalCart from "../Components/ModalCart/ModalCart";
+import ModalReviews from "../Components/ModalReviews/ModalReviews";
 
 import css from "./App.module.css";
 import { viewedLoad } from "../redux/actions/viewedAction";
@@ -21,6 +22,7 @@ const About = lazy(() => import("../Containers/About/About"));
 const Contact = lazy(() => import("../Containers/Contact/Contact"));
 const Delivery = lazy(() => import("../Containers/Delivery/Delivery"));
 const Payment = lazy(() => import("../Containers/Payment/Payment"));
+const Order = lazy(() => import("../Containers/Order/Order"));
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +54,7 @@ function App() {
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/delivery" component={Delivery} />
           <Route exact path="/payment" component={Payment} />
+          <Route exact path="/order" component={Order} />
 
           <Route exact path="/admin" component={Admin} />
 
@@ -64,6 +67,7 @@ function App() {
       <AdminModal />
       <ModalBurger />
       <ModalCart />
+      <ModalReviews />
     </div>
   );
 }

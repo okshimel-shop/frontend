@@ -59,13 +59,13 @@ const Products = ({ location, history }) => {
   return (
     <section className={css.products}>
       <Helmet>
-        <title>Все товары | Okshimel Shop</title>
+        <title>Всі товари | Okshimel Shop</title>
       </Helmet>
 
       {loaderStatus && <Loader />}
 
       <div className={css.products__wrapper}>
-        <h2 className={css.products__title}>Все товары</h2>
+        <h2 className={css.products__title}>Всі товари</h2>
 
         {!loaderStatus && products && (
           <>

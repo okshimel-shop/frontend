@@ -12,6 +12,7 @@
 .products__title {
   text-align: center;
   color: #333;
+  font-family: "Fira Sans", sans-serif;
   font-size: 18px;
   text-transform: uppercase;
   margin-bottom: 15px;
@@ -60,7 +61,7 @@
 }
 
 .products__list_item_bottom_wrapper {
-  padding: 3px 0 5px;
+  padding: 5px 8px;
   border-radius: 0 0 5px 5px;
   background-color: #fff;
 }
@@ -74,7 +75,9 @@
   height: 28px;
   border-radius: 5px;
   color: #333;
+  font-family: "Fira Sans", sans-serif;
   font-size: 13px;
+  letter-spacing: -0.05em;
   font-weight: 400;
   margin-bottom: 8px;
   word-wrap: break-word;
@@ -94,7 +97,9 @@
   padding-right: 10px;
   position: relative;
   color: #333;
+  font-family: "Fira Sans", sans-serif;
   font-size: 20px;
+  letter-spacing: -0.05em;
 }
 
 .products__list_item_price::after {

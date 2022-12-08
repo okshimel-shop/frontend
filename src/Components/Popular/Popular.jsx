@@ -6,6 +6,7 @@ import { getPopular } from "../../redux/operations/productOperation";
 import noimage from "../../images/products/no-image.png";
 import Loader from "../Loader/Loader";
 import css from "../../helpers/sliders.module.css";
+import { cartSet } from "../../redux/actions/cartAction";
 
 const Popular = () => {
   const [popular, setPopular] = useState(null);
@@ -61,6 +62,10 @@ const Popular = () => {
     };
   }, [dispatch]);
 
+  const prodCartHandler = ({ target }) => {
+    dispatch(cartSet({ id: target.id }));
+  };
+
   return (
     <section className={css.sliders}>
       {loaderStatus && <Loader />}
@@ -105,7 +110,11 @@ const Popular = () => {
                         <button
                           className={css.sliders__list_item_favourite}
                         ></button>
-                        <button className={css.sliders__list_item_btn}></button>
+                        <button
+                          onClick={prodCartHandler}
+                          id={prod.id}
+                          className={css.sliders__list_item_btn}
+                        ></button>
                       </div>
                     </div>
                   </div>

@@ -93,8 +93,14 @@ const Order = () => {
 
       <div className={css.order__details_wrap}>
         <div className={css.order__detail__titles_wrap}>
-          <p className={css.order__detail__title}>Замовлення N 1</p>
-          <p className={css.order__detail__title}>на суму: {totalSum} грн</p>
+          <p className={css.order__detail__title}>
+            Замовлення
+            <span className={css.order__detail__title_count}>N 1111</span>
+          </p>
+          <p className={css.order__detail__title}>
+            на суму:{" "}
+            <span className={css.order__detail__title_sum}>{totalSum} грн</span>
+          </p>
         </div>
         <div className={css.order__detail__product_wrap}>
           <ul className={css.order__detail__product_list}>

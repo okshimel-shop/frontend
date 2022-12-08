@@ -4,7 +4,7 @@
   padding: 10px 0 0;
   width: 310px;
   margin: 0 auto;
-  background-color: #eeeeee;
+  /* background-color: #eeeeee; */
 }
 
 .view__category {
@@ -20,11 +20,12 @@
 .view__title {
   font-family: "Fira Sans", sans-serif;
   font-weight: 500;
-  width: 99%;
+  width: 100%;
   margin: 0 auto 16px;
   padding: 5px 10px;
   color: #333;
   font-size: 24px;
+  letter-spacing: -0.05em;
   word-wrap: break-word;
   border-radius: 5px;
   background-color: #fff;
@@ -67,6 +68,7 @@
   font-family: "Fira Sans", sans-serif;
   font-weight: 500;
   font-size: 22px;
+  letter-spacing: -0.05em;
   border-radius: 5px;
   background-color: #f5f5f5;
 }
@@ -98,6 +100,7 @@
   font-family: "Fira Sans", sans-serif;
   font-weight: 300;
   font-size: 16px;
+  letter-spacing: -0.05em;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 200ms linear;
@@ -118,6 +121,8 @@
   padding-left: 30px;
   width: 100%;
   line-height: 2.1;
+  font-family: "Fira Sans", sans-serif;
+  letter-spacing: -0.05em;
 }
 
 .view__order_button_title::before {
@@ -142,6 +147,8 @@
 .view__order_button_in_cart {
   color: #333;
   background-color: #eee;
+  font-family: "Fira Sans", sans-serif;
+  letter-spacing: -0.05em;
 }
 
 .view__order_button_in_cart::before {
@@ -158,6 +165,8 @@
 .view__order_button_under_the_order {
   color: #666;
   background-color: #eee;
+  font-family: "Fira Sans", sans-serif;
+  letter-spacing: -0.05em;
 }
 
 .view__order_button_under_the_order::before {
@@ -182,6 +191,7 @@
 .view__delivery_title {
   color: #333;
   font-family: "Fira Sans", sans-serif;
+  letter-spacing: -0.05em;
   font-weight: 500;
   font-size: 18px;
   margin-bottom: 15px;
@@ -228,6 +238,7 @@
   font-family: "Fira Sans", sans-serif;
   font-weight: 400;
   font-size: 16px;
+  letter-spacing: -0.05em;
 }
 
 .view__delivery_list_item_price {
@@ -235,6 +246,7 @@
   font-family: "Fira Sans", sans-serif;
   font-weight: 400;
   font-size: 14px;
+  letter-spacing: -0.05em;
 }
 
 .view__payment_info_wrapper {
@@ -259,6 +271,7 @@
   font-weight: 500;
   font-size: 18px;
   margin-bottom: 15px;
+  letter-spacing: -0.05em;
 }
 
 .view__payment_info_text {
@@ -268,6 +281,7 @@
   font-family: "Fira Sans", sans-serif;
   font-weight: 400;
   font-size: 16px;
+  letter-spacing: -0.05em;
 }
 
 .view__payment_info_text::before {
@@ -294,6 +308,8 @@
   font-family: "Fira Sans", sans-serif;
   font-weight: 500;
   font-size: 18px;
+  letter-spacing: -0.05em;
+
   margin-bottom: 15px;
   word-wrap: break-word;
 }
@@ -304,6 +320,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
+  letter-spacing: -0.05em;
   word-wrap: break-word;
 }
 
@@ -326,6 +343,7 @@
   color: #333;
   font-family: "Fira Sans", sans-serif;
   font-weight: 500;
+  letter-spacing: -0.05em;
   font-size: 18px;
 }
 
@@ -346,6 +364,7 @@
   font-family: "Fira Sans", sans-serif;
   font-weight: 500;
   font-size: 16px;
+  letter-spacing: -0.05em;
   background-color: #333;
   cursor: pointer;
   transition: all 200ms linear;
@@ -397,6 +416,7 @@
   font-weight: 300;
   font-size: 10px;
   line-height: 16px;
+  letter-spacing: -0.05em;
 }
 
 .view__reviews_list_item_comment {
@@ -404,6 +424,7 @@
   font-family: "Fira Sans", sans-serif;
   font-weight: 300;
   font-size: 12px;
+  letter-spacing: -0.05em;
   border-radius: 0 0 5px 5px;
   background-color: #fff;
 }
@@ -601,6 +622,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     margin-bottom: 30px;
+    border-radius: 5px;
   }
 
   .view__description {
@@ -814,10 +836,10 @@
     line-height: 28px;
   }
   /* ============================================================================ */
-  .view__reviews_wrapper {
+  /* .view__reviews_wrapper {
     width: 100%;
     background-color: #fff;
-  }
+  } */
 
   .view__reviews_header_title {
     font-size: 22px;
@@ -999,9 +1021,9 @@
     line-height: 30px;
   }
   /* ============================================================================ */
-  .view__reviews_wrapper {
+  /* .view__reviews_wrapper {
     width: 100%;
-  }
+  } */
 
   .view__reviews_header_title {
     font-size: 24px;

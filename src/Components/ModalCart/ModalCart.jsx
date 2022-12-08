@@ -68,6 +68,11 @@ const ModalCart = () => {
     setCartItems(result);
   };
 
+  const toOrderPage = (e) => {
+    e.target.id === "close-modal" && dispatch(modalClose());
+    history.push(`/order`);
+  };
+
   return (
     <>
       <CSSTransition
@@ -162,7 +167,11 @@ const ModalCart = () => {
                     {totalPrice}
                   </span>
 
-                  <button className={css.modal_cart__receipt_submit}>
+                  <button
+                    id="close-modal"
+                    onClick={toOrderPage}
+                    className={css.modal_cart__receipt_submit}
+                  >
                     Оформити замовлення
                   </button>
                 </div>

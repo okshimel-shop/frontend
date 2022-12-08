@@ -10,6 +10,12 @@ import css from "./ModalReviews.module.css";
 
 const ModalReviews = () => {
   const [loaderStatus, setLoaderStatus] = useState(false);
+  const [nameUser, setNameUser] = useState(() => {
+    return JSON.parse(window.localStorage.getItem("nameUser")) ?? "";
+  });
+  const [review, setReview] = useState(() => {
+    return JSON.parse(window.localStorage.getItem("review")) ?? "";
+  });
 
   const dispatch = useDispatch();
   const modalStatus = useSelector((state) => modalStatusSelector(state));
@@ -25,10 +31,32 @@ const ModalReviews = () => {
     // eslint-disable-next-line
   }, [modalStatus]);
 
+  useEffect(() => {
+    window.localStorage.setItem("nameUser", JSON.stringify(nameUser));
+    window.localStorage.setItem("review", JSON.stringify(review));
+  }, [nameUser, review]);
+
   const modalCloseHandler = (e) => {
     if (e.target.id === "modal-close" || e.target.id === "modal-close-button") {
       dispatch(modalClose());
     }
+  };
+
+  const handleChange = ({ target: { name, value } }) => {
+    switch (name) {
+      case "nameUser":
+        setNameUser(value);
+        break;
+      case "review":
+        setReview(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleSubmitReview = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -58,14 +86,23 @@ const ModalReviews = () => {
               </div>
 
               <div className={css.modal_review__main}>
-                <form className={css.modal_reviews__form}>
+                <form
+                  onSubmit={handleSubmitReview}
+                  className={css.modal_reviews__form}
+                >
                   <input
                     className={css.modal_reviews__input}
+                    value={nameUser}
+                    onChange={handleChange}
+                    name="nameUser"
                     type="text"
                     placeholder="Ваше ім'я"
                   />
                   <textarea
                     className={css.modal_reviews__text}
+                    value={review}
+                    onChange={handleChange}
+                    name="review"
                     placeholder="Текст"
                   />
                   <button type="submit" className={css.modal_review__submit}>
